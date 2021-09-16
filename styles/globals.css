@@ -1,7 +1,7 @@
 
 *{
   font-family: "Poppins";
-  color: white !important;
+  /* color: white !important; */
 }
 html,
 body {
@@ -10,8 +10,16 @@ body {
   margin: 0px;
   padding: 0px;
   overflow-x: hidden;
-  background-color: #222 !important;
+  /* background-color: #222 !important; */
 
+}
+.bg-choco{
+  background-color: rgb(255, 115, 0) !important;
+  color: red !important;
+}
+.navbar{
+  /* z-index: 20000; */
+  background-color: white;
 }
 
 /* Scroll Bar */
@@ -208,7 +216,7 @@ body {
 
 /* Navbar */
 nav {
-  background-color: #333;
+  /* background-color: #333; */
   padding: .1rem 1rem;
   -webkit-box-shadow: 0 4px 6px -6px #222;
   -moz-box-shadow: 0 4px 6px -6px #222;

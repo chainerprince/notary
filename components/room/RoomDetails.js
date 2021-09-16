@@ -59,63 +59,64 @@ const RoomDetails = () => {
               setPaymentLoading(true);
               const amount = daysOfStay * pricePerNight;
               try{
-               const link = `api/checkout/${id}?checkInDate=${checkInDate.toISOString()}&
+               const link = `http://localhost:3000/api/checkout/${id}?checkInDate=${checkInDate.toISOString()}&
                checkOutDate=${checkOutDate.toISOString()}&daysOfStay=${daysOfStay}`;
 
             const {data} = await axios.get(link,{params:{amount}})
-            const stripe = getStripe()
-
+            console.log(getStripe)
+            const stripe = await getStripe()
+            // console.log(stripe)
+            console.log(data)
             stripe.redirectToCheckout({sessionId:data.id})
             setPaymentLoading(false)
               }catch(error){
                   setPaymentLoading(false)
-                  
+                  console.log("The thing failed")
                   toast.error(error.message)
               }
        }
- 
        const onchange = (dates) =>{
            const [checkInDate,checkOutDate] = dates;
            setCheckInDate(checkInDate)
            setCheckOutDate(checkOutDate)
            if(checkInDate && checkOutDate){
                const days = Math.floor( (new Date(checkOutDate) - new Date(checkInDate)) / 86400000) + 1
-               window.alert(days)
+               
                setDaysOfStay(days);
                  
                dispatch(checkBooking(id,checkInDate.toISOString(),checkOutDate.toISOString()))
            }
        }
      
-       const newBookingHandler = async()=>{
-           const booking = {
-               room: router.query.id,
-               checkInDate,
-               checkOutDate,
-               daysOfStay,
-               paidAt: Date.now(),
-               amountPaid: 80,
-               paymentInfo:{
-                   id:"payment Id",
-                   status:"payment status"     
-               }
-           }
+    //    const newBookingHandler = async()=>{
+    //        const booking = {
+    //            room: router.query.id,
+    //            checkInDate, 
+    //            checkOutDate,
+    //            daysOfStay,
+    //            paidAt: Date.now(),
+    //            amountPaid: 80,
+    //            paymentInfo:{
+    //                id:"payment Id",
+    //                status:"payment status"     
+    //            }
+    //        }
 
            
-           try {
-               const config = {
-                    headers:{
-                        'content-Type':'application/json'
-                    }
-               }
+    //        try {
+    //            const config = {
+    //                 headers:{
+    //                     'content-Type':'application/json'
+    //                 }
+    //            }
                
-               const { data } = await axios.post('/api/bookings',booking,config)
+    //            const { data } = await axios.post('/api/bookings',booking,config)
                
                
-           } catch (error) {
-               console.log(error)
-           }
-       }
+    //        } catch (error) {
+    //            console.log(error)
+    //        }
+    //    }
     return (
         <>
         <Head>

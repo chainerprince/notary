@@ -10,7 +10,7 @@ const BookingDetails = () => {
      const dispatch = useDispatch();
      const {booking,error} = useSelector(state=>state.bookingDetails)
      const {user,error:userError} = useSelector(state=>state.login)
-  
+        
      
      useEffect(() => {
         if(error){

@@ -32,7 +32,7 @@ const Home = () => {
       
        <>
 
-    <section id="rooms" className="container mt-5">
+    <section id="rooms" className="container-fluid mt-5">
 
     <h2 className='mb-3 ml-2 stays-heading'>{location ? `Rooms in ${location}` : "All Rooms" }</h2>
 

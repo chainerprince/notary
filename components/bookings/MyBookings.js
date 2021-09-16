@@ -79,7 +79,8 @@ const MyBookings = () => {
     }
 
     const downloadInvoice = async (booking) => {
-
+         console.log(booking)
+         console.log(booking.room)
         const data = {
             "documentTitle": "Booking INVOICE", //Defaults to INVOICE
             "currency": "USD",
@@ -108,7 +109,7 @@ const MyBookings = () => {
             "products": [
                 {
                     "quantity": `${booking.daysOfStay}`,
-                    "description": `${booking.room.name}`,
+                    "description": `${ booking.room.name}`,
                     "tax": 0,
                     "price": booking.room.pricePerNight
                 }
