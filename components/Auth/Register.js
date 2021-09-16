@@ -49,6 +49,7 @@ const Register = () => {
          name,email,password,avatar
      }
      dispatch(userRegister(userData));
+    
  }
   const onChange = e => {
 
@@ -66,6 +67,7 @@ const Register = () => {
       }else{
           
           setuser({...user,[e.target.name]:e.target.value});
+          
       }
   }
 
@@ -74,7 +76,7 @@ const Register = () => {
                 <div className="container container-fluid">
         <div className="row wrapper"> 
 		<div className="col-10 col-lg-5">
-        <form className="shadow-lg" onSubmit={handleSubmit}  method="POST">
+        <form className="shadow-lg" onSubmit={handleSubmit}  method="POST"> 
             <h1 className="mb-3">Join Us</h1>
 
             <div className="form-group">
@@ -85,6 +87,7 @@ const Register = () => {
                   className="form-control"
                   name="name"
                   value={name}
+                  
                   onChange={onChange}
                 />
               </div>
@@ -97,6 +100,7 @@ const Register = () => {
                 className="form-control"
                   name="email"
                   value={email}
+                  
                   onChange={onChange}
               />
             </div>
@@ -109,6 +113,7 @@ const Register = () => {
                 className="form-control"
                 name="password"
                 value={password}
+                
                 onChange={onChange}
               />
             </div>
