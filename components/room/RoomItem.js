@@ -5,18 +5,19 @@ import Link from 'next/link'
 
 const RoomItem = ({room}) => {
     return (
-        <div className="col-sm-12  col-md-6 col-lg-3 my-3">
+        <div className="col-sm-12   col-md-6 col-lg-3 my-3">
         <div className="card p-2">
           <Image
-            className="card-img-top mx-auto"
+            className=" mx-auto"
             src={room.images[0].url}
             height = {170}
             width = ""
           />
-          <div className="card-body d-flex bg-dark flex-column">
+          <div className="card-body d-flex  flex-column">
             <h5 className="card-title">
               <Link href={`/rooms/${room._id}`}>
-                  <a class="text-danger text-sm">{room.name}</a>
+
+                  <a className=" text-sm">{room.name.length> 20 ? room.name.slice(0,20) + "..." : room.name}</a>
               </Link>
             </h5>
 
@@ -31,10 +32,10 @@ const RoomItem = ({room}) => {
               <span id="no_of_reviews">({room.numOfReviews} Reviews)</span>
           </div>
 
-          <button className="btn btn-block bg-danger ">
+          <button className="btn btn-block rounded  ">
               
               <Link  href={`/rooms/${room._id}`}>
-                 <a className="text-white">View Details</a> 
+                 <a className="text-white bg-choco p-2 ">Book Room</a> 
               </Link>
           </button>
         </div>

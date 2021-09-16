@@ -20,8 +20,8 @@ function Header() {
   }, [dispatch])
   
     return (
-        <nav className="navbar row justify-content-center sticky-top">
-      <div className="container">
+        <nav className="navbar row justify-content-center   sticky-top">
+      <div className="container-fluid">
       <div className="col-3 p-0">
         <div className="navbar-brand">
             {/* <img src="./images/bookit_logo.png" alt="BookIT" /> */}
@@ -91,7 +91,7 @@ function Header() {
         ):
       !loading &&  (
           <Link href="/login">
-         <a className="btn btn-danger px-4 text-white login-header-btn float-right">Login</a>
+         <a className="btn bg-choco px-4 text-white login-header-btn float-right">Login</a>
         </Link>
         )
 

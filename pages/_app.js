@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import '../styles/bootstrap.min.css'
+import '../styles/Home.module.css'
 import { wrapper } from '../state/store';
 
 

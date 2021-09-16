@@ -71,7 +71,7 @@ export const checkRoomAvailability = AsyncErrors(async(req,res,next)=>{
         select:'name email'
     })
     
-    
+
 
     res.status(201).json({
         success:true,
@@ -104,7 +104,6 @@ export const checkRoomAvailability = AsyncErrors(async(req,res,next)=>{
 export const myBookings = AsyncErrors(async(req,res,next)=>{
     const bookings = await Booking.find({
         user:req.user._id
-        
     })
     .populate({
         path:'room',
@@ -115,7 +114,7 @@ export const myBookings = AsyncErrors(async(req,res,next)=>{
         select:'name email'
     })
     
-
+       
     res.status(201).json({
         success:true,
         bookings
