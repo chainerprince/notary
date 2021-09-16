@@ -203,25 +203,25 @@ const forgotPassword = AsyncErrors(async (req,res,next)=>{
 
 const registerUser = AsyncErrors(async(req,res)=>{
   
-//   const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-//     folder: 'bookit/avatars',
-//     // width: '150',
-//     // crop: 'scale'
-// })
+  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: 'bookit/avatars',
+    // width: '150',
+    // crop: 'scale'
+})
 
 
 
-// const { name, email, password } = req.body;
+const { name, email, password } = req.body;
 
-// const user = await User.create({
-//     name,
-//     email,
-//     password,
-//     avatar: {
-//         public_id: result.public_id,
-//         url: result.secure_url
-//     }
-// });
+const user = await User.create({
+    name,
+    email,
+    password,
+    avatar: {
+        public_id: result.public_id,
+        url: result.secure_url
+    }
+});
 
 res.status(200).json({
     success: true,
