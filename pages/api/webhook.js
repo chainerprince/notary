@@ -15,8 +15,8 @@ export const config = {
     }
 }
 // handler.get(allRooms);
-
-handler.use(isAuthenticated).post(hookCheckout)
+console.log("The hook checkout that is working given something")
+handler.post(hookCheckout)
 
 
 export default handler;

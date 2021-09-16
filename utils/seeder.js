@@ -7,7 +7,7 @@ const rooms = require('../data/rooms');
 const  mongoose  = require("mongoose");
 
 
-mongoose.connect("mongodb://localhost:27017/bookit",{
+mongoose.connect("mongodb+srv://admin:bookit@bookit.v9kl4.mongodb.net/bookit?retryWrites=true&w=majority",{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useFindAndModify:false,

@@ -2,6 +2,7 @@ module.exports = {
   reactStrictMode: true,
   env:{
     LOCAL_DB_URL:"mongodb://localhost:27017/bookit",
+    DB_URL:"mongodb+srv://admin:bookit@bookit.v9kl4.mongodb.net/bookit?retryWrites=true&w=majority",
     CLOUDINARY_CLOUD_NAME:"blocker",
     CLOUDINARY_API_KEY:"396142776597681",
     CLOUDINARY_SECRET_KEY:"OUIwZiaXiyXdaojfQetOOQGGotg",
