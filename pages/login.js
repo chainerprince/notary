@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/client'
-import Login from '../components/auth/Login'
+import Login from '../components/Auth/Login'
 import Layout from '../components/layout/Layout'
 
 // import { wrapper } from '../state/store';
