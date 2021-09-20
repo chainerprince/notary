@@ -15,7 +15,7 @@ module.exports = {
     STRIPE_PUBLIC_KEY:'pk_test_51JFOUzJt8PjGxb7vBnax4XXGVaMf9G78be5UMwj6EotdLe6mOOI6931bptYCxh0hh8ui6fsRHEXHU9u2nMNRiWEQ00GNPHuJFn',
     STRIPE_PRIVATE_KEY:'sk_test_51JFOUzJt8PjGxb7vpU8kzIV8ayFecSJ2JmnIyMAQLknFAAVOe3V4SRHOoQIUimpdhTb7q31B5i5jkeIj8FXvPHlC00mpH0aw9E',
     WEB_HOOK_SECRET : 'whsec_awczvWmm3tx9GZOUT4EpxJEGlEEseJD0',
-    NEXTAUTH_URL:"https://bookhotel.vercel.app"
+    // NEXTAUTH_URL:"https://bookhotel.vercel.app"
 
   },
   images:{

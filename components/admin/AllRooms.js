@@ -1,3 +1,5 @@
+import { MDBDataTableV5 } from 'mdbreact';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { MDBDataTable } from 'mdbreact';
 import React,{useEffect} from 'react'
 import Link from 'next/link';
@@ -39,7 +41,7 @@ const AllRooms = () => {
       console.log(id)
       dispatch(deleteRoom(id));
   }
-    const setRooms = () => {
+    // const setRooms = () => {
         const data = {
             columns :[
                 {
@@ -53,7 +55,7 @@ const AllRooms = () => {
                     sort:'asc'
                 },
                 {
-                    label: "Price / Night",
+                    label: "Price/Night",
                     field:'price',
                     sort:'asc'
                 },
@@ -68,7 +70,7 @@ const AllRooms = () => {
                     sort:'asc'
                 },
             ],
-            rows:[]
+            rows:[],
         }
 
         rooms && rooms.forEach(room => {
@@ -79,7 +81,7 @@ const AllRooms = () => {
                   price:`$${room.pricePerNight}`,
                   category:`${room.category}`,
                   action:
-                  <>
+                  <div className="d-flex">
                    <Link href={`/admin/rooms/${room._id}`}>
                       <a  className="btn btn-primary">
                           <i className="fa fa-pencil"></i>
@@ -93,13 +95,13 @@ const AllRooms = () => {
                    >
                        <i className="fa fa-trash"></i>
                    </button>
-                  </>
+                  </div>
               })
         });
 
 
-        return data;
-    }
+        // return data;
+    // }
 
     return (
         <div className="container container-fluid">
@@ -109,20 +111,22 @@ const AllRooms = () => {
             <h1 className="my-4">{`${rooms && rooms.length} Rooms`}</h1>
 
             <Link href="/admin/rooms/new">
-                <a className="mt-0 btn text-white float-right btn-danger">Create Room</a>
+                <a className="mt-0 btn text-white float-right bg-choco btn-sm mt-3">Create Room</a>
             </Link>
 
 
             </>            
             }
         
-        <MDBDataTable
-         data={setRooms()}
-         className="px-3"
-         bordered
-         striped
-         hover
-        />
+
+         <MDBDataTable
+      striped
+      bordered
+      responsive
+      small
+      searching={true}
+      data={data}
+    />
 
     </div>
     )

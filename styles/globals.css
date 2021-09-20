@@ -302,11 +302,12 @@ nav {
   display: inline-block;
   position: relative;
   font-family: FontAwesome;
-  color: #e61e4d;
+  color: chocolate;
 }
 
 .rating-outer::before {
   content: '\f006 \f006 \f006 \f006 \f006';
+  color: red;
 }
 
 .rating-inner {
@@ -316,11 +317,14 @@ nav {
   white-space: nowrap;
   overflow: hidden;
   width: 0;
+ 
 }
 
 .rating-inner::before {
-  content: '\f005 \f005 \f005 \f005 \f005';
-  color: #e61e4d;
+  content: '\2605 \2605 \2605 \2605 \2605 \2605';
+  font-size: 1.2rem;
+  color: yellow;
+  fill: red;
 }
 
 /* Room Details Page */
@@ -513,7 +517,16 @@ input::placeholder {
 
 
 
+@media only screen and (max-width:768px) {
+   #menu{
+     position: absolute !important;
+     left: -80% !important;
+     top: 3rem;
+     
+   }
 
+   
+}
 
 
 
