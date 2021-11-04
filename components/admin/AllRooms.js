@@ -1,3 +1,5 @@
+import { MDBDataTableV5 } from 'mdbreact';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { MDBDataTable } from 'mdbreact';
 import React,{useEffect} from 'react'
 import Link from 'next/link';
@@ -39,7 +41,7 @@ const AllRooms = () => {
       console.log(id)
       dispatch(deleteRoom(id));
   }
-    const setRooms = () => {
+    // const setRooms = () => {
         const data = {
             columns :[
                 {
@@ -68,7 +70,7 @@ const AllRooms = () => {
                     sort:'asc'
                 },
             ],
-            rows:[]
+            rows:[],
         }
 
         rooms && rooms.forEach(room => {
@@ -98,8 +100,8 @@ const AllRooms = () => {
         });
 
 
-        return data;
-    }
+        // return data;
+    // }
 
     return (
         <div className="container container-fluid">
@@ -109,23 +111,27 @@ const AllRooms = () => {
             <h1 className="my-4">{`${rooms && rooms.length} Rooms`}</h1>
 
             <Link href="/admin/rooms/new">
+
                 <a className="mt-0 btn text-white btn-sm float-right bg-choco mt-3">Create Room</a>
+
+       
             </Link>
 
 
             </>            
             }
         
-        <MDBDataTable
-         data={setRooms()}
-         className="px-3"
-         bordered
-         striped
-         hover
-         responsive
-         autoWidth
-         small
-        />
+
+
+         <MDBDataTable
+      striped
+      bordered
+      responsive
+      small
+      searching={true}
+      data={data}
+    />
+
 
     </div>
     )

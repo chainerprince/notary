@@ -55,14 +55,15 @@ export const userRegister = (userData) => async(dispatch) => {
        }
        
        const {data} = await axios.post('/api/auth/register',userData,config)
-       console.log(data);
+       console.log(data)
+            
        dispatch({
         type:USER_REGISTER_SUCCESS
        }) 
 
 
     } catch (error) {
-        console.log(error.response.data.error)
+        console.log(error)
         dispatch({
             type:USER_REGISTER_FAIL,
             payload:error.response.data.message
@@ -106,7 +107,7 @@ export const allUser = () => async(dispatch) => {
 
        const {data} = await axios.get('/api/admin/users')
        
-    //    console.log(data.user)
+       console.log(data.user)
        
        dispatch({
         type:ALL_USER_SUCCESS,
