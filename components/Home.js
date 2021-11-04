@@ -39,7 +39,7 @@ const Home = () => {
     <Link href='/search'> 
     <a  className='ml-2 back-to-search'>
 
-    <i className='fa fa-arrow-left'></i> Back to Search
+    <i className='fa fa-arrow-left'></i> Search
     
     </a> 
     </Link>

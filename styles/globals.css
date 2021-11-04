@@ -13,6 +13,12 @@ body {
   /* background-color: #222 !important; */
 
 }
+.payment {
+  margin: 4rem auto;
+  height: 30rem;
+  
+  width: 25rem;
+}
 .bg-choco{
   background-color: rgb(255, 115, 0) !important;
   color: red !important;

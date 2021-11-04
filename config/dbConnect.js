@@ -4,7 +4,7 @@ const dbConnect = ()=>{
     if(mongoose.connection.readyState >= 1){
         return;
     }
-    mongoose.connect(process.env.LOCAL_DB_URL,{
+    mongoose.connect(process.env.DB_URL,{
         useNewUrlParser:true,
         useUnifiedTopology:true,
         useFindAndModify:false,

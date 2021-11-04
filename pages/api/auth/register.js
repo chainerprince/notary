@@ -11,7 +11,7 @@ dbConnect();
 // handler.get(allRooms);
 
 
-handler.use(upload.single('avatar')).post(registerUser)
+handler.post(registerUser)
 
 
 export default handler;

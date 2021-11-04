@@ -88,7 +88,7 @@ export  const adminUpdateUser = AsyncErrors(async (req,res,next)=>{
 
 const updateUser = AsyncErrors(async (req,res,next)=>{
     const user = await User.findById(req.user._id);
-    console.log(user)
+    
     console.log("They are hitting me now and thn and am tired");
     if(user){
         user.name = req.body.name;
@@ -203,12 +203,13 @@ const forgotPassword = AsyncErrors(async (req,res,next)=>{
 
 const registerUser = AsyncErrors(async(req,res)=>{
   
-  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+  
+// })
+const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
     folder: 'bookit/avatars',
     // width: '150',
     // crop: 'scale'
 })
-
 
 
 const { name, email, password } = req.body;
