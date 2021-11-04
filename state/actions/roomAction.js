@@ -99,6 +99,7 @@ export const getAdminRooms = (req,id) => async(dispatch) => {
       })
       const {origin} = absoluteUrl(req)
       const {data} = await axios.get(`${origin}/api/admin/rooms`)
+      
       dispatch({
           type: ADMIN_ROOMS_SUCCESS,
           payload: data.rooms

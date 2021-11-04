@@ -22,9 +22,12 @@ const RoomDetails = () => {
     const [checkInDate,setCheckInDate] = useState();
     const [checkOutDate,setCheckOutDate] = useState();
     const [daysOfStay,setDaysOfStay] = useState();
+    const [phoneNumber,setPhoneNumber] = useState();
     const {room,error} = useSelector(state=>state.roomDetails)
     const {user} = useSelector(state=>state.login)
     const {available,loading:bookingLoader} = useSelector(state=>state.checkBooking)
+
+    
 
 
     const [paymentLoading, setPaymentLoading] = useState(false)
@@ -70,10 +73,34 @@ const RoomDetails = () => {
             setPaymentLoading(false)
               }catch(error){
                   setPaymentLoading(false)
-                  console.log("The thing failed")
+                  
                   toast.error(error.message)
               }
        }
+
+       
+       const bookMtn = async(id,pricePerNight) =>{
+        setPaymentLoading(true);
+        const amount = daysOfStay * pricePerNight;
+        try{
+
+          
+         const link = `http://localhost:3000/payment?id=${id}&checkInDate=${checkInDate.toISOString()}&
+         checkOutDate=${checkOutDate.toISOString()}&daysOfStay=${daysOfStay}&amount=${amount}`;
+
+         router.push(link)
+      
+      setPaymentLoading(false)
+        }catch(error){
+            setPaymentLoading(false)
+            
+            toast.error(error.message)
+        }
+ }
+
+ 
+
+
        const onchange = (dates) =>{
            const [checkInDate,checkOutDate] = dates;
            setCheckInDate(checkInDate)
@@ -86,7 +113,7 @@ const RoomDetails = () => {
                dispatch(checkBooking(id,checkInDate.toISOString(),checkOutDate.toISOString()))
            }
        }
-     
+       
     //    const newBookingHandler = async()=>{
     //        const booking = {
     //            room: router.query.id,
@@ -192,14 +219,29 @@ const RoomDetails = () => {
                             
                             }
                             {available && !user && <div className="alert alert-danger font-weight-bold  my-3">First login to book the room</div>}
-                            {available && user &&                     
+                            {available && user &&  
+                            <>
+                            
                             <button 
                             onClick={()=>bookRoom(room._id,room.pricePerNight)} 
                             disabled={paymentLoading || bookingLoader ? true : false}
                             className="btn btn-block py-3 booking-btn bg-danger text-white">
                             Pay - ${daysOfStay*room.pricePerNight}
+                            </button>
+
+                            <div>
+                                <input name="number" required value={phoneNumber} onChange={e=>setPhoneNumber(e.target.value)} />
+                                <button 
+                            onClick={()=>bookMtn(room._id,room.pricePerNight)} 
+                            disabled={paymentLoading || bookingLoader ? true : false}
+                            className="btn btn-block py-3 booking-btn bg-warning border-0 text-white">
+                            MTN - ${daysOfStay*room.pricePerNight}
+                            </button>
+                            </div>
                             
-                        </button>}
+                            </>                   
+                        
+                        }
     
     
                       </div>

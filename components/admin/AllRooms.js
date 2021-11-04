@@ -76,7 +76,7 @@ const AllRooms = () => {
         rooms && rooms.forEach(room => {
               data.rows.push({
                   id:room._id,
-                  name:room.name,
+                  name: <div> <span className="d-none d-md-block ">{room.name}</span> <span className="d-sm-block d-md-none ">{room.name.slice(0,8) + "..."}</span>  </div> ,
                  
                   price:`$${room.pricePerNight}`,
                   category:`${room.category}`,
@@ -111,13 +111,17 @@ const AllRooms = () => {
             <h1 className="my-4">{`${rooms && rooms.length} Rooms`}</h1>
 
             <Link href="/admin/rooms/new">
-                <a className="mt-0 btn text-white float-right bg-choco btn-sm mt-3">Create Room</a>
+
+                <a className="mt-0 btn text-white btn-sm float-right bg-choco mt-3">Create Room</a>
+
+       
             </Link>
 
 
             </>            
             }
         
+
 
          <MDBDataTable
       striped
@@ -127,6 +131,7 @@ const AllRooms = () => {
       searching={true}
       data={data}
     />
+
 
     </div>
     )

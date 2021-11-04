@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React,{useState} from 'react'
+import Link from 'next/link'
 
 const Search = () => {
     const [location, setlocation] = useState('');
@@ -62,6 +63,11 @@ const Search = () => {
             </div>
 
             <button type="submit" className="btn btn-block py-2">Search</button>
+            <Link href='/'> 
+                      <a  className='ml-2 back-to-search'>
+                      <i className='fa fa-arrow-left'></i> Back
+                      </a> 
+            </Link>
           </form>
         </div>
       </div>
