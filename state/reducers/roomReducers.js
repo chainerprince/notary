@@ -259,7 +259,7 @@ export const newRoomReducer = (state={error:null,room:{}},action)=>{
 }
 
 
-export const canReviewReducer = (state={error:null,canReview:null},action)=>{
+export const canReviewReducer = (state={canRev:null},action)=>{
     switch(action.type){
         case CAN_REVIEW_REQUEST:
             return {
@@ -267,10 +267,10 @@ export const canReviewReducer = (state={error:null,canReview:null},action)=>{
             }
             
         case CAN_REVIEW_SUCCESS:
+            
             return {
                 loading:false,
-                 
-                 canReview:action.payload 
+                 canRev:action.payload 
             }
         case CAN_REVIEW_FAIL:
             return {

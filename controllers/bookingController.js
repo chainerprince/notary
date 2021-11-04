@@ -187,40 +187,40 @@ export const checkBookedDates = AsyncErrors(async(req,res,next)=>{
 
 
 
-export const newBooking = AsyncErrors(async(req,res,next)=>{
+// export const newBooking = AsyncErrors(async(req,res,next)=>{
 
 
     
-    const {
-        room,
+//     const {
+//         room,
         
-        checkInDate,
-        checkOutDate,
-        daysOfStay,
-        amountPaid,
-        paidAt,
-        paymentInfo
-    } = req.body;
+//         checkInDate,
+//         checkOutDate,
+//         daysOfStay,
+//         amountPaid,
+//         paidAt,
+//         paymentInfo
+//     } = req.body;
     
 
-
+// console.log(req.body)
 
 
   
-   const booking = await Booking.create({
-       room,
-       user:req.user._id,
-       checkInDate,
-       checkOutDate,
-       daysOfStay, 
-       paidAt,
-       amountPaid,
-       paymentInfo 
-   })
+//    const booking = await Booking.create({
+//        room,
+//        user:req.user._id,
+//        checkInDate,
+//        checkOutDate,
+//        daysOfStay, 
+//        paidAt,
+//        amountPaid,
+//        paymentInfo 
+//    })
    
-    res.status(201).json({
-        success:true,
-        booking
-    })
+//     res.status(201).json({
+//         success:true,
+//         booking
+//     })
     
- })
+//  })

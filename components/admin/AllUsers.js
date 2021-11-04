@@ -18,6 +18,7 @@ const Users = () => {
     
 
     useEffect(() => {
+        
         dispatch(allUser())
         if(error){
             toast.error(error)
@@ -32,8 +33,9 @@ const Users = () => {
             router.push('/admin/users');
             dispatch({type:DELETE_USER_RESET})
         }
+     
 
-    }, [dispatch,isDeleted,deleteError,error])
+    }, [dispatch,error,isDeleted])
 
     
 

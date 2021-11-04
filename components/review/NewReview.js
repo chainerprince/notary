@@ -15,14 +15,19 @@ const NewReview = () => {
     const dispatch = useDispatch()
     const router = useRouter();
     const {error, success } = useSelector(state=>state.newReview);
-    const {error:reviewError, reviewPossible } = useSelector(state=>state.reviewPossible); 
+    const { canRev } = useSelector(state=>state.reviewPossible); 
     const {id} = router.query;
 
 
     useEffect(() => {
-        if(id!==undefined){
+        
+        console.log("The id ",id)
+        if(id !== undefined){
             dispatch(canReview(id))
+          
         }
+
+   
         if(error){
             
             toast.error(error);
@@ -33,6 +38,7 @@ const NewReview = () => {
             
             // router.push('/')
             dispatch({type:NEW_REVIEW_RESET})
+            // router.push(`/room/${id}`)
         }
    
     }, [dispatch,success,error,id])
@@ -87,7 +93,7 @@ const NewReview = () => {
     return (
         <div className="container">
         <div className="row d-flex justify-content-between">
-            {reviewPossible && 
+            {canRev && 
              <button 
              id="review_btn" 
              type="button" 
