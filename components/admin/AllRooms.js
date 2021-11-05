@@ -112,16 +112,24 @@ const AllRooms = () => {
 
             <Link href="/admin/rooms/new">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <a className="mt-0 btn text-white btn-sm float-right bg-choco mt-3">Create Room</a>
 =======
                 <a className="mt-0 btn text-white float-right bg-choco btn-sm mt-3">Create Room</a>
 >>>>>>> 7f9373479266f41bf4a7018de3fc5a8ca6ab53d1
+=======
+
+                <a className="mt-0 btn text-white btn-sm float-right bg-choco mt-3">Create Room</a>
+
+       
+>>>>>>> 98578a726ae5f336257e9e8dfc15ab54ab0edf51
             </Link>
 
 
             </>            
             }
         
+<<<<<<< HEAD
 <<<<<<< HEAD
         <MDBDataTable
          data={setRooms()}
@@ -134,6 +142,9 @@ const AllRooms = () => {
          small
         />
 =======
+=======
+
+>>>>>>> 98578a726ae5f336257e9e8dfc15ab54ab0edf51
 
          <MDBDataTable
       striped
@@ -143,7 +154,11 @@ const AllRooms = () => {
       searching={true}
       data={data}
     />
+<<<<<<< HEAD
 >>>>>>> 7f9373479266f41bf4a7018de3fc5a8ca6ab53d1
+=======
+
+>>>>>>> 98578a726ae5f336257e9e8dfc15ab54ab0edf51
 
     </div>
     )

@@ -26,7 +26,7 @@ const Payment = () => {
         
         try{
             
-         const link = `http://localhost:3000/api/checkout/mtn/${id}`;
+         const link = `/api/checkout/mtn/${id}`;
          
       console.log(phone,pin,amount)
       const {data} = await axios.post(link,{'amount':2000,pin,phone})
