@@ -8,11 +8,11 @@ import ErrorHandler from "../utils/errorHandler";
     const session = await getSession({req})
     // console.log(session)
     if(!session){
-      // return  next(new ErrorHandler("You must first login",304));
-      res.status(401).json({
-        success:false,
-        message:"First login to continue"
-      })
+      return  next(new ErrorHandler("You must first login",304));
+      // res.status(401).json({
+      //   success:false,
+      //   message:"First login to continue"
+      // })
     }
     req.user = session.user;
     next();
