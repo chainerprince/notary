@@ -13,6 +13,14 @@ dbConnect();
 
 handler.post(registerUser)
 
+export const config = {
+    api: {
+      bodyParser: {
+        sizeLimit: '5mb',
+      },
+    },
+  }
+
 
 export default handler;
 
