@@ -51,8 +51,8 @@ const stripePayment = AsyncErrors(async(req,res)=>{
 
 const mtnCheckout = AsyncErrors(async(req,res)=>{
 
-    console.log("The mtn Checkout")
-    const room = await Room.findById(req.query.roomid);
+    // console.log("The mtn Checkout")
+    // const room = await Room.findById(req.query.roomid);
     const {origin} = absoluteUrl(req);
     const {phone,amount} = req.body;
     const current_date = (new Date()).valueOf().toString();
