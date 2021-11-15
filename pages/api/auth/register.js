@@ -12,7 +12,6 @@ dbConnect();
 
 
 handler.post(registerUser)
-
 export const config = {
     api: {
       bodyParser: {
