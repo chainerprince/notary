@@ -20,7 +20,5 @@ export const config = {
       },
     },
   }
-
-
 export default handler;
 
