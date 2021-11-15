@@ -106,6 +106,4 @@ const hookCheckout = AsyncErrors(async(req,res)=>{
 export {
     stripePayment,
     hookCheckout,
-    mtnCheckout,
-    flutterCheckout
 }
