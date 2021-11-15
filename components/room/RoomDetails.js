@@ -12,6 +12,8 @@ import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios';
 import { checkBooking , bookedDates} from '../../state/actions/bookingAction';
 import { CHECK_BOOKING_RESET } from '../../state/constants/bookingConstants';
+// import { FlutterWaveButton, closePaymentModal } from 'flutterwave-react-v3';
+import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 
 import getStripe from '../../utils/stripe'
 import NewReview from '../review/NewReview';
@@ -23,6 +25,7 @@ const RoomDetails = () => {
     const [checkOutDate,setCheckOutDate] = useState();
     const [daysOfStay,setDaysOfStay] = useState();
     const [phoneNumber,setPhoneNumber] = useState();
+    
     const {room,error} = useSelector(state=>state.roomDetails)
     const {user} = useSelector(state=>state.login)
     const {available,loading:bookingLoader} = useSelector(state=>state.checkBooking)
@@ -82,10 +85,10 @@ const RoomDetails = () => {
        
        const bookMtn = async(id,pricePerNight) =>{
         setPaymentLoading(true);
-        const amount = daysOfStay * pricePerNight;
+        // const amount = daysOfStay * pricePerNight;
         try{
             const link = `http://localhost:3000/api/checkout/mtn/${id}`;
-            const {data} = await axios.post(link,{'amount':amount,'phone':phoneNumber})
+            const {data} = await axios.post(link,{'amount':amount,'phone':phoneNumber,'enteringDate':checkInDate.toISOString(),'leavingDate':checkOutDate.toISOString(),stayingDays:daysOfStay})
             // console.log(data);
             if(data.status='success') {
                 window.location.assign(data.meta.authorization.redirect) 
@@ -113,36 +116,63 @@ const RoomDetails = () => {
                dispatch(checkBooking(id,checkInDate.toISOString(),checkOutDate.toISOString()))
            }
        }
-       
-    //    const newBookingHandler = async()=>{
-    //        const booking = {
-    //            room: router.query.id,
-    //            checkInDate, 
-    //            checkOutDate,
-    //            daysOfStay,
-    //            paidAt: Date.now(),
-    //            amountPaid: 80,
-    //            paymentInfo:{
-    //                id:"payment Id",
-    //                status:"payment status"     
-    //            }
-    //        }
+
+    //    const amount = daysOfStay * room.pricePerNight;
+      const config = {
+        public_key: process.env.FLW_PUBLIC_KEY,
+        tx_ref: Date.now(),
+        amount: room && daysOfStay * room.pricePerNight*100,
+        currency: 'RWF',
+        payment_options: 'card,mobilemoney,ussd',
+        customer: {
+          email:user && user.email,
+          name: user && user.name,
+        },
+        customizations: {
+          title: 'Book it',
+          description: 'Pay to book the room',
+          logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
+        },
+      };
+    
+      const handleFlutterPayment = useFlutterwave(config);
+
+          const newBookingHandler = async(response)=>{
+              
+           const booking = {
+               room: router.query.id,
+               checkInDate, 
+               checkOutDate,
+               daysOfStay,
+               paidAt: Date.now(),
+               amountPaid: response.amount,
+               paymentInfo:{
+                   id:response.transaction_id,
+                   status:response.status     
+               }
+           }
 
            
-    //        try {
-    //            const config = {
-    //                 headers:{
-    //                     'content-Type':'application/json'
-    //                 }
-    //            }
+           try {
+               const config = {
+                    headers:{
+                        'content-Type':'application/json'
+                    }
+               }
                
-    //            const { data } = await axios.post('/api/bookings',booking,config)
+               const { data } = await axios.post('/api/bookings',booking,config)
+               if(data.success) {
+                   toast.success("The room was booked succesfully");
+               }
+               closePaymentModal()
                
                
-    //        } catch (error) {
-    //            console.log(error)
-    //        }
-    //    }
+           } catch (error) {
+               console.log(error)
+           }
+       }
+    
+       
     return (
         <>
         <Head>
@@ -228,18 +258,30 @@ const RoomDetails = () => {
                             className="btn btn-block py-3 booking-btn bg-danger text-white">
                             Pay - ${daysOfStay*room.pricePerNight}
                             </button>
-
-                            <div class="d-flex align-items-center my-5">
+                            <button  className="btn btn-block py-3 booking-btn bg-warning text-white"
+        onClick={() => {
+            
+          handleFlutterPayment({
+            callback: (response)=>{
+                newBookingHandler(response)
+            },
+            onClose: () => {},
+          });
+        }}
+      >
+        Use MTN - {daysOfStay*room.pricePerNight*1000} Rwf
+      </button>
+                            {/* <div class="d-flex align-items-center my-5">
                                 <input name="number" required placeholder="Mtn Phone Number" value={phoneNumber} className="py-3 mx-2 flex-1 form-control" onChange={e=>setPhoneNumber(e.target.value)} />
                                 <button 
                             onClick={()=>bookMtn(room._id,room.pricePerNight)} 
                             disabled={paymentLoading || bookingLoader ? true : false}
                             className="btn btn-block btn-sm py-2 w-25  bg-warning border-0 text-white">
-   ${daysOfStay*room.pricePerNight}
+                                ${daysOfStay*room.pricePerNight}
                             </button>
                             </div>
-                            
-                            </>                   
+                             */}
+                            </>                    
                         
                         }
     

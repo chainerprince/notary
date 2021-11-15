@@ -187,13 +187,9 @@ export const checkBookedDates = AsyncErrors(async(req,res,next)=>{
 
 
 
-export const newBooking = AsyncErrors(async(req,res,next)=>{
-
-
-    
+export const newBooking = AsyncErrors(async(req,res,next)=>{   
     const {
-        room,
-        
+        room,    
         checkInDate,
         checkOutDate,
         daysOfStay,
@@ -201,15 +197,10 @@ export const newBooking = AsyncErrors(async(req,res,next)=>{
         paidAt,
         paymentInfo
     } = req.body;
-    
-
-
-
-
   
    const booking = await Booking.create({
        room,
-       user:req.user._id,
+       user:req.user && req.user._id,
        checkInDate,
        checkOutDate,
        daysOfStay, 

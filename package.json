@@ -16,6 +16,7 @@
     "cloudinary": "^1.25.1",
     "easyinvoice": "^1.0.112",
     "flutterwave-node-v3": "^1.0.9",
+    "flutterwave-react-v3": "^1.1.0",
     "mdbreact": "^5.1.0",
     "moment": "^2.29.1",
     "moment-range": "^4.0.2",
