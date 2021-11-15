@@ -18,9 +18,7 @@ export const config = {
       bodyParser: {
         sizeLimit: '5mb',
       },
-    },
+    }
   }
-
-
 export default handler;
 

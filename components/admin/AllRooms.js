@@ -111,10 +111,7 @@ const AllRooms = () => {
             <h1 className="my-4">{`${rooms && rooms.length} Rooms`}</h1>
 
             <Link href="/admin/rooms/new">
-
                 <a className="mt-0 btn text-white btn-sm float-right bg-choco mt-3">Create Room</a>
-
-       
             </Link>
 
 
