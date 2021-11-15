@@ -20,6 +20,14 @@ export const config = {
     },
   }
 
+export const config = {
+    api: {
+      bodyParser: {
+        sizeLimit: '5mb',
+      },
+    },
+  }
+
 
 export default handler;
 
