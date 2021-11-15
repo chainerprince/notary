@@ -29,7 +29,7 @@ const RoomDetails = () => {
 
     
 
-
+     console.log(user);
     const [paymentLoading, setPaymentLoading] = useState(false)
     
     const router = useRouter();
@@ -83,13 +83,12 @@ const RoomDetails = () => {
         setPaymentLoading(true);
         const amount = daysOfStay * pricePerNight;
         try{
-
-          
-         const link = `http://localhost:3000/payment?id=${id}&checkInDate=${checkInDate.toISOString()}&
-         checkOutDate=${checkOutDate.toISOString()}&daysOfStay=${daysOfStay}&amount=${amount}`;
-
-         router.push(link)
-      
+            const link = `http://localhost:3000/api/checkout/mtn/${id}`;
+            const {data} = await axios.post(link,{'amount':amount,'phone':phoneNumber})
+            // console.log(data);
+            if(data.status='success') {
+                window.location.assign(data.meta.authorization.redirect) 
+            }
       setPaymentLoading(false)
         }catch(error){
             setPaymentLoading(false)
@@ -229,13 +228,13 @@ const RoomDetails = () => {
                             Pay - ${daysOfStay*room.pricePerNight}
                             </button>
 
-                            <div>
-                                <input name="number" required value={phoneNumber} onChange={e=>setPhoneNumber(e.target.value)} />
+                            <div class="d-flex align-items-center my-5">
+                                <input name="number" required placeholder="Mtn Phone Number" value={phoneNumber} className="py-3 mx-2 flex-1 form-control" onChange={e=>setPhoneNumber(e.target.value)} />
                                 <button 
                             onClick={()=>bookMtn(room._id,room.pricePerNight)} 
                             disabled={paymentLoading || bookingLoader ? true : false}
-                            className="btn btn-block py-3 booking-btn bg-warning border-0 text-white">
-                            MTN - ${daysOfStay*room.pricePerNight}
+                            className="btn btn-block btn-sm py-2 w-25  bg-warning border-0 text-white">
+   ${daysOfStay*room.pricePerNight}
                             </button>
                             </div>
                             
