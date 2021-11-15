@@ -11,5 +11,4 @@ const dbConnect = ()=>{
         useCreateIndex:true
     }).then(con=>console.log('Connected to db Successfully'))
 }
-
-export default dbConnect;
+export default dbConnect; 

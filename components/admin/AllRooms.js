@@ -113,22 +113,19 @@ const AllRooms = () => {
             <Link href="/admin/rooms/new">
                 <a className="mt-0 btn text-white btn-sm float-right bg-choco mt-3">Create Room</a>
             </Link>
-
-
             </>            
             }
-        
 
-
-         <MDBDataTable
-      striped
-      bordered
-      responsive
-      small
-      searching={true}
-      data={data}
-    />
-
+        <MDBDataTable
+         data={setRooms()}
+         className="px-3"
+         bordered
+         striped
+         hover
+         responsive
+         autoWidth
+         small
+        />
 
     </div>
     )
