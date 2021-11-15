@@ -65,8 +65,7 @@ const RoomDetails = () => {
               setPaymentLoading(true);
               const amount = daysOfStay * pricePerNight;
               try{
-               const link = `http://localhost:3000/api/checkout/${id}?checkInDate=${checkInDate.toISOString()}&
-               checkOutDate=${checkOutDate.toISOString()}&daysOfStay=${daysOfStay}`;
+               const link = `/api/checkout/${id}?checkOutDate=${checkOutDate.toISOString()}&checkInDate=${checkInDate.toISOString()}&daysOfStay=${daysOfStay}`;
 
             const {data} = await axios.get(link,{params:{amount}})
             console.log(getStripe)

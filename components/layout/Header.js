@@ -50,7 +50,7 @@ function Header() {
                      </figure>
                         <span>{user && user.name}</span>
               </a>
-              <div className="dropdown-menu" id="menu">
+              <div className="dropdown-menu " id="menu">
                 {
                   user.role == 'admin' && (
                     <>

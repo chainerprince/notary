@@ -247,6 +247,7 @@ export const canReview = (roomId) => async(dispatch) => {
 
       
       const {data} = await axios.get(`/api/reviews/if_review?roomid=${roomId}`)
+      console.log("The data in booked",data)
       
       dispatch({
           type: CAN_REVIEW_SUCCESS,

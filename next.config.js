@@ -14,12 +14,19 @@ module.exports = {
     SMTP_FROM_EMAIL:'noreply@gmail.com',
     STRIPE_PUBLIC_KEY:'pk_test_51JFOUzJt8PjGxb7vBnax4XXGVaMf9G78be5UMwj6EotdLe6mOOI6931bptYCxh0hh8ui6fsRHEXHU9u2nMNRiWEQ00GNPHuJFn',
     STRIPE_PRIVATE_KEY:'sk_test_51JFOUzJt8PjGxb7vpU8kzIV8ayFecSJ2JmnIyMAQLknFAAVOe3V4SRHOoQIUimpdhTb7q31B5i5jkeIj8FXvPHlC00mpH0aw9E',
-    WEB_HOOK_SECRET : 'whsec_Y33keCIQStInV0YroJf9MzDCm2JtFJHU',
+
+
     FLW_PUBLIC_KEY: 'FLWPUBK_TEST-7e3b392887a3d66706517a0d8f871607-X',
-    FLW_PRIVATE_KEY: 'FLWSECK_TEST-ee5ab6a7c167c319bd2b281fbca0bc5e-X'
+    FLW_PRIVATE_KEY: 'FLWSECK_TEST-ee5ab6a7c167c319bd2b281fbca0bc5e-X',
+
+    WEB_HOOK_SECRET : 'whsec_awczvWmm3tx9GZOUT4EpxJEGlEEseJD0',
+
+    // NEXTAUTH_URL:"https://bookhotel.vercel.app"
+
 
   },
   images:{
     domains:['res.cloudinary.com'],
   }
+  
 }
