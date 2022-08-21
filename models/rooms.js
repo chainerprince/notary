@@ -1,52 +1,70 @@
 const  { Schema,model,models } = require("mongoose");
 
-const roomSchema = new Schema({
+const notifierSchema = new Schema({
      name:{
          type:String,
-         required:[true,"Please enter room name"],
+         required:[true,"Please enter notifier name"],
          trim:true,
          maxLength:[100,"Room name can't exceed 100 characters"]
      },
-     pricePerNight:{
+     pricePerDocument:{
          type:Number,
-         required:[true,"Please enter room price per night"],
+         required:[true,"Please enter notifier price per document"],
          trim:true,
-         maxLength:[4,"Room name can't exceed 5 characters"],
+         maxLength:[6,"Notifier price can't exceed 7 numbers"],
          default:0.0
      },
      description:{
          type:String,
-         required:[true,"Please enter room description"]
+         required:[true,"Please enter notifier description"]
      },
      address:{
+          lat:{
+              type:Number,
+              required:true
+          },
+          long:{
+              type:Number,
+              required:true
+          },
+           city:{
          type:String,
-         required:[true,"Please enter room address"]
+         required:[false]
      },
-     guestCapacity:{
+           sector:{
          type:String,
-         required:[true,"Please enter room guest capacity"]
+         required:[false]
      },
-     numOfBeds:{
+           district:{
          type:String,
-         required:[true,"Please enter Number of beds"]
+         required:[false]
      },
-     internet:{
+     },
+     totalDocuments:{
+         type:String,
+         required:[true,"Please enter notifier document capacity"]
+     },     
+     landServices:{
          type:Boolean,
          default:false
      },
-     airConditioner:{
+     migrationServices:{
          type:Boolean,
          default:false
      },
-     breakfast:{
+     divorce:{
          type:Boolean,
          default:false
      },
-     petsAllowed:{
+     marriage:{
          type:Boolean,
          default:false
      },
-     roomCleaning:{
+     schoolReports:{
+         type:Boolean,
+         default:false
+     },
+     birthCertificates:{
          type:Boolean,
          default:false
      },
@@ -58,31 +76,9 @@ const roomSchema = new Schema({
          type:Number,
          default:0
      },
-     images:[
-         {
-            public_id:{
-                  type:String,
-                   required:true
-         },
-            url:{
-                  type:String,
-                   required:true
-         }
-         }
-     ]
-     ,
-     category:{
-        type:String,
-        required:[true,"Please enter Number of beds"],
-        enum:{
-            values:[
-                'King',
-                'Twins',
-                'Single'
-            ],
-            message:"Please select correct category for room"
-        }
-     },
+    
+     
+    
      reviews:[
          {
              user:{
@@ -115,6 +111,6 @@ const roomSchema = new Schema({
      }
 })
 
-module.exports = models.Room || model('Room',roomSchema)
+module.exports = models.Notifier || model('Notifier',notifierSchema)
 
 

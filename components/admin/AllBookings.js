@@ -11,7 +11,7 @@ import { DELETE_BOOKING_RESET } from '../../state/constants/bookingConstants';
 
 
 
-
+ 
 const AllBookings = () => {
     const router = useRouter();
     const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const AllBookings = () => {
         const data = {
             columns :[
                 {
-                    label: "Booking Id",
+                    label: "Appointment Id",
                     field:'id',
                     sort:'asc'
                 },
@@ -154,7 +154,7 @@ const AllBookings = () => {
             {
                 loading ? <Loader /> : 
                 <>
-                            <h1 className="my-4">{`${bookings && bookings.length} Bookings` }</h1>
+                            <h1 className="my-4">{`${bookings && bookings.length} Appointments` }</h1>
             <MDBDataTable
              data={setBookings()}
              className="px-3"

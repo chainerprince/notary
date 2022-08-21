@@ -101,7 +101,7 @@ const NewRoom = () => {
         <div className="row wrapper">
            <div className="col-10 col-lg-8">
               <form className="shadow-lg" onSubmit={handleSubmit} enctype="multipart/form-data">
-                 <h1 className="mb-4">New Room</h1>
+                 <h1 className="mb-4">Add Notifier</h1>
                  <div className="form-group">
                     <label htmlFor="name_field">Name</label>
                     <input
@@ -136,7 +136,7 @@ const NewRoom = () => {
                        ></textarea>
                  </div>
                  <div className="form-group">
-                    <label htmlFor="address_field">Address</label>
+                    <label htmlFor="address_field">city</label>
                     <input
                        type="text"
                        id="address_field"
@@ -147,7 +147,7 @@ const NewRoom = () => {
                        />
                  </div>
                  <div className="form-group">
-                    <label htmlFor="category_field">Category</label>
+                    <label htmlFor="category_field">Latitude</label>
                     <select className="form-control" id="rom_type_field" 
               value={category}
               onChange = {e=>setCategory(e.target.value)}
@@ -165,7 +165,7 @@ const NewRoom = () => {
                     </select> */}
                  </div>
                  <div className="form-group">
-                    <label htmlFor="category_field">Guest Capacity</label>
+                    <label htmlFor="category_field">Longititude</label>
                     <select className="form-control" id="guest_field" 
               value={guestCapacity}
               onChange = {e=>setGuestCapacity(e.target.value)}
@@ -182,7 +182,7 @@ const NewRoom = () => {
                     </select> */}
                  </div>
                  <div className="form-group">
-                    <label htmlFor="category_field">Number of Beds</label>
+                    <label htmlFor="category_field">District</label>
 
                     <select className="form-control" id="guest_field" 
               value={numOfBeds}
@@ -199,7 +199,7 @@ const NewRoom = () => {
                        <option value="">2</option>
                     </select> */}
                  </div>
-                 <label className="mb-3">Room Features</label>
+                 <label className="mb-3">Documents Available</label>
                  <div className="form-check">
                     <input
                        className="form-check-input"
@@ -209,7 +209,7 @@ const NewRoom = () => {
                        onChange={e=>setInternet(e.target.checked)}
                        />
                     <label className="form-check-label" htmlFor="internet_checkbox">
-                    Internet
+                    Land Services
                     </label>
                  </div>
                  <div className="form-check">
@@ -221,7 +221,7 @@ const NewRoom = () => {
                        onChange={e=>setBreakfast(e.target.checked)}
                        />
                     <label className="form-check-label" htmlFor="breakfast_checkbox">
-                    Breakfast
+                    Marriage
                     </label>
                  </div>
                  <div className="form-check">
@@ -233,7 +233,7 @@ const NewRoom = () => {
                        onChange={e=>setAirConditioned(e.target.checked)}
                        />
                     <label className="form-check-label" htmlFor="airConditioned_checkbox">
-                    Air Conditioned
+                    Birth Certificates
                     </label>
                  </div>
                  <div className="form-check">
@@ -245,7 +245,7 @@ const NewRoom = () => {
                        onChange={e=>setPetsAllowed(e.target.checked)}
                        />
                     <label className="form-check-label" htmlFor="petsAllowed_checkbox">
-                    Pets Allowed
+                    Migration Services
                     </label>
                  </div>
                  <div className="form-check">
@@ -257,7 +257,7 @@ const NewRoom = () => {
                        onChange={e=>setRoomCleaning(e.target.checked)}
                        />
                     <label className="form-check-label" htmlFor="roomCleaning_checkbox">
-                    Room Cleaning
+                    School Reports
                     </label>
                  </div>
                  <div className="form-group mt-4">
@@ -294,7 +294,7 @@ const NewRoom = () => {
                  className="btn btn-block new-room-btn py-3"
                  disabled = {loading?true:false}
                  >
-                     {loading ? <Loading /> : "CREATE"}
+                     {loading ? <Loading /> : "ADD"}
                  
                  </button>
               </form>

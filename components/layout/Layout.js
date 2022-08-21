@@ -11,7 +11,7 @@ const Layout = ({children}) => {
     return (
         <div>
       <Head>
-        <title>Book It</title>
+        <title>Notary Services</title>
         <meta name="description" content="The best hotel booking application" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

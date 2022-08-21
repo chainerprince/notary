@@ -2,7 +2,7 @@ const Room = require("../models/rooms");
 const rooms = require('../data/rooms');
 
 
-
+console.log(rooms)
 
 const  mongoose  = require("mongoose");
 

@@ -3,10 +3,10 @@ import timeZone from 'mongoose-timezone'
 
 
 const bookingSchema = new Schema({
-      room:{
+      notifier:{
           type:Schema.Types.ObjectId,
           required:true,
-          ref:'Room'
+          ref:'Notifier'
       },
       user:{
           type:Schema.Types.ObjectId,
@@ -25,7 +25,7 @@ const bookingSchema = new Schema({
           type:Number,
           required:true
       },
-      daysOfStay:{
+      daysBooked:{
            type:Number,
            required:true
       }

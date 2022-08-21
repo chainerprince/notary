@@ -41,11 +41,11 @@ const AllRooms = () => {
       console.log(id)
       dispatch(deleteRoom(id));
   }
-    // const setRooms = () => {
+    const setRooms = () => {
         const data = {
             columns :[
                 {
-                    label: "Room Id",
+                    label: "Notifier Id",
                     field:'id',
                     sort:'asc'
                 },
@@ -55,13 +55,13 @@ const AllRooms = () => {
                     sort:'asc'
                 },
                 {
-                    label: "Price/Night",
+                    label: "Price/Document",
                     field:'price',
                     sort:'asc'
                 },
                 {
-                    label: "Category",
-                    field:'category',
+                    label: "Location",
+                    field:'location',
                     sort:'asc'
                 },
                 {
@@ -72,14 +72,14 @@ const AllRooms = () => {
             ],
             rows:[],
         }
-
+  
         rooms && rooms.forEach(room => {
               data.rows.push({
                   id:room._id,
                   name: <div> <span className="d-none d-md-block ">{room.name}</span> <span className="d-sm-block d-md-none ">{room.name.slice(0,8) + "..."}</span>  </div> ,
                  
-                  price:`$${room.pricePerNight}`,
-                  category:`${room.category}`,
+                  price:`${room.pricePerDocument} RWF`,
+                  location:`${room.address?.sector}`,
                   action:
                   <div className="d-flex">
                    <Link href={`/admin/rooms/${room._id}`}>
@@ -100,18 +100,18 @@ const AllRooms = () => {
         });
 
 
-        // return data;
-    // }
+        return data;
+    }
 
     return (
         <div className="container container-fluid">
             {loading ? <Loader /> : 
             <>
 
-            <h1 className="my-4">{`${rooms && rooms.length} Rooms`}</h1>
+            <h1 className="my-4">{`${rooms && rooms.length} Notifiers`}</h1>
 
             <Link href="/admin/rooms/new">
-                <a className="mt-0 btn text-white btn-sm float-right bg-choco mt-3">Create Room</a>
+                <a className="mt-0 btn text-white btn-sm float-right bg-choco mt-3">Add Notifier</a>
             </Link>
             </>            
             }

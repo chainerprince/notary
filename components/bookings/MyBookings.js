@@ -6,9 +6,6 @@ import { toast } from 'react-toastify';
 import { clearErrors } from '../../state/actions/bookingAction';
 import easyinvoice from 'easyinvoice';
 
-
-
-
 const MyBookings = () => {
     const dispatch = useDispatch();
     const {bookings,error} = useSelector(state=>state.bookings)
@@ -98,8 +95,8 @@ const MyBookings = () => {
                 "country": "United States"
             },
             "client": {
-                "company": `${booking.user.name}`,
-                "address": `${booking.user.email}`,
+                "company": `${booking?.user?.name ?? ''}`,
+                "address": `${booking?.user?.email}`,
                 "zip": "",
                 "city": `Check In: ${new Date(booking.checkInDate).toLocaleString('en-US')}`,
                 "country": `Check In: ${new Date(booking.checkOutDate).toLocaleString('en-US')}`
@@ -108,10 +105,10 @@ const MyBookings = () => {
             "invoiceDate": `${new Date(Date.now()).toLocaleString('en-US')}`,
             "products": [
                 {
-                    "quantity": `${booking.daysOfStay}`,
-                    "description": `${ booking.room.name}`,
+                    "quantity": `${booking?.daysOfStay ?? ''}`,
+                    "description": `${ booking?.room?.name ?? ''}`,
                     "tax": 0,
-                    "price": booking.room.pricePerNight
+                    "price": booking?.room?.pricePerNight ?? ''
                 }
             ],
             "bottomNotice": "This is auto generated Invoice of your booking on Book IT."
@@ -125,7 +122,7 @@ const MyBookings = () => {
 
     return (
         <div className="container container-fluid">
-            <h1 className="my-4">My Bookings</h1>
+            <h1 className="my-4">My Appointments</h1>
             <MDBDataTable
              data={setBookings()}
              className="px-3"

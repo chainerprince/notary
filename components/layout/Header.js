@@ -25,8 +25,8 @@ function Header() {
       <div className="col-3 p-0">
         <div className="navbar-brand">
             {/* <img src="./images/bookit_logo.png" alt="BookIT" /> */}
-            <Link href="/">
-            <h2 style={{cursor:'pointer'}}>Book It</h2>
+            <Link href="/" passHref>
+            <h2 style={{cursor:'pointer'}}>Notary</h2>
             </Link>
            
         </div>
@@ -55,13 +55,13 @@ function Header() {
                   user.role == 'admin' && (
                     <>
                     <Link href="/admin/rooms">
-                      <a  className="dropdown-item">Rooms</a>            
+                      <a  className="dropdown-item">Notifiers</a>            
                   </Link>
 
                  
 
                     <Link href="/admin/bookings">
-                      <a  className="dropdown-item">Bookings</a>            
+                      <a  className="dropdown-item">Appointments</a>            
                   </Link>
 
 
@@ -78,7 +78,7 @@ function Header() {
                   )
                 }
                   <Link href="/bookings/me">
-                      <a  className="dropdown-item">My Bookings</a>
+                      <a  className="dropdown-item">My Appointments</a>
                   </Link>
                   <Link href="/me/update">
                       <a  className="dropdown-item">My Profile</a>

@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
 import { clearErrors } from '../../state/actions/roomAction';
-import Head from 'next/dist/next-server/lib/head';
+import Head from 'next/head';
 import { Carousel } from 'react-bootstrap';
 import Image from 'next/image';
 import {useRouter} from 'next/router'
@@ -61,9 +61,9 @@ const RoomDetails = () => {
            booked.push(new Date(dat))
        })
 
-       const bookRoom = async(id,pricePerNight) =>{
+       const bookRoom = async(id,pricePerDocument) =>{
               setPaymentLoading(true);
-              const amount = daysOfStay * pricePerNight;
+              const amount = daysOfStay * pricePerDocument;
               try{
                const link = `/api/checkout/${id}?checkOutDate=${checkOutDate.toISOString()}&checkInDate=${checkInDate.toISOString()}&daysOfStay=${daysOfStay}`;
 
@@ -82,9 +82,9 @@ const RoomDetails = () => {
        }
 
        
-       const bookMtn = async(id,pricePerNight) =>{
+       const bookMtn = async(id,pricePerDocument) =>{
         setPaymentLoading(true);
-        // const amount = daysOfStay * pricePerNight;
+        // const amount = daysOfStay * pricePerDocument;
         try{
             const link = `http://localhost:3000/api/checkout/mtn/${id}`;
             const {data} = await axios.post(link,{'amount':amount,'phone':phoneNumber,'enteringDate':checkInDate.toISOString(),'leavingDate':checkOutDate.toISOString(),stayingDays:daysOfStay})
@@ -116,11 +116,11 @@ const RoomDetails = () => {
            }
        }
 
-    //    const amount = daysOfStay * room.pricePerNight;
+    //    const amount = daysOfStay * room.pricePerDocument;
       const config = {
         public_key: process.env.FLW_PUBLIC_KEY,
         tx_ref: Date.now(),
-        amount: room && daysOfStay * room.pricePerNight*100,
+        amount: room && daysOfStay * room.pricePerDocument*100,
         currency: 'RWF',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
@@ -172,7 +172,10 @@ const RoomDetails = () => {
        }
     
        
-    return (
+   
+    console.log(room,'the room we have')
+   
+       return (
         <>
         <Head>
             <title>{ room && room.name} - BookIt</title>
@@ -180,7 +183,7 @@ const RoomDetails = () => {
         {
             room && <div className="container container-fluid">
             <h2 className='mt-5'>{room.name}</h2>
-            <p>{room.address}</p>
+            <p>{room.address?.city}</p>
     
             <div className="ratings mt-auto mb-3">
                 <div className="rating-outer">
@@ -219,7 +222,7 @@ const RoomDetails = () => {
     
                   <div className="col-12 col-md-6 col-lg-4">
                       <div className="booking-card shadow-lg p-4">
-                        <p className='price-per-night'><b>${room.pricePerNight}</b> / night</p> <hr/>
+                        <p className='price-per-night'><b>${room.pricePerDocument}</b> / document</p> <hr/>
     
                                  <p className="mt-3 mb-3">
                                      Pick Check in & Check Out Date
@@ -239,11 +242,11 @@ const RoomDetails = () => {
     
                            {available ?
                            <div className="alert alert-success font-weight-bold  my-3">
-                               Room is available. Book it
+                               Notifier is available. Book Appointment
                             </div>
                             :
                            <div className="alert alert-danger font-weight-bold  my-3">
-                               Room not available. Try a different Date
+                               Notifier not available. Try a different Date
                             </div>
                             
                             }
@@ -252,10 +255,10 @@ const RoomDetails = () => {
                             <>
                             
                             <button 
-                            onClick={()=>bookRoom(room._id,room.pricePerNight)} 
+                            onClick={()=>bookRoom(room._id,room.pricePerDocument)} 
                             disabled={paymentLoading || bookingLoader ? true : false}
                             className="btn btn-block py-3 booking-btn bg-danger text-white">
-                            Pay - ${daysOfStay*room.pricePerNight}
+                            Pay - ${daysOfStay*room.pricePerDocument}
                             </button>
                             <button  className="btn btn-block py-3 booking-btn bg-warning text-white"
         onClick={() => {
@@ -268,15 +271,15 @@ const RoomDetails = () => {
           });
         }}
       >
-        Use MTN - {daysOfStay*room.pricePerNight*1000} Rwf
+        Use MTN - {daysOfStay*room.pricePerDocument*1000} Rwf
       </button>
                             {/* <div class="d-flex align-items-center my-5">
                                 <input name="number" required placeholder="Mtn Phone Number" value={phoneNumber} className="py-3 mx-2 flex-1 form-control" onChange={e=>setPhoneNumber(e.target.value)} />
                                 <button 
-                            onClick={()=>bookMtn(room._id,room.pricePerNight)} 
+                            onClick={()=>bookMtn(room._id,room.pricePerDocument)} 
                             disabled={paymentLoading || bookingLoader ? true : false}
                             className="btn btn-block btn-sm py-2 w-25  bg-warning border-0 text-white">
-                                ${daysOfStay*room.pricePerNight}
+                                ${daysOfStay*room.pricePerDocument}
                             </button>
                             </div>
                              */}
@@ -294,7 +297,7 @@ const RoomDetails = () => {
            <NewReview />
     
             {room.reviews && room.reviews.length > 0 ? <ListReview reviews = {room.reviews} /> : 
-             <div>No Reviews available for this room</div>
+             <div>No Reviews available for this notifier</div>
             } 
         </div>
     

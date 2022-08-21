@@ -34,7 +34,7 @@ const Home = () => {
 
     <section id="rooms" className="container-fluid mt-5">
 
-    <h2 className='mb-3 ml-2 stays-heading'>{location ? `Rooms in ${location}` : "All Rooms" }</h2>
+    <h2 className='mb-3 ml-2 stays-heading'>{location ? `Notifiers in ${location}` : "All Notifiers" }</h2>
 
     <Link href='/search'> 
     <a  className='ml-2 back-to-search'>
@@ -45,7 +45,7 @@ const Home = () => {
     </Link>
     <div className="row"> 
        {rooms && rooms.length===0 ? 
-        <div className="alert alert-danger"><b>No Rooms</b></div>
+        <div className="alert alert-danger"><b>No Appointments</b></div>
         :
      rooms &&   rooms.map(room=> <RoomItem key={room._id} room={room} />)
       }

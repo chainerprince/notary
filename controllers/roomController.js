@@ -1,4 +1,4 @@
-import Room from "../models/rooms";
+import Notifier from "../models/rooms";
 import Booking from '../models/booking'
 import ErrorHandler from "../utils/errorHandler";
 import AsyncErrors from "../middlewares/asyncErrors";
@@ -8,8 +8,8 @@ import cloudinary from 'cloudinary'
 
 const allRooms = AsyncErrors(async(req,res)=>{
      const resPerPage = 4;
-     const roomsCount = await Room.countDocuments();
-     const apiFeatures = new APIFeatures(Room.find(),req.query).
+     const roomsCount = await Notifier.countDocuments();
+     const apiFeatures = new APIFeatures(Notifier.find(),req.query).
      search().
      filter()
      
@@ -34,7 +34,7 @@ const allRooms = AsyncErrors(async(req,res)=>{
 
 const singleRoom = AsyncErrors(async(req,res,next)=>{
    
-      const room = await Room.findById(req.query.id);
+      const room = await Notifier.findById(req.query.id);
      
       if(!room){
         return next(new ErrorHandler("That Room is not saved",404));
@@ -51,7 +51,7 @@ const singleRoom = AsyncErrors(async(req,res,next)=>{
 
 export const roomReviews = AsyncErrors(async(req,res,next)=>{
    
-      const room = await Room.findById(req.query.id);
+      const room = await Notifier.findById(req.query.id);
      
       if(!room){
         return next(new ErrorHandler("That Room is not saved",404));
@@ -68,7 +68,7 @@ export const roomReviews = AsyncErrors(async(req,res,next)=>{
 
 export const deleteReview = AsyncErrors(async(req,res,next)=>{
    
-      const room = await Room.findById(req.query.roomid);
+      const room = await Notifier.findById(req.query.roomid);
       if(!room){
         return next(new ErrorHandler("That Room is not saved",404));
       }
@@ -79,7 +79,7 @@ export const deleteReview = AsyncErrors(async(req,res,next)=>{
   
       const ratings = room.reviews.reduce((acc, item) => item.rating + acc, 0) / reviews.length
 
-      await Room.findByIdAndUpdate(req.query.roomid,{
+      await Notifier.findByIdAndUpdate(req.query.roomid,{
         reviews,
         ratings,
         numOfReviews
@@ -104,7 +104,7 @@ export const deleteReview = AsyncErrors(async(req,res,next)=>{
 const updateRoom = AsyncErrors(async(req,res,next)=>{
   
     
-    let room = await Room.findById(req.query.id);
+    let room = await Notifier.findById(req.query.id);
     if(!room){
       return next(new ErrorHandler("That Room doesn't Exist",404));
     }
@@ -134,7 +134,7 @@ const updateRoom = AsyncErrors(async(req,res,next)=>{
   
     req.body.images = imageLinks;
 
-    room = await Room.findByIdAndUpdate(req.query.id,req.body,{
+    room = await Notifier.findByIdAndUpdate(req.query.id,req.body,{
       new:true,
       runValidators: true
     })
@@ -149,7 +149,7 @@ const updateRoom = AsyncErrors(async(req,res,next)=>{
 
 const deleteRoom = AsyncErrors(async(req,res,next)=>{
   
-    const room = await Room.findById(req.query.id);
+    const room = await Notifier.findById(req.query.id);
     if(!room){
       return next(new ErrorHandler("That Room doesn't Exist",404));
     }
@@ -175,7 +175,7 @@ export const createRoomReview = AsyncErrors(async(req,res,next)=>{
     rating:Number(rating),
     comment
   }
-    const room = await Room.findById(roomId);
+    const room = await Notifier.findById(roomId);
     
 
     
@@ -233,7 +233,7 @@ export const canReview = AsyncErrors(async(req,res,next)=>{
 
 export const allAdminRooms = AsyncErrors(async(req,res,next)=>{
 
-     const rooms = await Room.find();
+     const rooms = await Notifier.find();
     
     res.status(200).json({
       success:true,
@@ -266,7 +266,7 @@ const saveRoom = AsyncErrors(async (req,res)=>{
   req.body.images = imageLinks;
   req.body.user = req.user._id;
   
-  const room = await Room.create(req.body);
+  const room = await Notifier.create(req.body);
   console.log(room)
   res.status(201).json(
     {
