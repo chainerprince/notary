@@ -3,7 +3,7 @@ import React,{useEffect} from 'react'
 import Link from 'next/link';
 import { useSelector,useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
-import { clearErrors } from '../../state/actions/bookingAction';
+import { clearErrors } from '../../state/actions/appointmentAction';
 import easyinvoice from 'easyinvoice';
 
 const MyBookings = () => {

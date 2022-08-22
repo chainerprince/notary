@@ -1,5 +1,5 @@
 import nc from 'next-connect'
-import { deleteRoom, singleRoom,updateRoom } from '../../../controllers/roomController'
+import { deleteRoom, singleRoom,updateRoom } from '../../../controllers/notifierController'
 import dbConnect from '../../../config/dbConnect';
 import onError from "../../../middlewares/error"
 

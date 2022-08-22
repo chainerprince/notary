@@ -4,10 +4,11 @@ import React,{useEffect,useState} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { clearErrors, getRoomDetails } from '../../state/actions/roomAction';
-import { updateRoom } from '../../state/actions/roomAction';
+import { clearErrors, getRoomDetails,updateRoom } from '../../state/actions/notifierAction';
 import Loading from '../layout/Loading';
-import { NEW_ROOM_RESET } from '../../state/constants/roomConstants';
+import { NEW_ROOM_RESET } from '../../state/constants/notifierConstants';
+import Loader from '../layout/Loader';
+import Image from 'next/image';
 
 const UpdateRoom = () => {
 
@@ -139,7 +140,7 @@ const UpdateRoom = () => {
         <div className="container container-fluid">
         <div className="row wrapper">
            <div className="col-10 col-lg-8">
-              <form className="shadow-lg" onSubmit={handleSubmit} enctype="multipart/form-data">
+              <form className="shadow-lg" onSubmit={handleSubmit} encType="multipart/form-data">
                  <h1 className="mb-4">New Room</h1>
                  <div className="form-group">
                     <label htmlFor="name_field">Name</label>
@@ -322,26 +323,26 @@ const UpdateRoom = () => {
 
                     {
                         imagesPreview.map(img=>
-                            <img
+                            <Image
                             src={img}
                             alt={img}
                             key={img}
                             className="mt-3 mr-2"
-                            width="55"
-                            height="52"
+                            width={55}
+                            height={52}
                             />
                         )
                     }
 
 {
                         oldImages && oldImages.map(img=>
-                            <img
+                            <Image
                             src={img.url}
                             alt={img.public_id}
                             key={img.public_id}
                             className="mt-3 mr-2"
-                            width="55"
-                            height="52"
+                            width={55}
+                            height={52}
                             />
                         )
                     }

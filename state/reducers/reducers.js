@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import { bookedDatesReducer, bookingDetailsReducer, checkBookingReducer, deleteBookingReducer, myBookingReducer } from "./bookingReducer";
+import { bookedDatesReducer, bookingDetailsReducer, checkBookingReducer, deleteBookingReducer, myBookingReducer } from "./appointmentReducer";
 import { roomDetailsReducer } from "./detailsReducer";
-import { canReviewReducer, newRoomReducer, roomReviewReducer, roomsReducer, deleteRoomReducer,updateRoomReducer, reviewsReducer, deleteReviewReducer } from "./roomReducers";
+import { canReviewReducer, newRoomReducer, roomReviewReducer, roomsReducer, deleteRoomReducer,updateRoomReducer, reviewsReducer, deleteReviewReducer } from "./notifierReducers";
 import { AllUserReducer, authReducer, forgotPasswordReducer, loginReducer, resetPasswordReducer, userDetailReducer, userReducer } from "./userReducers";
 
 const reducers = combineReducers({

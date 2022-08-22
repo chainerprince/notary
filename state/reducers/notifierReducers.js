@@ -46,7 +46,7 @@ import {
     DELETE_REVIEW_FAIL,
     DELETE_REVIEW_RESET
 }
-from '../constants/roomConstants'
+from '../constants/notifierConstants'
 
 
 export const roomsReducer = (state={rooms:[]},action)=>{

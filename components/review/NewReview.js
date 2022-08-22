@@ -5,8 +5,8 @@ import {toast} from 'react-toastify'
 
 import { useDispatch,useSelector } from 'react-redux'
 
-import { canReview, clearErrors,newRoomReviews  } from '../../state/actions/roomAction'
-import { NEW_REVIEW_RESET } from '../../state/constants/roomConstants'
+import { canReview, clearErrors,newRoomReviews  } from '../../state/actions/notifierAction'
+import { NEW_REVIEW_RESET } from '../../state/constants/notifierConstants'
 
 const NewReview = () => {
 

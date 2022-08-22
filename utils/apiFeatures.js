@@ -1,4 +1,4 @@
-import { remove } from "../models/rooms";
+import { remove } from "../models/notifiers";
 
 class  APIFeatures{
     constructor(query,queryStr){

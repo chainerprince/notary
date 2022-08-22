@@ -1,17 +1,17 @@
 import React,{useEffect,useState} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
-import { clearErrors } from '../../state/actions/roomAction';
+import { clearErrors } from '../../state/actions/notifierAction';
 import Head from 'next/head';
 import { Carousel } from 'react-bootstrap';
 import Image from 'next/image';
 import {useRouter} from 'next/router'
-import RoomFeatures from './RoomFeatures' 
+import RoomFeatures from './NotifierDocs' 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios';
-import { checkBooking , bookedDates} from '../../state/actions/bookingAction';
-import { CHECK_BOOKING_RESET } from '../../state/constants/bookingConstants';
+import { checkBooking , bookedDates} from '../../state/actions/appointmentAction';
+import { CHECK_BOOKING_RESET } from '../../state/constants/appointmentConstants';
 // import { FlutterWaveButton, closePaymentModal } from 'flutterwave-react-v3';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 

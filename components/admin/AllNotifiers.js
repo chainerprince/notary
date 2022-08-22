@@ -6,10 +6,10 @@ import Link from 'next/link';
 import { useSelector,useDispatch } from 'react-redux'
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { clearErrors } from '../../state/actions/bookingAction';
-import { getAdminRooms,deleteRoom } from '../../state/actions/roomAction';
+import { clearErrors } from '../../state/actions/appointmentAction';
+import { getAdminRooms,deleteRoom } from '../../state/actions/notifierAction';
 import Loader from '../layout/Loader';
-import { DELETE_ROOM_RESET } from '../../state/constants/roomConstants';
+import { DELETE_ROOM_RESET } from '../../state/constants/notifierConstants';
 
 const AllRooms = () => {
     const dispatch = useDispatch();

@@ -1,5 +1,5 @@
-import Notifier from "../models/rooms";
-import Booking from '../models/booking'
+import Notifier from "../models/notifiers";
+import Booking from '../models/appointment'
 import ErrorHandler from "../utils/errorHandler";
 import AsyncErrors from "../middlewares/asyncErrors";
 import APIFeatures from "../utils/apiFeatures";

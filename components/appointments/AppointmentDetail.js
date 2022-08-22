@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSelector,useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
-import { clearErrors } from '../../state/actions/bookingAction';
+import { clearErrors } from '../../state/actions/appointmentAction';
 
 const BookingDetails = () => {
      const dispatch = useDispatch();

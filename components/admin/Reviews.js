@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 import Loader from '../layout/Loader';
 
 
-import { getReviews,clearErrors, deleteReview } from '../../state/actions/roomAction';
-import { DELETE_REVIEW_RESET } from '../../state/constants/roomConstants';
+import { getReviews,clearErrors, deleteReview } from '../../state/actions/notifierAction';
+import { DELETE_REVIEW_RESET } from '../../state/constants/notifierConstants';
 
 const Reviews = () => {
     const dispatch = useDispatch();

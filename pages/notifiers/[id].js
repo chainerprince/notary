@@ -5,7 +5,7 @@
 import Layout from '../../components/layout/Layout'
 
 import { wrapper } from '../../state/store';
-import { getRoomDetails } from '../../state/actions/roomAction'
+import { getRoomDetails } from '../../state/actions/notifierAction'
 import RoomDetails from '../../components/room/RoomDetails'
 
 

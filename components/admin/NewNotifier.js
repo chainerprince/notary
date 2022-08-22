@@ -4,10 +4,11 @@ import React,{useEffect,useState} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { clearErrors } from '../../state/actions/roomAction';
-import { newRoom } from '../../state/actions/roomAction';
+import { clearErrors } from '../../state/actions/notifierAction';
+import { newRoom } from '../../state/actions/notifierAction';
 import Loading from '../layout/Loading';
-import { NEW_ROOM_RESET } from '../../state/constants/roomConstants';
+import { NEW_ROOM_RESET } from '../../state/constants/notifierConstants';
+import Image from 'next/image';
 
 const NewRoom = () => {
 
@@ -100,7 +101,7 @@ const NewRoom = () => {
         <div className="container container-fluid">
         <div className="row wrapper">
            <div className="col-10 col-lg-8">
-              <form className="shadow-lg" onSubmit={handleSubmit} enctype="multipart/form-data">
+              <form className="shadow-lg" onSubmit={handleSubmit} encType="multipart/form-data">
                  <h1 className="mb-4">Add Notifier</h1>
                  <div className="form-group">
                     <label htmlFor="name_field">Name</label>
@@ -278,12 +279,13 @@ const NewRoom = () => {
 
                     {
                         imagesPreview.map(img=>
-                            <img
+                            <Image
+                            key={img}
                             src={img}
                             alt={img}
                             className="mt-3 mr-2"
-                            width="55"
-                            height="52"
+                            width={55}
+                            height={52}
                             />
                         )
                     }

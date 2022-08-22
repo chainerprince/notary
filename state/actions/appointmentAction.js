@@ -23,7 +23,7 @@ import {
    
 
  }
- from '../constants/bookingConstants'
+ from '../constants/appointmentConstants'
 
  
 export const bookingDetails = (authCookie, req, id) => async (dispatch) => {

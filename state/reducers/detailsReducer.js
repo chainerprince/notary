@@ -4,7 +4,7 @@ import {
     CLEAR_ERRORS
     
 }
-from '../constants/roomConstants'
+from '../constants/notifierConstants'
 515038
 
 export const roomDetailsReducer = (state={room:{} },action)=>{

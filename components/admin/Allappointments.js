@@ -3,11 +3,11 @@ import React,{useEffect} from 'react'
 import Link from 'next/link';
 import { useSelector,useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
-import { adminBookings, clearErrors, deleteBooking } from '../../state/actions/bookingAction';
+import { adminBookings, clearErrors, deleteBooking } from '../../state/actions/appointmentAction';
 import easyinvoice from 'easyinvoice';
 import Loader from '../layout/Loader';
 import { useRouter } from 'next/router';
-import { DELETE_BOOKING_RESET } from '../../state/constants/bookingConstants';
+import { DELETE_BOOKING_RESET } from '../../state/constants/appointmentConstants';
 
 
 
@@ -41,7 +41,7 @@ const AllBookings = () => {
         dispatch(deleteBooking(id));
     }
 
-    const setBookings = () => {
+    const setAppointments = () => {
         const data = {
             columns :[
                 {
@@ -156,7 +156,7 @@ const AllBookings = () => {
                 <>
                             <h1 className="my-4">{`${bookings && bookings.length} Appointments` }</h1>
             <MDBDataTable
-             data={setBookings()}
+             data={setAppointments()}
              className="px-3"
              bordered
              striped

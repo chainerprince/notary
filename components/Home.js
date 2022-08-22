@@ -2,8 +2,8 @@ import React,{useEffect} from 'react'
 import  Pagination  from 'react-js-pagination';
 import { useSelector,useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
-import { clearErrors } from '../state/actions/roomAction';
-import RoomItem from './room/RoomItem';
+import { clearErrors } from '../state/actions/notifierAction';
+import RoomItem from './notifier/NotifierItem';
 import {useRouter} from 'next/router'
 import Link from 'next/link';
 const Home = () => {

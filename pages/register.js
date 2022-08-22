@@ -2,8 +2,6 @@ import { getSession } from 'next-auth/client'
 import Register from '../components/Auth/Register'
 import Layout from '../components/layout/Layout'
 
-// import { wrapper } from '../state/store';
-// import { getRooms } from '../state/actions/roomAction'
 
 
 export default function search() {

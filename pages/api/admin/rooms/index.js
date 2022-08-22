@@ -1,5 +1,5 @@
 import nc from 'next-connect'
-import { allAdminRooms, saveRoom } from '../../../../controllers/roomController'
+import { allAdminRooms, saveRoom } from '../../../../controllers/notifierController'
 import dbConnect from '../../../../config/dbConnect';
 import onError from "../../../../middlewares/error";
 import isAuthenticated, { authorize } from '../../../../middlewares/auth'

@@ -1,5 +1,5 @@
 import nc from 'next-connect'
-import {  canReview } from '../../../controllers/roomController'
+import {  canReview } from '../../../controllers/notifierController'
 import dbConnect from '../../../config/dbConnect';
 import onError from "../../../middlewares/error"
 import isAuthenticated from "../../../middlewares/auth"

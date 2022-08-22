@@ -7,13 +7,7 @@ const RoomFeatures = ({room}) => {
           <div className='room-feature'>
             <i className="fa  fa-fw fa-users" aria-hidden="true"></i>
             <p>{room.totalDocuments} Documents</p>
-          </div>
-
-          {/* <div className='room-feature'>
-            <i className="fa  fa-fw fa-bed" aria-hidden="true"></i>
-            <p>{room.numOfBeds} Beds</p>
-          </div> */}
-
+          </div>        
           <div className='room-feature'>
             <i className={room.marriage ? "fa fa-cog fa-fw fa-check text-success" : "fa fa-cog fa-fw fa-times text-danger"} aria-hidden="true"></i>
             <p>Marriage</p>

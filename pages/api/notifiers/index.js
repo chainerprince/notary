@@ -1,5 +1,5 @@
 import nc from 'next-connect'
-import { allRooms, saveRoom } from '../../../controllers/roomController'
+import { allRooms, saveRoom } from '../../../controllers/notifierController'
 import dbConnect from '../../../config/dbConnect';
 import onError from "../../../middlewares/error"
 const handler = nc({onError});
