@@ -52,7 +52,8 @@ from '../constants/notifierConstants'
 export const getNotifiers = (req,currentPage=1,location='',document) => async(dispatch) => {
   try {
       const {origin} = absoluteUrl(req)
-      let link = `${origin}/api/rooms?page=${currentPage}&location=${location}`
+      console.log(origin,'the original page')
+      let link = `${origin}/api/notifier?page=${currentPage}&location=${location}`
       if(document) link = link.concat(`&document=${document}`)
       
       const {data} = await axios.get(link);
@@ -75,7 +76,7 @@ export const getRoomDetails = (req,id) => async(dispatch) => {
   try {
     
       const {origin} = absoluteUrl(req)
-      const {data} = await axios.get(`${origin}/api/rooms/${id}`)
+      const {data} = await axios.get(`${origin}/api/notifier/${id}`)
       
       dispatch({
           type: NOTIFIER_DETAILS_SUCCESS,
@@ -173,7 +174,7 @@ export const updateRoom = (id,roomData) => async(dispatch) => {
         }
     }
       
-      const {data} = await axios.put(`/api/rooms/${id}`,roomData,config)
+      const {data} = await axios.put(`/api/notifier/${id}`,roomData,config)
       console.log(data)
       dispatch({
           type: UPDATE_NOTIFIER_SUCCESS,
@@ -198,7 +199,7 @@ export const deleteRoom = (id) => async(dispatch) => {
     //     }
     // }
       
-      const {data} = await axios.delete(`/api/rooms/${id}`)
+      const {data} = await axios.delete(`/api/notifier/${id}`)
       console.log(data);
       
       dispatch({

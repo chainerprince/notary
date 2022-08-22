@@ -1,6 +1,6 @@
 import {
-    ROOM_SUCCESS,
-    ROOM_FAIL,
+    NOTIFIER_SUCCESS,
+    NOTIFIER_FAIL,
     CLEAR_ERRORS,
 
     NEW_REVIEW_REQUEST,
@@ -9,22 +9,22 @@ import {
     NEW_REVIEW_RESET,
 
 
-    NEW_ROOM_REQUEST,
-    NEW_ROOM_SUCCESS,
-    NEW_ROOM_FAIL,
-    NEW_ROOM_RESET,
+    NEW_NOTIFIER_REQUEST,
+    NEW_NOTIFIER_SUCCESS,
+    NEW_NOTIFIER_FAIL,
+    NEW_NOTIFIER_RESET,
 
 
-   UPDATE_ROOM_REQUEST,
-   UPDATE_ROOM_SUCCESS,
-   UPDATE_ROOM_FAIL,
-   UPDATE_ROOM_RESET,
+   UPDATE_NOTIFIER_REQUEST,
+   UPDATE_NOTIFIER_SUCCESS,
+   UPDATE_NOTIFIER_FAIL,
+   UPDATE_NOTIFIER_RESET,
 
 
-   DELETE_ROOM_REQUEST,
-   DELETE_ROOM_SUCCESS,
-   DELETE_ROOM_FAIL,
-   DELETE_ROOM_RESET,
+   DELETE_NOTIFIER_REQUEST,
+   DELETE_NOTIFIER_SUCCESS,
+   DELETE_NOTIFIER_FAIL,
+   DELETE_NOTIFIER_RESET,
 
     
     CAN_REVIEW_REQUEST,
@@ -51,7 +51,7 @@ from '../constants/notifierConstants'
 
 export const roomsReducer = (state={rooms:[]},action)=>{
     switch(action.type){
-        case ROOM_SUCCESS:
+        case NOTIFIER_SUCCESS:
             return {
                 roomsCount : action.payload.roomsCount,
                 resPerPage : action.payload.resPerPage,
@@ -67,7 +67,7 @@ export const roomsReducer = (state={rooms:[]},action)=>{
                 rooms:action.payload
             }
             
-        case ROOM_FAIL:
+        case NOTIFIER_FAIL:
             case ADMIN_ROOMS_FAIL:
             return {
                  error:action.payload
@@ -122,23 +122,23 @@ export const roomReviewReducer = (state={error:null},action)=>{
 
 export const updateRoomReducer = (state={error:null},action)=>{
     switch(action.type){
-        case UPDATE_ROOM_REQUEST:
+        case UPDATE_NOTIFIER_REQUEST:
             return {
                loading:true
             }
             
-        case UPDATE_ROOM_SUCCESS:
+        case UPDATE_NOTIFIER_SUCCESS:
             return {
                 loading:false,
                  
                  isUpdated:action.payload 
             }
-        case UPDATE_ROOM_FAIL:
+        case UPDATE_NOTIFIER_FAIL:
             return {
                 loading:false,                 
                  error:action.payload
             }
-        case UPDATE_ROOM_RESET:
+        case UPDATE_NOTIFIER_RESET:
             return {
                 
                 success:false
@@ -155,23 +155,23 @@ export const updateRoomReducer = (state={error:null},action)=>{
 }
 export const deleteRoomReducer = (state={error:null},action)=>{
     switch(action.type){
-        case DELETE_ROOM_REQUEST:
+        case DELETE_NOTIFIER_REQUEST:
             return {
                loading:true
             }
             
-        case DELETE_ROOM_SUCCESS:
+        case DELETE_NOTIFIER_SUCCESS:
             return {
                 loading:false,
                  
                  isDeleted:action.payload 
             }
-        case DELETE_ROOM_FAIL:
+        case DELETE_NOTIFIER_FAIL:
             return {
                  loading:false,                 
                  error:action.payload
             }
-        case DELETE_ROOM_RESET:
+        case DELETE_NOTIFIER_RESET:
             return {
                 
                 success:false, 
@@ -226,23 +226,23 @@ export const deleteReviewReducer = (state={error:null},action)=>{
 
 export const newRoomReducer = (state={error:null,room:{}},action)=>{
     switch(action.type){
-        case NEW_ROOM_REQUEST:
+        case NEW_NOTIFIER_REQUEST:
             return {
                loading:true
             }
             
-        case NEW_ROOM_SUCCESS:
+        case NEW_NOTIFIER_SUCCESS:
             return {
                 loading:false,
                  success:action.payload.success,
                  room:action.payload.room
             }
-        case NEW_ROOM_FAIL:
+        case NEW_NOTIFIER_FAIL:
             return {
                 loading:false,                 
                  error:action.payload
             }
-        case NEW_ROOM_RESET:
+        case NEW_NOTIFIER_RESET:
             return {
                 
                 success:false

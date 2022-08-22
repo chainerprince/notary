@@ -4,13 +4,13 @@ import {getSession, session} from 'next-auth/client'
 
 import Layout from '../../../components/layout/Layout'
 
-import AllBookings from '../../../components/admin/AllBookings'
+import Allappointments from '../../../components/admin/Allappointments'
 
-const AllBookingsPage = () => {
+const AllappointmentsPage = () => {
     return (
         <div>
            <Layout>
-               <AllBookings  />
+               <Allappointments  />
            </Layout>
         </div>
     )
@@ -34,4 +34,4 @@ export async function getServerSideProps(context){
        }
 }
 
-export default AllBookingsPage
+export default AllappointmentsPage

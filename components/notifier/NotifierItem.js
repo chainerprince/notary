@@ -49,7 +49,7 @@ const RoomItem = ({room}) => {
 
           <button className="btn btn-block rounded  ">
               
-              <Link  href={`/rooms/${room._id}`}>
+              <Link  href={`/notifier/${room._id}`}>
                  <a className="text-white bg-choco p-2 ">Book Appointment</a> 
               </Link>
           </button>

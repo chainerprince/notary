@@ -9,6 +9,7 @@ import cloudinary from 'cloudinary'
 const allRooms = AsyncErrors(async(req,res)=>{
      const resPerPage = 4;
      const roomsCount = await Notifier.countDocuments();
+     console.log(roomsCount,'the number of rooms')
      const apiFeatures = new APIFeatures(Notifier.find(),req.query).
      search().
      filter()

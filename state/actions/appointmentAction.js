@@ -169,7 +169,7 @@ export const checkBooking = (roomId,checkInDate,checkOutDate) => async(dispatch)
 
      
 
-       let link = `/api/bookings/check?roomId=${roomId}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+       let link = `/api/appointments/check?roomId=${roomId}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
 
        const {data} = await axios.get(link);
        

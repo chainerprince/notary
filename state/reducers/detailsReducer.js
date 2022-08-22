@@ -1,6 +1,6 @@
 import {
-    ROOM_DETAILS_SUCCESS,
-    ROOM_DETAILS_FAIL,
+    NOTIFIER_DETAILS_SUCCESS,
+    NOTIFIER_DETAILS_FAIL,
     CLEAR_ERRORS
     
 }
@@ -9,12 +9,12 @@ from '../constants/notifierConstants'
 
 export const roomDetailsReducer = (state={room:{} },action)=>{
     switch(action.type){
-        case ROOM_DETAILS_SUCCESS:
+        case NOTIFIER_DETAILS_SUCCESS:
             return {
                room:action.payload
             }
             
-        case ROOM_DETAILS_FAIL:
+        case NOTIFIER_DETAILS_FAIL:
             return {
                  error:action.payload
             }

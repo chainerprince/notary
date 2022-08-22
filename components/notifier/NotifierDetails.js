@@ -57,7 +57,7 @@ const RoomDetails = () => {
     
 
        const booked = [];
-       dates.forEach(dat=>{
+       dates?.forEach(dat=>{
            booked.push(new Date(dat))
        })
 
@@ -134,7 +134,7 @@ const RoomDetails = () => {
         },
       };
     
-      const handleFlutterPayment = useFlutterwave(config);
+    //   const handleFlutterPayment = useFlutterwave(config);
 
           const newBookingHandler = async(response)=>{
               
@@ -159,7 +159,7 @@ const RoomDetails = () => {
                     }
                }
                
-               const { data } = await axios.post('/api/bookings',booking,config)
+               const { data } = await axios.post('/api/appointments',booking,config)
                if(data.success) {
                    toast.success("The room was booked succesfully");
                }
@@ -260,7 +260,7 @@ const RoomDetails = () => {
                             className="btn btn-block py-3 booking-btn bg-danger text-white">
                             Pay - ${daysOfStay*room.pricePerDocument}
                             </button>
-                            <button  className="btn btn-block py-3 booking-btn bg-warning text-white"
+                            {/* <button  className="btn btn-block py-3 booking-btn bg-warning text-white"
         onClick={() => {
             
           handleFlutterPayment({
@@ -272,7 +272,7 @@ const RoomDetails = () => {
         }}
       >
         Use MTN - {daysOfStay*room.pricePerDocument*1000} Rwf
-      </button>
+      </button> */}
                             {/* <div class="d-flex align-items-center my-5">
                                 <input name="number" required placeholder="Mtn Phone Number" value={phoneNumber} className="py-3 mx-2 flex-1 form-control" onChange={e=>setPhoneNumber(e.target.value)} />
                                 <button 

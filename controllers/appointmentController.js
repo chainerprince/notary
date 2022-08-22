@@ -1,4 +1,4 @@
-import Booking from "../models/booking";
+import Booking from "../models/appointment";
 
 import AsyncErrors from "../middlewares/asyncErrors";
 

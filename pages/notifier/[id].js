@@ -6,7 +6,7 @@ import Layout from '../../components/layout/Layout'
 
 import { wrapper } from '../../state/store';
 import { getRoomDetails } from '../../state/actions/notifierAction'
-import RoomDetails from '../../components/room/RoomDetails'
+import RoomDetails from '../../components/notifier/NotifierDetails'
 
 
 export default function Index() {

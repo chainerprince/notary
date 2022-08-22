@@ -3,13 +3,13 @@ import {getSession, session} from 'next-auth/client'
 
 
 import Layout from '../../../components/layout/Layout'
-import AllRooms from '../../../components/admin/AllRooms'
+import AllNotifiers from '../../../components/admin/AllNotifiers'
 
 const AllRoom = () => {
     return (
         <div>
            <Layout>
-               <AllRooms  />
+               <AllNotifiers  />
            </Layout>
         </div>
     )
