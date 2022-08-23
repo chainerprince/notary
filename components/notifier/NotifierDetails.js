@@ -18,6 +18,10 @@ import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import getStripe from '../../utils/stripe'
 import NewReview from '../review/NewReview';
 import ListReview from '../review/ListReview'
+import Link from 'next/link';
+import Loader from '../layout/Loader';
+import BasicDateTimePicker from './DatePicker';
+import { MenuItem, TextField } from '@mui/material';
 // import RoomItem from './room/RoomItem';
 
 const RoomDetails = () => {
@@ -29,12 +33,54 @@ const RoomDetails = () => {
     const {room,error} = useSelector(state=>state.roomDetails)
     const {user} = useSelector(state=>state.login)
     const {available,loading:bookingLoader} = useSelector(state=>state.checkBooking)
+ const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+    const [loading,setloading] = useState(false);
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setloading(true)
+        const result = await signIn('credentials',{
+            redirect:false,
+            email,
+            password
+        })
+        setloading(false);
+        if(result.error){
+            toast.error(result.error)
+        }else{
+            window.location.href = '/'
+        }
+    }
     
 
      console.log(user);
     const [paymentLoading, setPaymentLoading] = useState(false)
+    const documents = [
+  {
+    value: 'landServices 2000',
+    label: 'Land Services',    
+  },
+  {
+    value: 'migrationServices 1500',
+    label: 'Migration Services',
+  },
+  {
+    value: 'schoolReports 2000',
+    label: 'School Reports',
+  },
+  {
+    value: 'others 1500',
+    label: 'Others',
+  },
+];
+const [document, setDocument] = useState('landServices 2000');
+
+  const handleChange = (event) => {
     
+    setDocument(event.target.value);
+    setPrice(document.split(' ')[1])
+  };
     const router = useRouter();
     const {id} = router.query;
    const dispatch = useDispatch();
@@ -61,111 +107,63 @@ const RoomDetails = () => {
            booked.push(new Date(dat))
        })
 
-       const bookRoom = async(id,pricePerDocument) =>{
-              setPaymentLoading(true);
-              const amount = daysOfStay * pricePerDocument;
-              try{
-               const link = `/api/checkout/${id}?checkOutDate=${checkOutDate.toISOString()}&checkInDate=${checkInDate.toISOString()}&daysOfStay=${daysOfStay}`;
+    //    const bookAppointment = async(id,pricePerDocument) =>{
+    //           setPaymentLoading(true);
+    //           const amount = daysOfStay * pricePerDocument;
+    //           try{
+    //            const link = `/api/checkout/${id}?checkOutDate=${checkOutDate.toISOString()}&checkInDate=${checkInDate.toISOString()}&daysOfStay=${daysOfStay}`;
 
-            const {data} = await axios.get(link,{params:{amount}})
-            console.log(getStripe)
-            const stripe = await getStripe()
-            // console.log(stripe)
-            console.log(data)
-            stripe.redirectToCheckout({sessionId:data.id})
-            setPaymentLoading(false)
-              }catch(error){
-                  setPaymentLoading(false)
+    //         const {data} = await axios.get(link,{params:{amount}})
+    //         console.log(getStripe)
+    //         const stripe = await getStripe()
+    //         // console.log(stripe)
+    //         console.log(data)
+    //         stripe.redirectToCheckout({sessionId:data.id})
+    //         setPaymentLoading(false)
+    //           }catch(error){
+    //               setPaymentLoading(false)
                   
-                  toast.error(error.message)
-              }
-       }
+    //               toast.error(error.message)
+    //           }
+    //    }
 
        
-       const bookMtn = async(id,pricePerDocument) =>{
-        setPaymentLoading(true);
-        // const amount = daysOfStay * pricePerDocument;
-        try{
-            const link = `http://localhost:3000/api/checkout/mtn/${id}`;
-            const {data} = await axios.post(link,{'amount':amount,'phone':phoneNumber,'enteringDate':checkInDate.toISOString(),'leavingDate':checkOutDate.toISOString(),stayingDays:daysOfStay})
-            // console.log(data);
-            if(data.status='success') {
-                window.location.assign(data.meta.authorization.redirect) 
-            }
-      setPaymentLoading(false)
-        }catch(error){
-            setPaymentLoading(false)
-            
-            toast.error(error.message)
-        }
- }
-
- 
+     
+     const [dateValue,setDateValue] = useState(new Date())
+     const [price,setPrice] = useState('')             
 
 
-       const onchange = (dates) =>{
-           const [checkInDate,checkOutDate] = dates;
-           setCheckInDate(checkInDate)
-           setCheckOutDate(checkOutDate)
-           if(checkInDate && checkOutDate){
-               const days = Math.floor( (new Date(checkOutDate) - new Date(checkInDate)) / 86400000) + 1
+
+    //    const onchange = (dates) =>{
+    //        const [checkInDate,checkOutDate] = dates;
+    //        setCheckInDate(checkInDate)
+    //        setCheckOutDate(checkOutDate)
+    //        if(checkInDate && checkOutDate){
+    //            const days = Math.floor( (new Date(checkOutDate) - new Date(checkInDate)) / 86400000) + 1
                
-               setDaysOfStay(days);
+    //            setDaysOfStay(days);
                  
-               dispatch(checkBooking(id,checkInDate.toISOString(),checkOutDate.toISOString()))
-           }
-       }
-
-    //    const amount = daysOfStay * room.pricePerDocument;
-      const config = {
-        public_key: process.env.FLW_PUBLIC_KEY,
-        tx_ref: Date.now(),
-        amount: room && daysOfStay * room.pricePerDocument*100,
-        currency: 'RWF',
-        payment_options: 'card,mobilemoney,ussd',
-        customer: {
-          email:user && user.email,
-          name: user && user.name,
-        },
-        customizations: {
-          title: 'Book it',
-          description: 'Pay to book the room',
-          logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
-        },
-      };
-    
-    //   const handleFlutterPayment = useFlutterwave(config);
-
-          const newBookingHandler = async(response)=>{
-              
+    //            dispatch(checkBooking(id,checkInDate.toISOString(),checkOutDate.toISOString()))
+    //        }
+    //    }
+          const newBookingHandler = async()=>{                        
            const booking = {
-               room: router.query.id,
-               checkInDate, 
-               checkOutDate,
-               daysOfStay,
-               paidAt: Date.now(),
-               amountPaid: response.amount,
-               paymentInfo:{
-                   id:response.transaction_id,
-                   status:response.status     
-               }
-           }
-
-           
+               notifier: router.query.id,
+               date: dateValue.toDateString(), 
+               time:dateValue.toTimeString(),
+               price,  
+               document: document.split(' ')[0],                                         
+           }                    
            try {
                const config = {
                     headers:{
                         'content-Type':'application/json'
                     }
-               }
-               
-               const { data } = await axios.post('/api/appointments',booking,config)
+               }               
+               const { data } = await axios.post('/api/appointments/new',booking,config)               
                if(data.success) {
-                   toast.success("The room was booked succesfully");
-               }
-               closePaymentModal()
-               
-               
+                   toast.success("The appointment created succesfully");
+               }                                             
            } catch (error) {
                console.log(error)
            }
@@ -173,12 +171,12 @@ const RoomDetails = () => {
     
        
    
-    console.log(room,'the room we have')
+    
    
        return (
         <>
         <Head>
-            <title>{ room && room.name} - BookIt</title>
+            <title>{ room && room.name} - Notary</title>
         </Head>
         {
             room && <div className="container container-fluid">
@@ -222,25 +220,41 @@ const RoomDetails = () => {
     
                   <div className="col-12 col-md-6 col-lg-4">
                       <div className="booking-card shadow-lg p-4">
-                        <p className='price-per-night'><b>${room.pricePerDocument}</b> / document</p> <hr/>
+                        <p className='price-per-night'><b>{price} RWF</b> / document</p> <hr/>
     
                                  <p className="mt-3 mb-3">
-                                     Pick Check in & Check Out Date
+                                     Please fill the following info
                                  </p>
     
-                                 <DatePicker 
-                                  className="w-100"
-                                  selected={checkInDate}
-                                  onChange = {onchange}
-                                  startDate= {checkInDate}
-                                  endDate = {checkOutDate}
-                                  minDate = {new Date()}
-                                  selectsRange
-                                  excludeDates = {booked}
-                                  inline
-                                 />
+                                 
+                                 <form  onSubmit={handleSubmit}>
+                                    
+           
+            <div className="form-group">              
+              <BasicDateTimePicker value={dateValue} setValue={setDateValue}/>
+            </div>
+  
+            <div className="form-group">
+              
+<TextField
+          id="outlined-select-document"
+          select
+          fullWidth
+          label="Select your document"
+          value={document}
+          onChange={handleChange}
+        //   helperText="Please select your document"
+        >
+          {documents.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+            </div>                               
+          </form>
     
-                           {available ?
+                           {!available ?
                            <div className="alert alert-success font-weight-bold  my-3">
                                Notifier is available. Book Appointment
                             </div>
@@ -251,14 +265,14 @@ const RoomDetails = () => {
                             
                             }
                             {available && !user && <div className="alert alert-danger font-weight-bold  my-3">First login to book the room</div>}
-                            {available && user &&  
+                            {!available && user &&  
                             <>
                             
                             <button 
-                            onClick={()=>bookRoom(room._id,room.pricePerDocument)} 
+                            onClick={()=>newBookingHandler()} 
                             disabled={paymentLoading || bookingLoader ? true : false}
                             className="btn btn-block py-3 booking-btn bg-danger text-white">
-                            Pay - ${daysOfStay*room.pricePerDocument}
+                            Book
                             </button>
                             {/* <button  className="btn btn-block py-3 booking-btn bg-warning text-white"
         onClick={() => {

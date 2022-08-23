@@ -3,6 +3,7 @@ import React,{useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux';
 import { userLogin } from '../../state/actions/userActions';
 import {signOut} from 'next-auth/client'
+import Image from 'next/image';
 
 
 function Header() {
@@ -42,7 +43,7 @@ function Header() {
               data-toggle="dropdown" 
               aria-haspopup="true">
                      <figure className="avatar avatar-nav">
-                       <img 
+                       <Image
                        src={user.avatar && user.avatar.url} 
                        alt={user && user.name} 
                        className="rounded-circle"
@@ -90,9 +91,15 @@ function Header() {
           </div>
         ):
       !loading &&  (
-          <Link href="/login">
+        <>
+        <Link href="/login">
          <a className="btn bg-choco px-4 text-white login-header-btn float-right">Login</a>
         </Link>
+        <Link href="/application">
+         <a className="btn bg-choco px-4 text-white login-header-btn mx-2 float-right">Apply as notifier</a>
+        </Link>
+        </>
+        
         )
 
       }

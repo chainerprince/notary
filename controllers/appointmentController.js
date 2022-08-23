@@ -189,24 +189,21 @@ export const checkBookedDates = AsyncErrors(async(req,res,next)=>{
 
 export const newBooking = AsyncErrors(async(req,res,next)=>{   
     const {
-        room,    
-        checkInDate,
-        checkOutDate,
-        daysOfStay,
-        amountPaid,
-        paidAt,
-        paymentInfo
+        notifier,    
+        date,
+        time,        
+        price,
+        status,      
     } = req.body;
   
    const booking = await Booking.create({
-       room,
+       notifier,
        user:req.user && req.user._id,
-       checkInDate,
-       checkOutDate,
-       daysOfStay, 
-       paidAt,
-       amountPaid,
-       paymentInfo 
+        date,
+        time,        
+        price,
+        status,    
+        
    })
    
     res.status(201).json({

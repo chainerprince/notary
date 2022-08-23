@@ -4,12 +4,9 @@ const RoomFeatures = ({room}) => {
     return (
         <div className="features mt-5">
         <h3 className='mb-4'>Documents Available:</h3>
+                  
           <div className='room-feature'>
-            <i className="fa  fa-fw fa-users" aria-hidden="true"></i>
-            <p>{room.totalDocuments} Documents</p>
-          </div>        
-          <div className='room-feature'>
-            <i className={room.marriage ? "fa fa-cog fa-fw fa-check text-success" : "fa fa-cog fa-fw fa-times text-danger"} aria-hidden="true"></i>
+            <i className={room.schoolReports ? "fa  fa-fw fa-check text-success" : "fa  fa-fw fa-times text-danger"} aria-hidden="true"></i>
             <p>Marriage</p>
           </div>
           <div className='room-feature'>

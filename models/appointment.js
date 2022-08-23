@@ -13,37 +13,24 @@ const bookingSchema = new Schema({
           required:true,
           ref:'User'
       },
-      checkInDate:{
+      date:{
           required:true,
           type:Date
       },
-      checkOutDate:{
+      time:{
           required:true,
-          type:Date
+          type:String
       },
-      amountPaid:{
+      price:{
           type:Number,
           required:true
       },
-      daysBooked:{
-           type:Number,
-           required:true
-      }
-      , 
-      paymentInfo:{
-          id:{
-              type:String,
-              required:true
-          },
-          status:{
-              type:String,
-              required:true
-          }
-      },
-      paidAt:{
-          type:Date,
-          required:true
-      },
+     status: {
+        type: String,
+        required: false,
+        default: 'pending'
+        
+     } ,  
       createdAt:{
           type:Date,
           default:Date.now
