@@ -31,7 +31,7 @@ const AppointmentDetails = () => {
         <div className="container">
         <div className="row d-flex justify-content-between">
           <div className="col-12 col-lg-8 mt-5 booking-details">
-           {booking && booking.user && booking.room &&
+           {booking && booking.user && booking.notifier &&
            <>
            <div className="container">
       <div className="row d-flex justify-content-between">
@@ -83,11 +83,11 @@ const AppointmentDetails = () => {
               </div>
 
               <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                <p>${ booking.room.pricePerNight}</p>
+                <p>${ booking.price}</p>
               </div>
 
               <div className="col-4 col-lg-3 mt-4  mt-lg-0">
-                <p>{booking.daysOfStay} Day(s)</p>
+                <p>{booking.document}</p>
               </div>
             </div>
           </div>

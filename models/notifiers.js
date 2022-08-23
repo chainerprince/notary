@@ -94,7 +94,8 @@ const notifierSchema = new Schema({
                  required:true
              },
              education:{
-                 type:String,                
+                 type:String,  
+                 default:'bachelors',             
                  required:true
              },
              rating:{

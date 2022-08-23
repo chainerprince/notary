@@ -107,26 +107,7 @@ const [document, setDocument] = useState('landServices 2000');
            booked.push(new Date(dat))
        })
 
-    //    const bookAppointment = async(id,pricePerDocument) =>{
-    //           setPaymentLoading(true);
-    //           const amount = daysOfStay * pricePerDocument;
-    //           try{
-    //            const link = `/api/checkout/${id}?checkOutDate=${checkOutDate.toISOString()}&checkInDate=${checkInDate.toISOString()}&daysOfStay=${daysOfStay}`;
-
-    //         const {data} = await axios.get(link,{params:{amount}})
-    //         console.log(getStripe)
-    //         const stripe = await getStripe()
-    //         // console.log(stripe)
-    //         console.log(data)
-    //         stripe.redirectToCheckout({sessionId:data.id})
-    //         setPaymentLoading(false)
-    //           }catch(error){
-    //               setPaymentLoading(false)
-                  
-    //               toast.error(error.message)
-    //           }
-    //    }
-
+    
        
      
      const [dateValue,setDateValue] = useState(new Date())
@@ -134,18 +115,7 @@ const [document, setDocument] = useState('landServices 2000');
 
 
 
-    //    const onchange = (dates) =>{
-    //        const [checkInDate,checkOutDate] = dates;
-    //        setCheckInDate(checkInDate)
-    //        setCheckOutDate(checkOutDate)
-    //        if(checkInDate && checkOutDate){
-    //            const days = Math.floor( (new Date(checkOutDate) - new Date(checkInDate)) / 86400000) + 1
-               
-    //            setDaysOfStay(days);
-                 
-    //            dispatch(checkBooking(id,checkInDate.toISOString(),checkOutDate.toISOString()))
-    //        }
-    //    }
+   
           const newBookingHandler = async()=>{                        
            const booking = {
                notifier: router.query.id,

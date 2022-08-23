@@ -111,6 +111,7 @@ const UpdateUser = () => {
               
               >
                 <option value="user">user</option>
+                <option value="notifier">user</option>
                 <option value="admin">admin</option>
               </select>
             </div>

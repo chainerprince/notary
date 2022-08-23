@@ -13,7 +13,7 @@ import { DELETE_REVIEW_RESET } from '../../state/constants/notifierConstants';
 
 const Reviews = () => {
     const dispatch = useDispatch();
-    const [roomId,setRoomId] = useState('')
+    const [notifierId,setnotifierId] = useState('')
     const router = useRouter();
     const {reviews,loading,error} = useSelector(state=>state.reviews)
     
@@ -26,8 +26,8 @@ const Reviews = () => {
             toast.error(error)
             dispatch(clearErrors())
         }
-        if(roomId !== ''){
-            dispatch(getReviews(roomId))
+        if(notifierId !== ''){
+            dispatch(getReviews(notifierId))
         }
         if(deleteError){
             toast.error(deleteError)
@@ -39,14 +39,14 @@ const Reviews = () => {
             dispatch({type:DELETE_REVIEW_RESET})
         }
 
-    }, [dispatch,roomId,deleteError,isDeleted])
+    }, [dispatch,notifierId,deleteError,isDeleted])
 
     
 
 
   const deleteHandler = (id) =>{
     
-      dispatch(deleteReview(id,roomId));
+      dispatch(deleteReview(id,notifierId));
       
   }
   const setReviews = () => {
@@ -109,13 +109,13 @@ const Reviews = () => {
                 <div className="col-5">
                     <form>
                         <div className="form-group">
-                            <label htmlFor="roomId_field">Enter Room ID</label>
+                            <label htmlFor="notifierId_field">Enter Notifier ID</label>
                             <input
                                 type="email"
-                                id="roomId_field"
+                                id="notifierId_field"
                                 className="form-control"
-                                value={roomId}
-                                onChange={(e) => setRoomId(e.target.value)}
+                                value={notifierId}
+                                onChange={(e) => setnotifierId(e.target.value)}
                             />
                         </div>
                     </form>

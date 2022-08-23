@@ -1,5 +1,5 @@
 import nc from 'next-connect'
-import { allNotifiers, saveRoom } from '../../../controllers/notifierController'
+import { allNotifiers, saveNotifier } from '../../../controllers/notifierController'
 import dbConnect from '../../../config/dbConnect';
 import onError from "../../../middlewares/error"
 const handler = nc({onError});
@@ -8,7 +8,7 @@ dbConnect();
 
 handler.get(allNotifiers);
 
-handler.use(isAuthenticated,authorize('admin')).post(saveRoom)
+handler.use(isAuthenticated,authorize('admin')).post(saveNotifier)
 
 
 export default handler;

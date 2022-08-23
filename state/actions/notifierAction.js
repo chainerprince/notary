@@ -78,8 +78,7 @@ export const getNotifierDetails = (req,id) => async(dispatch) => {
     
       const {origin} = absoluteUrl(req)
       
-      const {data} = await axios.get(`${origin}/api/notifier/${id}`) 
-      console.log(data,'The data we want')     
+      const {data} = await axios.get(`${origin}/api/notifier/${id}`)           
       dispatch({
           type: NOTIFIER_DETAILS_SUCCESS,
           payload: data
@@ -119,7 +118,7 @@ export const getAdminNotifiers = (req,id) => async(dispatch) => {
 
 
 
-export const newRoomReviews = (reviewData) => async(dispatch) => {
+export const newNotifierReviews = (reviewData) => async(dispatch) => {
   try {
    dispatch({type:NEW_REVIEW_REQUEST})
     const config = {
@@ -129,7 +128,7 @@ export const newRoomReviews = (reviewData) => async(dispatch) => {
     }
       
       const {data} = await axios.put(`/api/reviews/`,reviewData,config)
-      console.log(data)
+      console.log(data,'the data for reviewing the new reviews')
       dispatch({
           type: NEW_REVIEW_SUCCESS,
           payload: data.success
@@ -221,7 +220,7 @@ export const deleteNotifier = (id) => async(dispatch) => {
 }
 
 
-export const deleteReview = (id,roomId) => async(dispatch) => {
+export const deleteReview = (id,notifierId) => async(dispatch) => {
   try {
    dispatch({type:DELETE_REVIEW_REQUEST})
     // const config = {
@@ -230,7 +229,7 @@ export const deleteReview = (id,roomId) => async(dispatch) => {
     //     }
     // }
       
-      const {data} = await axios.delete(`/api/reviews/?id=${id}&roomid=${roomId}`)
+      const {data} = await axios.delete(`/api/reviews/?id=${id}&notifierid=${notifierId}`)
       console.log(data);
       
       dispatch({
@@ -247,13 +246,13 @@ export const deleteReview = (id,roomId) => async(dispatch) => {
 }
 
 
-export const canReview = (roomId) => async(dispatch) => {
+export const canReview = (notifier) => async(dispatch) => {
   try {
    dispatch({type:CAN_REVIEW_REQUEST})
 
       
-      const {data} = await axios.get(`/api/reviews/if_review?roomid=${roomId}`)
-      console.log("The data in booked",data)
+      const {data} = await axios.get(`/api/reviews/if_review?notifier=${notifier}`)
+      
       
       dispatch({
           type: CAN_REVIEW_SUCCESS,
@@ -268,12 +267,12 @@ export const canReview = (roomId) => async(dispatch) => {
   }
 }
 
-export const getReviews = (roomId) => async(dispatch) => {
+export const getReviews = (notifierId) => async(dispatch) => {
   try {
    dispatch({type:GET_REVIEWS_REQUEST})
 
       
-      const {data} = await axios.get(`/api/reviews/?id=${roomId}`)
+      const {data} = await axios.get(`/api/reviews/?id=${notifierId}`)
       
       dispatch({
           type: GET_REVIEWS_SUCCESS,

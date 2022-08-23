@@ -38,7 +38,7 @@ const singleNotifier = AsyncErrors(async(req,res,next)=>{
       const notifier = await Notifier.findById(req.query.id);
      
       if(!notifier){
-        return next(new ErrorHandler("That Room is not saved",404));
+        return next(new ErrorHandler("That Notifier is not registered",404));
       }
 
       res.status(200).json({
@@ -50,17 +50,17 @@ const singleNotifier = AsyncErrors(async(req,res,next)=>{
 })
 
 
-export const roomReviews = AsyncErrors(async(req,res,next)=>{
+export const notifierReviews = AsyncErrors(async(req,res,next)=>{
    
-      const room = await Notifier.findById(req.query.id);
+      const notifier = await Notifier.findById(req.query.id);
      
-      if(!room){
-        return next(new ErrorHandler("That Room is not saved",404));
+      if(!notifier){
+        return next(new ErrorHandler("That Notifier is not saved",404));
       }
 
       res.status(200).json({
         success:true,
-         reviews: room.reviews
+         reviews: notifier.reviews
       })
 
     
@@ -69,18 +69,18 @@ export const roomReviews = AsyncErrors(async(req,res,next)=>{
 
 export const deleteReview = AsyncErrors(async(req,res,next)=>{
    
-      const room = await Notifier.findById(req.query.roomid);
-      if(!room){
-        return next(new ErrorHandler("That Room is not saved",404));
+      const notifier = await Notifier.findById(req.query.roomid);
+      if(!notifier){
+        return next(new ErrorHandler("That notifier is not saved",404));
       }
 
-      const reviews = room.reviews.filter(review => review._id.toString() !== req.query.id.toString())
+      const reviews = notifier.reviews.filter(review => review._id.toString() !== req.query.id.toString())
 
       const numOfReviews = reviews.length;
   
-      const ratings = room.reviews.reduce((acc, item) => item.rating + acc, 0) / reviews.length
+      const ratings = notifier.reviews.reduce((acc, item) => item.rating + acc, 0) / reviews.length
 
-      await Notifier.findByIdAndUpdate(req.query.roomid,{
+      await Notifier.findByIdAndUpdate(req.query.notifierid,{
         reviews,
         ratings,
         numOfReviews
@@ -96,7 +96,7 @@ export const deleteReview = AsyncErrors(async(req,res,next)=>{
 
       res.status(200).json({
         success:true,
-         reviews: room.reviews
+         reviews: notifier.reviews
       })
 
     
@@ -170,39 +170,35 @@ const deleteNotifer = AsyncErrors(async(req,res,next)=>{
 })
 
 
-export const createRoomReview = AsyncErrors(async(req,res,next)=>{
+export const createNotifierReview = AsyncErrors(async(req,res,next)=>{
 
-  const {rating , roomId, comment } = req.body;
+  const {rating , notifierId, comment } = req.body;
   const review = {
     user:req.user._id,
     name:req.user.name,
     rating:Number(rating),
     comment
   }
-    const room = await Notifier.findById(roomId);
+    const notifier = await Notifier.findById(notifierId);
+    console.log(notifier,notifierId,'the notifier')
+
+    const isReviewed = notifier.reviews.find(r=>r.user.toString() === req.user._id.toString());
     
-
-    
-
-
-  
-
-    const isReviewed = room.reviews.find(r=>r.user.toString() === req.user._id.toString());
    if(isReviewed){
-          room.reviews.forEach(review=>{
+          notifier.reviews.forEach(review=>{
             review.comment = comment,
             review.rating = rating
           })
    }else{
-     room.reviews.push(review);
-     room.numOfReviews = room.reviews.length;
+     notifier.reviews.push(review);
+     notifier.numOfReviews = notifier.reviews.length;
    }
 
-   room.ratings = room.reviews.reduce((tot,item)=> tot + item.rating,0) /room.reviews.length
+   notifier.ratings = notifier.reviews.reduce((tot,item)=> tot + item.rating,0) /notifier.reviews.length
   
   
 
-   await room.save({validateBeforeSave:true});
+   await notifier.save({validateBeforeSave:true});
 
 
 
@@ -219,9 +215,10 @@ export const createRoomReview = AsyncErrors(async(req,res,next)=>{
 
 export const canReview = AsyncErrors(async(req,res,next)=>{
 
-  const {roomid} = req.query;
+  const {notifier} = req.query;  
+
   
-    const bookings = await Booking.find({user:req.user._id,room:roomid})
+    const bookings = await Booking.find({user:req.user._id,notifier})    
 
       let booked = false;
     bookings.length > 0 ? booked = true : null;
@@ -247,7 +244,7 @@ export const allAdminNotifiers = AsyncErrors(async(req,res,next)=>{
  
 })
 
-const saveRoom = AsyncErrors(async (req,res)=>{
+const saveNotifier = AsyncErrors(async (req,res)=>{
   const images = req.body.images;
 
   let imageLinks = [];
@@ -270,12 +267,11 @@ const saveRoom = AsyncErrors(async (req,res)=>{
   req.body.images = imageLinks;
   req.body.user = req.user._id;
   
-  const room = await Notifier.create(req.body);
-  console.log(room)
+  const notifier = await Notifier.create(req.body);  
   res.status(201).json(
     {
       success:true,
-      room
+      notifier
 
     }
   )
@@ -288,5 +284,5 @@ const saveRoom = AsyncErrors(async (req,res)=>{
 
 
 export {
-    allNotifiers,saveRoom,singleNotifier,updateNotifier,deleteNotifer
+    allNotifiers,saveNotifier,singleNotifier,updateNotifier,deleteNotifer
 }

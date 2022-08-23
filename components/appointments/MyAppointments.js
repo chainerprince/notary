@@ -102,9 +102,7 @@ const MyAppointments = () => {
         return data;
     }
 
-    const downloadInvoice = async (booking) => {
-         console.log(booking)
-         console.log(booking.room)
+    const downloadInvoice = async (booking) => {        
         const data = {
             "documentTitle": "Booking INVOICE", //Defaults to INVOICE
             "currency": "USD",
@@ -132,10 +130,10 @@ const MyAppointments = () => {
             "invoiceDate": `${new Date(Date.now()).toLocaleString('en-US')}`,
             "products": [
                 {
-                    "quantity": `${booking?.daysOfStay ?? ''}`,
-                    "description": `${ booking?.room?.name ?? ''}`,
+                    "document": `${booking?.document ?? ''}`,
+                    "description": `${ booking?.notifier?.name ?? ''}`,
                     "tax": 0,
-                    "price": booking?.room?.pricePerNight ?? ''
+                    "price": booking?.price ?? ''
                 }
             ],
             "bottomNotice": "This is auto generated Invoice of your booking on Book IT."

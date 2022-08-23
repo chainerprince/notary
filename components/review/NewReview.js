@@ -5,7 +5,7 @@ import {toast} from 'react-toastify'
 
 import { useDispatch,useSelector } from 'react-redux'
 
-import { canReview, clearErrors,newRoomReviews  } from '../../state/actions/notifierAction'
+import { canReview, clearErrors,newNotifierReviews  } from '../../state/actions/notifierAction'
 import { NEW_REVIEW_RESET } from '../../state/constants/notifierConstants'
 
 const NewReview = () => {
@@ -18,33 +18,25 @@ const NewReview = () => {
     const { canRev } = useSelector(state=>state.reviewPossible); 
     const {id} = router.query;
 
-
-    useEffect(() => {
-        
-        console.log("The id ",id)
+     
+    useEffect(() => {                
         if(id !== undefined){
-            dispatch(canReview(id))
-          
-        }
-
-   
-        if(error){
-            
+            dispatch(canReview(id))          
+        }   
+        if(error){            
             toast.error(error);
             dispatch(clearErrors());
         }
         if(success){
-            toast.success("Review Submitted");
-            
-            // router.push('/')
+            toast.success("Review Submitted");                        
             dispatch({type:NEW_REVIEW_RESET})
-            // router.push(`/room/${id}`)
+            
         }
    
     }, [dispatch,success,error,id])
 
 
-      function setRoomRating() {
+      function setNotifierRating() {
           let stars = document.querySelectorAll('.star')
           stars.forEach((star,index)=>{
               
@@ -84,11 +76,11 @@ const NewReview = () => {
         const reviewData = {
             rating,
             comment,
-            roomId:id
+            notifierId:id
         }
 
         
-        dispatch(newRoomReviews(reviewData))
+        dispatch(newNotifierReviews(reviewData))
     }
     return (
         <div className="container">
@@ -100,7 +92,7 @@ const NewReview = () => {
              className="btn bg-choco mt-4 mb-5" 
              data-toggle="modal" 
              data-target="#ratingModal"
-             onClick={setRoomRating}
+             onClick={setNotifierRating}
              >
                  Submit Your Review
              </button>

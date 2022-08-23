@@ -17,8 +17,7 @@ const AllBookings = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const {bookings,error,loading} = useSelector(state=>state.bookings)    
-    const {isDeleted,error:deleteError} = useSelector(state=>state.deleteBooking)
-    console.log(bookings,'the bookings data')
+    const {isDeleted,error:deleteError} = useSelector(state=>state.deleteBooking)    
     useEffect(() => {
         dispatch(adminBookings())
         if(error){
@@ -157,7 +156,7 @@ const AllBookings = () => {
 
         const data = {
             "documentTitle": "Booking INVOICE", //Defaults to INVOICE
-            "currency": "USD",
+            "currency": "RWF",
             "taxNotation": "vat", //or gst
             "marginTop": 25,
             "marginRight": 25,
@@ -165,30 +164,30 @@ const AllBookings = () => {
             "marginBottom": 25,
             "logo": "https://res.cloudinary.com/bookit/image/upload/v1617904918/bookit/bookit_logo_cbgjzv.png",
             "sender": {
-                "company": "Book IT",
-                "address": "13th Street. 47 W 13th St",
+                "company": "Notary",
+                "address": "13th Street. Rebero",
                 "zip": "10001",
-                "city": "New York",
-                "country": "United States"
+                "city": "Kigali",
+                "country": "Rwanda"
             },
             "client": {
                 "company": `${booking.user.name}`,
                 "address": `${booking.user.email}`,
                 "zip": "",
-                "city": `Check In: ${new Date(booking.checkInDate).toLocaleString('en-US')}`,
-                "country": `Check In: ${new Date(booking.checkOutDate).toLocaleString('en-US')}`
+                "city": "kigali",
+                "district": "Kicukiro"
             },
             "invoiceNumber": `${booking._id}`,
             "invoiceDate": `${new Date(Date.now()).toLocaleString('en-US')}`,
             "products": [
                 {
-                    "quantity": `${booking.daysOfStay}`,
-                    "description": `${booking.room.name}`,
+                    "document": `${booking.document}`,
+                    "description": `${booking.notifier?.name}`,
                     "tax": 0,
-                    "price": booking.room.pricePerNight
+                    "price": booking.notifier.pricePerDocument
                 }
             ],
-            "bottomNotice": "This is auto generated Invoice of your booking on Book IT."
+            "bottomNotice": "This is auto generated Invoice of your booking on Notary."
         };
 
         const result = await easyinvoice.createInvoice(data);
