@@ -115,8 +115,7 @@ export const myBookings = AsyncErrors(async(req,res,next)=>{
         path:'user',
         select:'name email'
     })
-    
-    console.log(bookings,'the booking')
+        
     res.status(201).json({
         success:true,
         bookings
@@ -145,7 +144,7 @@ export const allBookings = AsyncErrors(async(req,res,next)=>{
         select:'name email'
     })
 
-    console.log(bookings,'the bookings')
+    
 
     res.status(201).json({
         success:true,
@@ -168,8 +167,7 @@ export const checkBookedDates = AsyncErrors(async(req,res,next)=>{
 
     let bookedDates = [];
 
-    const timeDifference = moment().utcOffset() / 60;
-    console.log(timeDifference);
+    const timeDifference = moment().utcOffset() / 60;    
     bookings.forEach(booking=>{
         const checkInDate = moment(booking.checkInDate).add(timeDifference,'hours');
         const checkOutDate = moment(booking.checkOutDate).add(timeDifference,'hours');
@@ -226,4 +224,21 @@ export const newBooking = AsyncErrors(async(req,res,next)=>{
         booking
     })
     
+ })
+
+
+ export const approveAppointment = AsyncErrors(async(req,res,next)=>{
+    try{
+        console.log(req.body.id,'the request')
+ const booking = await Booking.findByIdAndUpdate(req.body.id, { $set: { status: true } });
+   console.log(booking,'the one to approve')
+   
+    res.status(201).json({
+        success:true,        
+    })
+    }   
+    catch(error) {
+        console.log(error,'the error')
+    }
+  
  })

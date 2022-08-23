@@ -273,30 +273,7 @@ const [document, setDocument] = useState('landServices 2000');
                             disabled={paymentLoading || bookingLoader ? true : false}
                             className="btn btn-block py-3 booking-btn bg-danger text-white">
                             Book
-                            </button>
-                            {/* <button  className="btn btn-block py-3 booking-btn bg-warning text-white"
-        onClick={() => {
-            
-          handleFlutterPayment({
-            callback: (response)=>{
-                newBookingHandler(response)
-            },
-            onClose: () => {},
-          });
-        }}
-      >
-        Use MTN - {daysOfStay*notifier.pricePerDocument*1000} Rwf
-      </button> */}
-                            {/* <div class="d-flex align-items-center my-5">
-                                <input name="number" required placeholder="Mtn Phone Number" value={phoneNumber} className="py-3 mx-2 flex-1 form-control" onChange={e=>setPhoneNumber(e.target.value)} />
-                                <button 
-                            onClick={()=>bookMtn(notifier._id,notifier.pricePerDocument)} 
-                            disabled={paymentLoading || bookingLoader ? true : false}
-                            className="btn btn-block btn-sm py-2 w-25  bg-warning border-0 text-white">
-                                ${daysOfStay*notifier.pricePerDocument}
-                            </button>
-                            </div>
-                             */}
+                            </button>                           
                             </>                    
                         
                         }

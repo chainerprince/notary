@@ -107,7 +107,7 @@ const updateNotifier = AsyncErrors(async(req,res,next)=>{
     
     let notifier = await Notifier.findById(req.query.id);
     if(!notifier){
-      return next(new ErrorHandler("That Room doesn't Exist",404));
+      return next(new ErrorHandler("That Notifier doesn't Exist",404));
     }
    
 

@@ -97,7 +97,7 @@ const NewReview = () => {
              <button 
              id="review_btn" 
              type="button" 
-             className="btn btn-primary mt-4 mb-5" 
+             className="btn bg-choco mt-4 mb-5" 
              data-toggle="modal" 
              data-target="#ratingModal"
              onClick={setRoomRating}
@@ -107,7 +107,7 @@ const NewReview = () => {
  
             }
            
-            <div className="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel" aria-hidden="true">
+            <div className="modal fade" id="ratingModal" tabIndex="-1" role="dialog" aria-labelledby="ratingModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">

@@ -18,22 +18,32 @@ const MyAppointments = () => {
 
     }, [dispatch])
 
-    const setBookings = () => {
+      const setAppointments = () => {
         const data = {
             columns :[
                 {
-                    label: "Booking Id",
+                    label: "Appointment Id",
                     field:'id',
                     sort:'asc'
                 },
                 {
-                    label: "Check In",
-                    field:'checkIn',
+                    label: "Date",
+                    field:'date',
                     sort:'asc'
                 },
                 {
-                    label: "Check Out",
-                    field:'checkOut',
+                    label: "Time",
+                    field:'time',
+                    sort:'asc'
+                },
+                {
+                    label: "Price",
+                    field:'price',
+                    sort:'asc'
+                },
+                {
+                    label: "User",
+                    field:'user',
                     sort:'asc'
                 },
                 {
@@ -42,8 +52,8 @@ const MyAppointments = () => {
                     sort:'asc'
                 },
                 {
-                    label: "Amount Paid",
-                    field:'amountPaid',
+                    label: "Approve",
+                    field:'status',
                     sort:'asc'
                 },
                 {
@@ -58,22 +68,33 @@ const MyAppointments = () => {
         bookings && bookings.forEach(booking => {
               data.rows.push({
                   id:booking._id,
-                  checkIn:new Date(booking.checkInDate).toLocaleString('en-UK'),
-                  checkOut:new Date(booking.checkOutDate).toLocaleString('en-US'),
+                  date:new Date(booking.date).toLocaleString('en-UK')?.split(',')[0],
+                  time:booking.time?.split(' ')[0],
+                  price:`${booking.price} RWF`,
+                  user: booking?.user?.name,
                   document: booking.document,
-                  amountPaid:`${booking.price} RWF`,
+                  status:
+                
+                    booking.status !== 'true' ?  'pending' : 'approved',                                                                                                               
+                  
                   action:
-                  <>
-                   <Link href={`/bookings/${booking._id}`}>
+                  <div className='d-flex justify-content-between flex-nowrap'>
+                   <Link href={`/admin/appointments/${booking._id}`}>
                       <a  className="btn btn-primary">
                           <i className="fa fa-eye"></i>
                           
                       </a>
-                   </Link>
+                   </Link> 
                    <button className="btn-success btn mx-2" onClick={()=>downloadInvoice(booking)}>
                        <i className="fa fa-download"></i>
                    </button>
-                  </>
+                   <button 
+                   className="btn-danger btn mx-2"
+                   onClick={_=>deleteHandler(booking._id)}
+                   >
+                       <i className="fa fa-trash"></i>
+                   </button>
+                  </div>
               })
         });
 
@@ -130,7 +151,7 @@ const MyAppointments = () => {
         <div className="container container-fluid">
             <h1 className="my-4">My Appointments</h1>
             <MDBDataTable
-             data={setBookings()}
+             data={setAppointments()}
              className="px-3"
              bordered
              striped
