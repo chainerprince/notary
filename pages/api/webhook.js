@@ -14,7 +14,6 @@ export const config = {
         bodyParser:false
     }
 }
-// handler.get(allRooms);
 console.log("The hook checkout that is working given something")
 handler.post(hookCheckout)
 

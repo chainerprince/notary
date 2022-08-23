@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
 import Loader from '../layout/Loader';
-// import { DELETE_ROOM_RESET } from '../../state/constants/roomConstants';
 import { updateUser, userDetails } from '../../state/actions/userActions';
 import { UPDATE_USER_RESET } from '../../state/constants/userConstants';
 
@@ -23,8 +22,7 @@ const UpdateUser = () => {
     
     const userId = router.query.id;
     // console.log(userError)
-    
-    // const {isDeleted,error:deleteError}  = useSelector(state=>state.deleteroom)
+        
     
 
     useEffect(() => {
@@ -58,9 +56,6 @@ const UpdateUser = () => {
     
 
 
-//   const deleteHandler = (id) =>{
-//       dispatch(deleteRoom(id));
-//   }
   const handleSubmit = (e) => {
     
       e.preventDefault();

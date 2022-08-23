@@ -1,23 +1,21 @@
-// import Head from 'next/head'
-// import Image from 'next/image'
-// import styles from '../styles/Home.module.css'
+
 
 import Layout from '../../components/layout/Layout'
 
 import { wrapper } from '../../state/store';
-import { getRoomDetails } from '../../state/actions/notifierAction'
-import RoomDetails from '../../components/notifier/NotifierDetails'
+import { getNotifierDetails } from '../../state/actions/notifierAction'
+import NotifierDetails from '../../components/notifier/NotifierDetails'
 
 
 export default function Index() {
   return (
     <Layout>
-      <RoomDetails />
+      <NotifierDetails />
     </Layout>
   )
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(async ({req,store,params})=>{
-    await store.dispatch(getRoomDetails(req,params.id))
+    await store.dispatch(getNotifierDetails(req,params.id))
     
 })

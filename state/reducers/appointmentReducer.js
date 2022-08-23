@@ -14,18 +14,21 @@ import {
 
 
  
-export const myBookingReducer = (state={bookings:[],error:null},action)=>{
+export const myAppointmentReducer = (state={bookings:[],error:null},action)=>{
     switch(action.type){
         case ADMIN_BOOKING_REQUEST:
             return {
-                loading:true   
+                loading:true   ,
+                bookings: [],
+                error: false
             }
         
         case MY_BOOKINGS_SUCCESS:
             case ADMIN_BOOKING_SUCCESS:
             return {
                 loading:false,
-                bookings:action.payload
+                bookings:action.payload,
+                error: false
                 
             }
 

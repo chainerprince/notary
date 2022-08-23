@@ -5,8 +5,8 @@ import {getSession} from 'next-auth/client'
 import Layout from '../../../components/layout/Layout'
 
 import { wrapper } from '../../../state/store';
-import { bookingDetails } from '../../../state/actions/bookingAction'
-import BookingDetail from '../../../components/bookings/BookingDetail';
+import { bookingDetails } from '../../../state/actions/appointmentAction'
+import BookingDetail from '../../../components/appointments/AppointmentDetail';
 
 const BookingDetails = () => {
     return (

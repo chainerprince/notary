@@ -5,14 +5,13 @@ const notifierSchema = new Schema({
          type:String,
          required:[true,"Please enter notifier name"],
          trim:true,
-         maxLength:[100,"Room name can't exceed 100 characters"]
+         maxLength:[100,"Notifier name can't exceed 100 characters"]
      },
      pricePerDocument:{
-         type:Number,
+         type:String,
          required:[true,"Please enter notifier price per document"],
-         trim:true,
-         maxLength:[6,"Notifier price can't exceed 7 numbers"],
-         default:0.0
+         trim:true,        
+         default:'1000 RWF'
      },
      description:{
          type:String,
@@ -21,11 +20,11 @@ const notifierSchema = new Schema({
      address:{
           lat:{
               type:Number,
-              required:true
+              required:false
           },
           long:{
               type:Number,
-              required:true
+              required:false
           },
            city:{
          type:String,
@@ -35,15 +34,19 @@ const notifierSchema = new Schema({
          type:String,
          required:[false]
      },
+      
+
            district:{
          type:String,
          required:[false]
      },
      },
-     totalDocuments:{
-         type:String,
-         required:[true,"Please enter notifier document capacity"]
-     },     
+       status: {
+        type: String,
+        required: false,
+        default: 'pending'
+        
+     } ,           
      landServices:{
          type:Boolean,
          default:false
@@ -51,14 +54,14 @@ const notifierSchema = new Schema({
      migrationServices:{
          type:Boolean,
          default:false
-     },
-     divorce:{
-         type:Boolean,
-         default:false
-     },
+     },    
      marriage:{
          type:Boolean,
          default:false
+     },
+     category:{
+         type:String,
+         default:'private'
      },
      schoolReports:{
          type:Boolean,
@@ -87,6 +90,10 @@ const notifierSchema = new Schema({
                  required:false
              },
              name:{
+                 type:String,                
+                 required:true
+             },
+             education:{
                  type:String,                
                  required:true
              },

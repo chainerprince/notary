@@ -3,13 +3,14 @@ import {getSession, session} from 'next-auth/client'
 
 
 import Layout from '../../../components/layout/Layout'
-import AllNotifiers from '../../../components/admin/AllNotifiers'
 
-const AllRoom = () => {
+import UpdateNotifier from '../../../components/admin/UpdateNotifier'
+
+const UpdateNotifierPage = () => {
     return (
         <div>
            <Layout>
-               <AllNotifiers  />
+               <UpdateNotifier  />
            </Layout>
         </div>
     )
@@ -33,4 +34,4 @@ export async function getServerSideProps(context){
        }
 }
 
-export default AllRoom
+export default UpdateNotifierPage

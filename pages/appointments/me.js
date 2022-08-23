@@ -3,15 +3,15 @@ import {getSession} from 'next-auth/client'
 
 
 import Layout from '../../components/layout/Layout'
-import MyBookings from '../../components/bookings/MyBookings'
+import MyAppointments from '../../components/appointments/MyAppointments'
 import { wrapper } from '../../state/store';
-import { bookings } from '../../state/actions/bookingAction'
+import { bookings } from '../../state/actions/appointmentAction'
 
 const MyBookingsPage = () => {
     return (
         <div>  
            <Layout>
-               <MyBookings/>
+               <MyAppointments/>
            </Layout>
         </div>
     )

@@ -34,7 +34,7 @@ const Search = () => {
             </div>          
 
             <div className="form-group">
-              <label htmlFor="room_type_field">Type of documents</label>
+              <label htmlFor="notifier_type_field">Type of documents</label>
               <select className="form-control" id="rom_type_field" 
               value={document}
               onChange = {e=>setDocument(e.target.value)}

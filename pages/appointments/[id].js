@@ -6,7 +6,7 @@ import Layout from '../../components/layout/Layout'
 
 import { wrapper } from '../../state/store';
 import { bookingDetails } from '../../state/actions/appointmentAction'
-import BookingDetail from '../../components/bookings/BookingDetail';
+import BookingDetail from '../../components/appointments/AppointmentDetail';
 
 const BookingDetails = () => {
     return (

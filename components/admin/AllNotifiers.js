@@ -7,19 +7,18 @@ import { useSelector,useDispatch } from 'react-redux'
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { clearErrors } from '../../state/actions/appointmentAction';
-import { getAdminRooms,deleteRoom } from '../../state/actions/notifierAction';
+import { getAdminNotifiers, deleteNotifier } from '../../state/actions/notifierAction';
 import Loader from '../layout/Loader';
-import { DELETE_ROOM_RESET } from '../../state/constants/notifierConstants';
 
-const AllRooms = () => {
+const AllNotifiers = () => {
     const dispatch = useDispatch();
     const router = useRouter();
-    const {rooms,loading,error} = useSelector(state=>state.allRooms)
-    const {isDeleted,error:deleteError}  = useSelector(state=>state.deleteroom)
+    const {notifiers,loading,error} = useSelector(state=>state.allNotifiers)
+    const {isDeleted,error:deleteError}  = useSelector(state=>state.deleteNotifier)
     
 
     useEffect(() => {
-        dispatch(getAdminRooms())
+        dispatch(getAdminNotifiers())
         if(error){
             toast.error(error)
             dispatch(clearErrors())
@@ -30,8 +29,8 @@ const AllRooms = () => {
         }
 
         if(isDeleted){
-            router.push('/admin/rooms');
-            dispatch({type:DELETE_ROOM_RESET})
+            router.push('/admin/notifiers');
+            dispatch({type:DELETE_NOTIFIER_RESET})
         }
 
     }, [dispatch,isDeleted,deleteError])
@@ -39,9 +38,9 @@ const AllRooms = () => {
     
   const deleteHandler = (id) =>{
       console.log(id)
-      dispatch(deleteRoom(id));
+      dispatch(deleteNotifier(id));
   }
-    const setRooms = () => {
+    const setNotifiers = () => {
         const data = {
             columns :[
                 {
@@ -65,6 +64,12 @@ const AllRooms = () => {
                     sort:'asc'
                 },
                 {
+                    label: "Status",
+                    field:'status',
+                    sort:'asc'
+                },
+
+                {
                     label: "Actions",
                     field:'action',
                     sort:'asc'
@@ -73,16 +78,32 @@ const AllRooms = () => {
             rows:[],
         }
   
-        rooms && rooms.forEach(room => {
+        notifiers && notifiers.forEach(notifier => {
               data.rows.push({
-                  id:room._id,
-                  name: <div> <span className="d-none d-md-block ">{room.name}</span> <span className="d-sm-block d-md-none ">{room.name.slice(0,8) + "..."}</span>  </div> ,
+                  id:notifier._id,
+                  name: <div> <span className="d-none d-md-block ">{notifier.name}</span> <span className="d-sm-block d-md-none ">{notifier.name.slice(0,8) + "..."}</span>  </div> ,
                  
-                  price:`${room.pricePerDocument} RWF`,
-                  location:`${room.address?.sector}`,
+                  price:`${notifier.pricePerDocument} RWF`,
+                  location:`${notifier.address?.sector}`,
+                  status:
+                  <div className="d-flex justify-content-center align-items-center ">
+                {
+                    notifier.status !== 'true' ? (<Link href={`/admin/notifiers/${notifier._id}?approve=true`}>
+                      <a  className="btn btn-success">
+                          <i className="fa fa-check"></i>
+                          
+                      </a>
+                   </Link>
+                   
+                   )
+                   : 'approved'
+                }
+                   
+                   
+                  </div>,
                   action:
                   <div className="d-flex">
-                   <Link href={`/admin/rooms/${room._id}`}>
+                   <Link href={`/admin/notifiers/${notifier._id}`}>
                       <a  className="btn btn-primary">
                           <i className="fa fa-pencil"></i>
                           
@@ -91,7 +112,7 @@ const AllRooms = () => {
                    <button 
                    
                    className="btn-danger btn mx-2"
-                   onClick = {()=>deleteHandler(room._id)}
+                   onClick = {()=>deleteHandler(notifier._id)}
                    >
                        <i className="fa fa-trash"></i>
                    </button>
@@ -108,16 +129,16 @@ const AllRooms = () => {
             {loading ? <Loader /> : 
             <>
 
-            <h1 className="my-4">{`${rooms && rooms.length} Notifiers`}</h1>
+            <h1 className="my-4">{`${notifiers && notifiers.length} Notifiers`}</h1>
 
-            <Link href="/admin/rooms/new">
+            <Link href="/admin/notifiers/new">
                 <a className="mt-0 btn text-white btn-sm float-right bg-choco mt-3">Add Notifier</a>
             </Link>
             </>            
             }
 
         <MDBDataTable
-         data={setRooms()}
+         data={setNotifiers()}
          className="px-3"
          bordered
          striped
@@ -131,4 +152,4 @@ const AllRooms = () => {
     )
 }
 
-export default AllRooms
+export default AllNotifiers

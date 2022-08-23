@@ -1,5 +1,5 @@
 import nc from 'next-connect'
-import { deleteRoom, singleRoom,updateRoom } from '../../../controllers/notifierController'
+import { deleteNotifier, singleNotifier,updateNotifier } from '../../../controllers/notifierController'
 import dbConnect from '../../../config/dbConnect';
 import onError from "../../../middlewares/error"
 
@@ -7,10 +7,10 @@ import isAuthenticated, { authorize } from '../../../middlewares/auth'
 const handler = nc({onError});
 dbConnect();
 
-handler.get(singleRoom);
+handler.get(singleNotifier);
 
-handler.use(isAuthenticated,authorize('admin')).put(updateRoom);
-handler.use(isAuthenticated,authorize('admin')).delete(deleteRoom)
+handler.use(isAuthenticated,authorize('admin')).put(updateNotifier);
+handler.use(isAuthenticated,authorize('admin')).delete(deleteNotifier)
 
 
 

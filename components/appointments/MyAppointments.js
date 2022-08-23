@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { clearErrors } from '../../state/actions/appointmentAction';
 import easyinvoice from 'easyinvoice';
 
-const MyBookings = () => {
+const MyAppointments = () => {
     const dispatch = useDispatch();
     const {bookings,error} = useSelector(state=>state.bookings)
 
@@ -37,6 +37,11 @@ const MyBookings = () => {
                     sort:'asc'
                 },
                 {
+                    label: "Document",
+                    field:'document',
+                    sort:'asc'
+                },
+                {
                     label: "Amount Paid",
                     field:'amountPaid',
                     sort:'asc'
@@ -55,7 +60,8 @@ const MyBookings = () => {
                   id:booking._id,
                   checkIn:new Date(booking.checkInDate).toLocaleString('en-UK'),
                   checkOut:new Date(booking.checkOutDate).toLocaleString('en-US'),
-                  amountPaid:`$${booking.amountPaid}`,
+                  document: booking.document,
+                  amountPaid:`${booking.price} RWF`,
                   action:
                   <>
                    <Link href={`/bookings/${booking._id}`}>
@@ -135,4 +141,4 @@ const MyBookings = () => {
     )
 }
 
-export default MyBookings
+export default MyAppointments

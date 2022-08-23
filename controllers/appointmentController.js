@@ -63,8 +63,8 @@ export const checkRoomAvailability = AsyncErrors(async(req,res,next)=>{
  export const bookingDetails = AsyncErrors(async(req,res,next)=>{
     const booking = await Booking.findById(req.query.id)
     .populate({
-        path:'room',
-        select:'name pricePerNight  images'
+        path:'notifier',
+        select:'name pricePerDocument  images'
     })
     .populate({
         path:'user',
@@ -85,7 +85,7 @@ export const checkRoomAvailability = AsyncErrors(async(req,res,next)=>{
     const booking = await Booking.findById(req.query.id)
 
     if(!booking){
-        return next(new ErrorHandler("The room can't be found",404))
+        return next(new ErrorHandler("The notifier can't be found",404))
     }
 
     await booking.remove();
@@ -102,23 +102,34 @@ export const checkRoomAvailability = AsyncErrors(async(req,res,next)=>{
 
 
 export const myBookings = AsyncErrors(async(req,res,next)=>{
-    const bookings = await Booking.find({
+
+    try{
+ const bookings = await Booking.find({
         user:req.user._id
     })
     .populate({
-        path:'room',
-        select:'name pricePerNight  images'
+        path:'notifier',
+        select:'name pricePerDocument  images'
     })
     .populate({
         path:'user',
         select:'name email'
     })
     
-       
+    console.log(bookings,'the booking')
     res.status(201).json({
         success:true,
         bookings
     })
+    }
+    catch(error){
+        console.log(error)
+res.status(400).json({
+        success:true,
+        error: error
+    })
+    }
+   
     
  })
 
@@ -126,13 +137,15 @@ export const myBookings = AsyncErrors(async(req,res,next)=>{
 export const allBookings = AsyncErrors(async(req,res,next)=>{
     const bookings = await Booking.find()
     .populate({
-        path:'room',
-        select:'name pricePerNight  images'
+        path:'notifier',
+        select:'name pricePerDocument  images'
     })
     .populate({
         path:'user',
         select:'name email'
     })
+
+    console.log(bookings,'the bookings')
 
     res.status(201).json({
         success:true,
@@ -193,6 +206,7 @@ export const newBooking = AsyncErrors(async(req,res,next)=>{
         date,
         time,        
         price,
+        document,
         status,      
     } = req.body;
   
@@ -202,6 +216,7 @@ export const newBooking = AsyncErrors(async(req,res,next)=>{
         date,
         time,        
         price,
+        document,
         status,    
         
    })

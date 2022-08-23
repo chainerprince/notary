@@ -6,25 +6,25 @@ import APIFeatures from "../utils/apiFeatures";
 
 import cloudinary from 'cloudinary'
 
-const allRooms = AsyncErrors(async(req,res)=>{
+const allNotifiers = AsyncErrors(async(req,res)=>{
      const resPerPage = 4;
-     const roomsCount = await Notifier.countDocuments();
-     console.log(roomsCount,'the number of rooms')
+     const notifiersCount = await Notifier.countDocuments();
+     
      const apiFeatures = new APIFeatures(Notifier.find(),req.query).
      search().
      filter()
      
-     let rooms = await apiFeatures.query;
-     let filteredRoomsCount = rooms.length;
+     let notifiers = await apiFeatures.query;
+     let filteredNotifiersCount = notifiers.length;
      apiFeatures.pagination(resPerPage);
-     rooms = await apiFeatures.query;
+     notifiers = await apiFeatures.query;
     res.status(200).json(
       {
         success:true, 
-        roomsCount,
+        notifiersCount,
         resPerPage,
-        filteredRoomsCount,
-        rooms
+        filteredNotifiersCount,
+        notifiers
       }  
     )
    
@@ -33,17 +33,17 @@ const allRooms = AsyncErrors(async(req,res)=>{
 
 
 
-const singleRoom = AsyncErrors(async(req,res,next)=>{
+const singleNotifier = AsyncErrors(async(req,res,next)=>{
    
-      const room = await Notifier.findById(req.query.id);
+      const notifier = await Notifier.findById(req.query.id);
      
-      if(!room){
+      if(!notifier){
         return next(new ErrorHandler("That Room is not saved",404));
       }
 
       res.status(200).json({
         success:true,
-        room
+        notifier
       })
 
     
@@ -102,25 +102,28 @@ export const deleteReview = AsyncErrors(async(req,res,next)=>{
     
 })
 
-const updateRoom = AsyncErrors(async(req,res,next)=>{
+const updateNotifier = AsyncErrors(async(req,res,next)=>{
   
     
-    let room = await Notifier.findById(req.query.id);
-    if(!room){
+    let notifier = await Notifier.findById(req.query.id);
+    if(!notifier){
       return next(new ErrorHandler("That Room doesn't Exist",404));
     }
    
 
     if(req.body.images){
-      for(let i=0;i<room.images.length;i++){
-        await cloudinary.v2.uploader.destroy(room.images[i].public_id)
+      if(notifier.images){
+ for(let i=0;i<notifier?.images?.length;i++){
+        await cloudinary.v2.uploader.destroy(notifier?.images[i]?.public_id)
       }
+      }
+     
     }
 
     let imageLinks=[];
     
 
-    for(let i = 0; i < req.body.images.length ; i++){
+    for(let i = 0; i < req.body?.images?.length ; i++){
       const result = await cloudinary.v2.uploader.upload(req.body.images[i],{
         folder:"bookit/rooms",
        
@@ -135,32 +138,32 @@ const updateRoom = AsyncErrors(async(req,res,next)=>{
   
     req.body.images = imageLinks;
 
-    room = await Notifier.findByIdAndUpdate(req.query.id,req.body,{
+    notifier = await Notifier.findByIdAndUpdate(req.query.id,req.body,{
       new:true,
       runValidators: true
     })
     res.status(200).json({
       success:true,
-      room
+      notifier
     })
     
  
 })
 
 
-const deleteRoom = AsyncErrors(async(req,res,next)=>{
+const deleteNotifer = AsyncErrors(async(req,res,next)=>{
   
-    const room = await Notifier.findById(req.query.id);
-    if(!room){
-      return next(new ErrorHandler("That Room doesn't Exist",404));
+    const notifier = await Notifier.findById(req.query.id);
+    if(!notifier){
+      return next(new ErrorHandler("That notifier doesn't Exist",404));
     }
-    for(let i=0;i<room.images.length;i++){
-      await cloudinary.v2.uploader.destroy(room.images[i].public_id)
+    for(let i=0;i<notifier.images.length;i++){
+      await cloudinary.v2.uploader.destroy(notifier.images[i].public_id)
     }
-    await room.remove();
+    await notifier.remove();
     res.status(200).json({
       success:true,
-      message:"The room has been deleted succesfully"
+      message:"The notifier has been deleted succesfully"
     })
 
  
@@ -232,13 +235,13 @@ export const canReview = AsyncErrors(async(req,res,next)=>{
 })
 
 
-export const allAdminRooms = AsyncErrors(async(req,res,next)=>{
+export const allAdminNotifiers = AsyncErrors(async(req,res,next)=>{
 
-     const rooms = await Notifier.find();
+     const notifiers = await Notifier.find();
     
     res.status(200).json({
       success:true,
-      rooms
+      notifiers
     })
 
  
@@ -285,5 +288,5 @@ const saveRoom = AsyncErrors(async (req,res)=>{
 
 
 export {
-    allRooms,saveRoom,singleRoom,updateRoom,deleteRoom
+    allNotifiers,saveRoom,singleNotifier,updateNotifier,deleteNotifer
 }

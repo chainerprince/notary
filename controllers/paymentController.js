@@ -26,7 +26,7 @@ const stripePayment = AsyncErrors(async(req,res)=>{
 
      const session = await stripe.checkout.sessions.create({
             payment_method_types:['card'],
-            success_url:`${origin}/bookings/me`,
+            success_url:`${origin}/appointments/me`,
             cancel_url:`${origin}/room/${room._id}`,
             customer_email:req.user.email,
             client_reference_id:req.query.roomid,

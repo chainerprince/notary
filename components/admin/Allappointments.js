@@ -15,8 +15,7 @@ import { DELETE_BOOKING_RESET } from '../../state/constants/appointmentConstants
 const AllBookings = () => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const {bookings,error,loading} = useSelector(state=>state.bookings)
-    console.log(bookings)
+    const {bookings,error,loading} = useSelector(state=>state.bookings)    
     const {isDeleted,error:deleteError} = useSelector(state=>state.deleteBooking)
     
     useEffect(() => {
@@ -31,7 +30,7 @@ const AllBookings = () => {
         }
 
         if(isDeleted){
-            router.push('/admin/bookings');
+            router.push('/admin/appointments');
             dispatch({type:DELETE_BOOKING_RESET})
         }
 
@@ -81,12 +80,12 @@ const AllBookings = () => {
                   amountPaid:`$${booking.amountPaid}`,
                   action:
                   <>
-                   <Link href={`/admin/bookings/${booking._id}`}>
+                   <Link href={`/admin/appointments/${booking._id}`}>
                       <a  className="btn btn-primary">
                           <i className="fa fa-eye"></i>
                           
                       </a>
-                   </Link>
+                   </Link> 
                    <button className="btn-success btn mx-2" onClick={()=>downloadInvoice(booking)}>
                        <i className="fa fa-download"></i>
                    </button>

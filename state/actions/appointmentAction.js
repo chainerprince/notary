@@ -38,7 +38,7 @@ export const bookingDetails = (authCookie, req, id) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.get(`${origin}/api/bookings/${id}`, config)
+        const { data } = await axios.get(`${origin}/api/appointments/${id}`, config)
         
 
         dispatch({
@@ -62,7 +62,7 @@ export const deleteBooking = (id) => async(dispatch) => {
      dispatch({type:DELETE_BOOKING_REQUEST})
      
         
-        const {data} = await axios.delete(`/api/admin/bookings/${id}`)
+        const {data} = await axios.delete(`/api/admin/appointments/${id}`)
         
         
         dispatch({
@@ -93,7 +93,7 @@ export const bookings = (authCookie, req) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.get(`${origin}/api/bookings/me`, config)
+        const { data } = await axios.get(`${origin}/api/appointments/me`, config)
         console.log(data)
 
         dispatch({
@@ -116,7 +116,7 @@ export const adminBookings = () => async (dispatch) => {
     try {
         dispatch({type:ADMIN_BOOKING_REQUEST})
 
-        const { data } = await axios.get(`/api/admin/bookings/`)
+        const { data } = await axios.get(`/api/admin/appointments/`)
 
         dispatch({
             type:ADMIN_BOOKING_SUCCESS,

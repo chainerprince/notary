@@ -5,13 +5,13 @@ import {
     
 }
 from '../constants/notifierConstants'
-515038
 
-export const roomDetailsReducer = (state={room:{} },action)=>{
+
+export const notifierDetailsReducer = (state={notifier:{} },action)=>{
     switch(action.type){
         case NOTIFIER_DETAILS_SUCCESS:
             return {
-               room:action.payload
+               notifier:action.payload.notifier
             }
             
         case NOTIFIER_DETAILS_FAIL:

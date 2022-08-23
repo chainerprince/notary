@@ -7,7 +7,6 @@ const handler = nc({onError});
 
 dbConnect();
 
-// handler.get(allRooms);
 
 
 handler.post(registerUser)

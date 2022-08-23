@@ -155,7 +155,7 @@ body {
 .booking-btn,
 .update-btn,
 #review_btn,
-.new-room-btn,
+.new-notifier-btn,
 #forgot_password_button,
 #new_password_button,
 .search-form .btn {
@@ -173,7 +173,7 @@ body {
   border-radius: 5rem;
 }
 
-.new-room-btn {
+.new-notifier-btn {
   background-color: #e61e4d;
   border-color: #e61e4d;
 }
@@ -350,12 +350,12 @@ nav {
   padding: 5px 10px;
 }
 
-.room-feature {
+.notifier-doc {
   font-size: 1.1rem;
   color: #404040;
 }
 
-.room-feature p {
+.notifier-doc p {
   margin-left: 0.4rem;
   display: inline-block;
 }

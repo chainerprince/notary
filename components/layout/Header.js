@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import React,{useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux';
@@ -43,10 +44,11 @@ function Header() {
               data-toggle="dropdown" 
               aria-haspopup="true">
                      <figure className="avatar avatar-nav">
-                       <Image
+                       <img
                        src={user.avatar && user.avatar.url} 
                        alt={user && user.name} 
                        className="rounded-circle"
+                       
                        />
                      </figure>
                         <span>{user && user.name}</span>
@@ -55,13 +57,13 @@ function Header() {
                 {
                   user.role == 'admin' && (
                     <>
-                    <Link href="/admin/rooms">
+                    <Link href="/admin/notifiers">
                       <a  className="dropdown-item">Notifiers</a>            
                   </Link>
 
                  
 
-                    <Link href="/admin/bookings">
+                    <Link href="/admin/appointments">
                       <a  className="dropdown-item">Appointments</a>            
                   </Link>
 
@@ -78,7 +80,7 @@ function Header() {
                     </>
                   )
                 }
-                  <Link href="/bookings/me">
+                  <Link href="/appointments/me">
                       <a  className="dropdown-item">My Appointments</a>
                   </Link>
                   <Link href="/me/update">

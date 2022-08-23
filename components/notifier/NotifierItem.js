@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import GoogleMapReact from 'google-map-react';
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
-const RoomItem = ({room}) => {
+const NotifierItem = ({notifier}) => {
   const defaultProps = {
     center: {
       lat: 10.99835602,
@@ -29,27 +29,27 @@ const RoomItem = ({room}) => {
           
           <div className="card-body d-flex  flex-column">
             <h5 className="card-title">
-              <Link href={`/rooms/${room._id}`}>
+              <Link href={`/notifier/${notifier._id}`}>
 
-                  <a className=" text-sm">{room.name.length> 20 ? room.name.slice(0,20) + "..." : room.name}</a>
+                  <a className=" text-sm">{notifier.name.length> 20 ? notifier.name.slice(0,20) + "..." : notifier.name}</a>
               </Link>
             </h5>
 
             <div className="ratings mt-auto mb-3">
-              <p className="card-text"><b>{room.pricePerDocument}</b> RWF / documents</p>
+              <p className="card-text"><b>{notifier.pricePerDocument}</b> RWF / documents</p>
 
               <div className="rating-outer">
                   <div className="rating-inner" 
-                   style={{width:`${(room.ratings / 5) * 100}%`}}
+                   style={{width:`${(notifier.ratings / 5) * 100}%`}}
                    
                   ></div>
               </div>
-              <span id="no_of_reviews">({room.numOfReviews} Reviews)</span>
+              <span id="no_of_reviews">({notifier.numOfReviews} Reviews)</span>
           </div>
 
           <button className="btn btn-block rounded  ">
               
-              <Link  href={`/notifier/${room._id}`}>
+              <Link  href={`/notifier/${notifier._id}`}>
                  <a className="text-white bg-choco p-2 ">Book Appointment</a> 
               </Link>
           </button>
@@ -59,4 +59,4 @@ const RoomItem = ({room}) => {
     )
 }
 
-export default RoomItem
+export default NotifierItem

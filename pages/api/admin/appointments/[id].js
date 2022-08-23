@@ -8,7 +8,7 @@ dbConnect();
 
 handler.use(isAuthenticated,authorize('admin')).delete(deleteBooking);
 
-// handler.post(saveRoom)
+
 
 
 export default handler;

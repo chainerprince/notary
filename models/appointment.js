@@ -25,6 +25,10 @@ const bookingSchema = new Schema({
           type:Number,
           required:true
       },
+      document:{
+          type:String,
+          required:true
+      },
      status: {
         type: String,
         required: false,

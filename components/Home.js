@@ -3,13 +3,14 @@ import  Pagination  from 'react-js-pagination';
 import { useSelector,useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
 import { clearErrors } from '../state/actions/notifierAction';
-import RoomItem from './notifier/NotifierItem';
+import NotifierItem from './notifier/NotifierItem';
 import {useRouter} from 'next/router'
 import Link from 'next/link';
 const Home = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const {rooms,resPerPage,filteredRoomsCount,roomsCount,error} = useSelector(state=>state.allRooms);
+  const {notifiers,resPerPage,filteredNotifiersCount,notifiersCount,error} = useSelector(state=>state.allNotifiers);
+  console.log(notifiers,'the notification gratis completion')
   useEffect(() => {
    if(error){
       toast.error(error)
@@ -24,15 +25,15 @@ const Home = () => {
     window.location.href = `/?page=${pageNumber}`
   }
 
-  let count = roomsCount;
+  let count = notifiersCount;
   if(location) {
-    count = filteredRoomsCount;
+    count = filteredNotifiersCount;
   }
     return (
       
        <>
 
-    <section id="rooms" className="container-fluid mt-5">
+    <section id="notifiers" className="container-fluid mt-5">
 
     <h2 className='mb-3 ml-2 stays-heading'>{location ? `Notifiers in ${location}` : "All Notifiers" }</h2>
 
@@ -44,10 +45,10 @@ const Home = () => {
     </a> 
     </Link>
     <div className="row"> 
-       {rooms && rooms.length===0 ? 
+       {notifiers && notifiers.length===0 ? 
         <div className="alert alert-danger"><b>No Appointments</b></div>
         :
-     rooms &&   rooms.map(room=> <RoomItem key={room._id} room={room} />)
+     notifiers &&   notifiers.map(notifier=> <NotifierItem key={notifier._id} notifier={notifier} />)
       }
         
     </div>

@@ -8,7 +8,7 @@ dbConnect();
 
 handler.use(isAuthenticated,authorize('admin')).get(allUsers);
 
-// handler.post(saveRoom)
+
 
 
 export default handler;

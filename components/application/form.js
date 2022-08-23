@@ -3,31 +3,32 @@ import { useSelector,useDispatch } from 'react-redux'
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { clearErrors } from '../../state/actions/notifierAction';
-import { newRoom } from '../../state/actions/notifierAction';
+import { newNotifier } from '../../state/actions/notifierAction';
 import Loading from '../layout/Loading';
-import { NEW_ROOM_RESET } from '../../state/constants/notifierConstants';
+import { NEW_NOTIFIER_RESET } from '../../state/constants/notifierConstants';
 import Image from 'next/image';
 
 const Application = () => {
 
     const [name ,setName] = useState('');
-    const [price ,setPrice] = useState('');
+    const [district ,setDistrict] = useState('kicukiro');
     const [description ,setDescription] = useState('');
-    const [address ,setAddress] = useState('');
-    const [category ,setCategory] = useState('King');
-    const [guestCapacity,setGuestCapacity] = useState(1);
-    const [numOfBeds ,setNumOfBeds] = useState(1);
-    const [internet ,setInternet] = useState(false);
-    const [breakfast ,setBreakfast] = useState(false);
-    const [petsAllowed ,setPetsAllowed] = useState(false);
-    const [roomCleaning ,setRoomCleaning] = useState(false);
-    const [airConditioned ,setAirConditioned] = useState(false);
+    const [sector ,setSector] = useState('');
+    const [category ,setCategory] = useState('private');
+    const [education,setEducation] = useState('');
+    const [price,setPrice] = useState('1000');
+    
+    const [land ,setLand] = useState(false);
+    const [marriage ,setMarriage] = useState(false);
+    const [migration ,setMigration] = useState(false);
+    const [reports ,setReports] = useState(false);
+    const [birth ,setBirth] = useState(false);
     const [images,setImages] = useState([]);
     const [imagesPreview,setImagesPreview] = useState([])
 
     const dispatch = useDispatch();
     const router = useRouter();
-    const {success,loading,error} = useSelector(state=>state.newRoom)
+    const {success,loading,error} = useSelector(state=>state.newNotifier)
     
 
     useEffect(() => {
@@ -38,11 +39,11 @@ const Application = () => {
             dispatch(clearErrors())
         }
         if(success){
-            router.push('/admin/rooms');
-            dispatch({type:NEW_ROOM_RESET});
+            router.push('/admin/notifiers');
+            dispatch({type:NEW_NOTIFIER_RESET});
         }
 
-    }, [dispatch,error,success])
+    }, [dispatch,error,success,router])
 
 
     const imageHandler = e => {
@@ -74,22 +75,22 @@ const Application = () => {
 
     const handleSubmit = e=>{
         e.preventDefault();
-        const roomData = {
+        const notifierData = {
             name,
-            pricePerNight:price,
+            pricePerDocument:`${price} RWF`,
             description,
-            address,
+            address: {sector,district},
             category,
-            guestCapacity: Number(guestCapacity),
-            numOfBeds: Number(numOfBeds),
-            internet,
-            breakfast,
-            petsAllowed,
-            roomCleaning,
+            education,            
+            landServices: land,
+            birthCertificates: birth,
+            marriage,
+            migrationSersvices: migration,
+            schoolReports:reports,
             images
         }
         
-        dispatch(newRoom(roomData))
+        dispatch(newNotifier(notifierData))
     }
 
 
@@ -112,19 +113,6 @@ const Application = () => {
                        required
                        />
                  </div>
-                
-                 
-                 <div className="form-group">
-                    <label htmlFor="address_field">city</label>
-                    <input
-                       type="text"
-                       id="address_field"
-                       className="form-control"
-                       value={address}
-                       onChange = {e=>setAddress(e.target.value)}
-                       required
-                       />
-                 </div>
                  <div className="form-group">
                     <label htmlFor="category_field">Category</label>
                     <select className="form-control" id="rom_type_field" 
@@ -136,36 +124,15 @@ const Application = () => {
                     <option value={num} key={num}>{num}</option>
                    ))
                 }
-              </select>
-                    {/* <select className="form-control" id="category_field" value="">
-                       <option value="">King</option>
-                       <option value="">Single</option>
-                       <option value="">Twins</option>
-                    </select> */}
+              </select>                   
                  </div>
-                 <div className="form-group">
-                    <label htmlFor="category_field">Choose your education</label>
-                    <select className="form-control" id="guest_field" 
-              value={guestCapacity}
-              onChange = {e=>setGuestCapacity(e.target.value)}
-              >
-                {
-                   ['Bachelors','Masters','PHD'].map(num=>(
-                    <option value={num} key={num}>{num}</option>
-                   ))
-                }
-              </select>
-                    {/* <select className="form-control" id="guestCapacity_field" value="">
-                       <option value="">1</option>
-                       <option value="">2</option>
-                    </select> */}
-                 </div>
+                             
                  <div className="form-group">
                     <label htmlFor="category_field">District</label>
 
                     <select className="form-control" id="guest_field" 
-              value={numOfBeds}
-              onChange = {e=>setNumOfBeds(e.target.value)}
+              value={district}
+              onChange = {e=>setDistrict(e.target.value)}
               >
                 {
                    [ 'Gasabo', 'Kicukiro', 'Nyarugenge' ].map(num=>(
@@ -178,14 +145,25 @@ const Application = () => {
                        <option value="">2</option>
                     </select> */}
                  </div>
+                 <div className="form-group">
+                    <label htmlFor="sector_field">Sector</label>
+                    <input
+                       type="text"
+                       id="sector_field"
+                       className="form-control"
+                       value={sector}
+                       onChange = {e=>setSector(e.target.value)}
+                       required
+                       />
+                 </div>
                  <label className="mb-3">Documents Available</label>
                  <div className="form-check">
                     <input
                        className="form-check-input"
                        type="checkbox"
-                       id="internet_checkbox"
-                       value={internet}
-                       onChange={e=>setInternet(e.target.checked)}
+                       id="land_checkbox"
+                       value={land}
+                       onChange={e=>setLand(e.target.checked)}
                        />
                     <label className="form-check-label" htmlFor="internet_checkbox">
                     Land Services
@@ -195,9 +173,9 @@ const Application = () => {
                     <input
                        className="form-check-input"
                        type="checkbox"
-                       id="breakfast_checkbox"
-                       value={breakfast}
-                       onChange={e=>setBreakfast(e.target.checked)}
+                       id="marriage_checkbox"
+                       value={marriage}
+                       onChange={e=>setMarriage(e.target.checked)}
                        />
                     <label className="form-check-label" htmlFor="breakfast_checkbox">
                     Marriage
@@ -207,11 +185,11 @@ const Application = () => {
                     <input
                        className="form-check-input"
                        type="checkbox"
-                       id="airConditioned_checkbox"
-                       value={airConditioned}
-                       onChange={e=>setAirConditioned(e.target.checked)}
+                       id="birth_checkbox"
+                       value={birth}
+                       onChange={e=>setBirth(e.target.checked)}
                        />
-                    <label className="form-check-label" htmlFor="airConditioned_checkbox">
+                    <label className="form-check-label" htmlFor="birth_checkbox">
                     Birth Certificates
                     </label>
                  </div>
@@ -219,11 +197,11 @@ const Application = () => {
                     <input
                        className="form-check-input"
                        type="checkbox"
-                       id="petsAllowed_checkbox"
-                       value={petsAllowed}
-                       onChange={e=>setPetsAllowed(e.target.checked)}
+                       id="migration_checkbox"
+                       value={migration}
+                       onChange={e=>setMigration(e.target.checked)}
                        />
-                    <label className="form-check-label" htmlFor="petsAllowed_checkbox">
+                    <label className="form-check-label" htmlFor="migration_checkbox">
                     Migration Services
                     </label>
                  </div>
@@ -231,31 +209,48 @@ const Application = () => {
                     <input
                        className="form-check-input"
                        type="checkbox"
-                       id="roomCleaning_checkbox"
-                       value={roomCleaning}
-                       onChange={e=>setRoomCleaning(e.target.checked)}
+                       id="reports_checkbox"
+                       value={reports}
+                       onChange={e=>setReports(e.target.checked)}
                        />
-                    <label className="form-check-label" htmlFor="roomCleaning_checkbox">
+                    <label className="form-check-label" htmlFor="reports_checkbox">
                     School Reports
                     </label>
                  </div>
-                 <div className="form-group">
-                    <label htmlFor="description_field">Description</label>
-                    <textarea
+                  <div className="form-group">
+                    <label htmlFor="price_field">Average price per document (RWF)</label>
+                    <input
+                       type="text"
+                       id="price_field"
                        className="form-control"
-                       id="description_field"
-                       rows="8"
-                       value={description}
-                       onChange = {e=>setDescription(e.target.value)}
+                       value={price}
+                       onChange = {e=>setPrice(e.target.value)}
                        required
-                       ></textarea>
+                       />
                  </div>
                  <div className="form-group mt-4">
-                    <label>Images of licenses</label>
+                      <div className="form-group">
+                    <label htmlFor="category_field">Choose your education</label>
+                    <select className="form-control" id="education_field" 
+              value={education}
+              onChange = {e=>setEducation(e.target.value)}
+              >
+                {
+                   ['Bachelors','Masters','PHD'].map(num=>(
+                    <option value={num} key={num}>{num}</option>
+                   ))
+                }
+              </select>
+                    {/* <select className="form-control" id="education_field" value="">
+                       <option value="">1</option>
+                       <option value="">2</option>
+                    </select> */}
+                 </div>
+                    <label>Images of education certificates</label>
                     <div className="custom-file">
                        <input
                           type="file"
-                          name="room_images"
+                          name="notifier_images"
                           className="custom-file-input"
                           id="customFile"
                           onChange={imageHandler}
@@ -278,14 +273,24 @@ const Application = () => {
                             />
                         )
                     }
-
+                 </div>
+                 <div className="form-group">
+                    <label htmlFor="description_field">Enter more about your notary office</label>
+                    <textarea
+                       className="form-control"
+                       id="description_field"
+                       rows="8"
+                       value={description}
+                       onChange = {e=>setDescription(e.target.value)}
+                       required
+                       ></textarea>
                  </div>
                  <button 
                  type="submit" 
-                 className="btn btn-block new-room-btn py-3"
+                 className="btn btn-block bg-choco text-white new-notifier-btn py-3"
                  disabled = {loading?true:false}
                  >
-                     {loading ? <Loading /> : "ADD"}
+                     {loading ? <Loading /> : "Appy"}
                  
                  </button>
               </form>

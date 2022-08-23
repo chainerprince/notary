@@ -19,9 +19,9 @@ import {
     CAN_REVIEW_FAIL,
 
 
-    ADMIN_ROOMS_REQUEST,
-    ADMIN_ROOMS_SUCCESS,
-    ADMIN_ROOMS_FAIL,
+    ADMIN_NOTIFIERS_REQUEST,
+    ADMIN_NOTIFIERS_SUCCESS,
+    ADMIN_NOTIFIERS_FAIL,
 
 
     NEW_NOTIFIER_REQUEST,
@@ -57,6 +57,7 @@ export const getNotifiers = (req,currentPage=1,location='',document) => async(di
       if(document) link = link.concat(`&document=${document}`)
       
       const {data} = await axios.get(link);
+      console.log(data,'the data we fetched')
       dispatch({
           type: NOTIFIER_SUCCESS,
           payload: data
@@ -71,20 +72,21 @@ export const getNotifiers = (req,currentPage=1,location='',document) => async(di
 
 
 
-export const getRoomDetails = (req,id) => async(dispatch) => {
+export const getNotifierDetails = (req,id) => async(dispatch) => {
     
   try {
     
       const {origin} = absoluteUrl(req)
-      const {data} = await axios.get(`${origin}/api/notifier/${id}`)
       
+      const {data} = await axios.get(`${origin}/api/notifier/${id}`) 
+      console.log(data,'The data we want')     
       dispatch({
           type: NOTIFIER_DETAILS_SUCCESS,
-          payload: data.room
+          payload: data
       })
   } catch (error) {
       
-      console.log(error)
+      console.log(error,'the error we have')
       dispatch({
           type:NOTIFIER_DETAILS_FAIL,
           payload:error.response.data.message
@@ -93,21 +95,23 @@ export const getRoomDetails = (req,id) => async(dispatch) => {
 }
 
 
-export const getAdminRooms = (req,id) => async(dispatch) => {
+export const getAdminNotifiers = (req,id) => async(dispatch) => {
   try {
       dispatch({
-         type: ADMIN_ROOMS_REQUEST
+         type: ADMIN_NOTIFIERS_REQUEST
       })
       const {origin} = absoluteUrl(req)
-      const {data} = await axios.get(`${origin}/api/admin/rooms`)
+      const {data} = await axios.get(`${origin}/api/admin/notifiers`)
+
+      console.log(data,'the admin notifier')
       
       dispatch({
-          type: ADMIN_ROOMS_SUCCESS,
-          payload: data.rooms
+          type: ADMIN_NOTIFIERS_SUCCESS,
+          payload: data
       })
   } catch (error) {
       dispatch({
-          type:ADMIN_ROOMS_FAIL,
+          type:ADMIN_NOTIFIERS_FAIL,
           payload:error.response.data.message
       })
   }
@@ -140,7 +144,7 @@ export const newRoomReviews = (reviewData) => async(dispatch) => {
 }
 
 
-export const newRoom = (roomData) => async(dispatch) => {
+export const newNotifier = (notifierData) => async(dispatch) => {
   try {
    dispatch({type:NEW_NOTIFIER_REQUEST})
     const config = {
@@ -149,7 +153,8 @@ export const newRoom = (roomData) => async(dispatch) => {
         }
     }
       
-      const {data} = await axios.post(`/api/rooms/`,roomData,config)
+      const {data} = await axios.post(`/api/notifier/`,notifierData,config)
+      
       
       dispatch({
           type: NEW_NOTIFIER_SUCCESS,
@@ -165,7 +170,7 @@ export const newRoom = (roomData) => async(dispatch) => {
 }
 
 
-export const updateRoom = (id,roomData) => async(dispatch) => {
+export const updateNotifier = (id,notifierData) => async(dispatch) => {
   try {
    dispatch({type:UPDATE_NOTIFIER_REQUEST})
     const config = {
@@ -174,7 +179,7 @@ export const updateRoom = (id,roomData) => async(dispatch) => {
         }
     }
       
-      const {data} = await axios.put(`/api/notifier/${id}`,roomData,config)
+      const {data} = await axios.put(`/api/notifier/${id}`,notifierData,config)
       console.log(data)
       dispatch({
           type: UPDATE_NOTIFIER_SUCCESS,
@@ -190,7 +195,7 @@ export const updateRoom = (id,roomData) => async(dispatch) => {
 }
 
 
-export const deleteRoom = (id) => async(dispatch) => {
+export const deleteNotifier = (id) => async(dispatch) => {
   try {
    dispatch({type:DELETE_NOTIFIER_REQUEST})
     // const config = {

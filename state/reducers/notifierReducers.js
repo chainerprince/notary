@@ -31,9 +31,9 @@ import {
     CAN_REVIEW_SUCCESS,
     CAN_REVIEW_FAIL,
 
-    ADMIN_ROOMS_REQUEST,
-    ADMIN_ROOMS_SUCCESS,
-    ADMIN_ROOMS_FAIL,
+    ADMIN_NOTIFIERS_REQUEST,
+    ADMIN_NOTIFIERS_SUCCESS,
+    ADMIN_NOTIFIERS_FAIL,
 
     
     GET_REVIEWS_REQUEST,
@@ -49,26 +49,26 @@ import {
 from '../constants/notifierConstants'
 
 
-export const roomsReducer = (state={rooms:[]},action)=>{
+export const notifiersReducer = (state={notifiers:[]},action)=>{
     switch(action.type){
         case NOTIFIER_SUCCESS:
             return {
-                roomsCount : action.payload.roomsCount,
+                notifiersCount : Number(action.payload.totalDocuments),
                 resPerPage : action.payload.resPerPage,
-                filteredRoomsCount: action.payload.filteredRoomsCount,
-                rooms:action.payload.rooms
+                filteredNotifiersCount: action?.payload?.filteredNotifiersCount,
+                notifiers:action.payload.notifiers
             }
-        case ADMIN_ROOMS_REQUEST:
+        case ADMIN_NOTIFIERS_REQUEST:
             return {
                 loading:true
             }
-        case ADMIN_ROOMS_SUCCESS:
+        case ADMIN_NOTIFIERS_SUCCESS:
             return {
-                rooms:action.payload
+                notifiers:action.payload.notifiers
             }
             
         case NOTIFIER_FAIL:
-            case ADMIN_ROOMS_FAIL:
+            case ADMIN_NOTIFIERS_FAIL:
             return {
                  error:action.payload
             }
@@ -120,7 +120,7 @@ export const roomReviewReducer = (state={error:null},action)=>{
 }
 
 
-export const updateRoomReducer = (state={error:null},action)=>{
+export const updateNotifierReducer = (state={error:null},action)=>{
     switch(action.type){
         case UPDATE_NOTIFIER_REQUEST:
             return {
@@ -141,7 +141,8 @@ export const updateRoomReducer = (state={error:null},action)=>{
         case UPDATE_NOTIFIER_RESET:
             return {
                 
-                success:false
+                success:false,
+                isUpdated: false
             }
         case CLEAR_ERRORS:
             return {
@@ -153,7 +154,7 @@ export const updateRoomReducer = (state={error:null},action)=>{
             return state
     }
 }
-export const deleteRoomReducer = (state={error:null},action)=>{
+export const deleteNotifierReducer = (state={error:null},action)=>{
     switch(action.type){
         case DELETE_NOTIFIER_REQUEST:
             return {
@@ -224,7 +225,7 @@ export const deleteReviewReducer = (state={error:null},action)=>{
     }
 }
 
-export const newRoomReducer = (state={error:null,room:{}},action)=>{
+export const newNotifierReducer = (state={error:null,notifier:{}},action)=>{
     switch(action.type){
         case NEW_NOTIFIER_REQUEST:
             return {
@@ -235,7 +236,7 @@ export const newRoomReducer = (state={error:null,room:{}},action)=>{
             return {
                 loading:false,
                  success:action.payload.success,
-                 room:action.payload.room
+                 notifier:action.payload.notifier
             }
         case NEW_NOTIFIER_FAIL:
             return {

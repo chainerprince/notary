@@ -8,7 +8,7 @@ import  isAuthenticated  from '../../middlewares/auth';
 const handler = nc({onError});
 dbConnect();
 
-// handler.get(allRooms);
+
 
 handler.use(isAuthenticated).get(currentUser)
 

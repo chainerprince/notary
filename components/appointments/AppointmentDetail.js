@@ -6,7 +6,7 @@ import { useSelector,useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
 import { clearErrors } from '../../state/actions/appointmentAction';
 
-const BookingDetails = () => {
+const AppointmentDetails = () => {
      const dispatch = useDispatch();
      const {booking,error} = useSelector(state=>state.bookingDetails)
      const {user,error:userError} = useSelector(state=>state.login)
@@ -23,6 +23,8 @@ const BookingDetails = () => {
         }
 
     }, [dispatch])
+
+    console.log(booking,'the booking we want')
     
   const isPaid = booking && booking.paymentInfo && booking.paymentInfo.status  === 'paid' ? true : false;
     return (
@@ -68,15 +70,15 @@ const BookingDetails = () => {
             <div className="row my-5">
               <div className="col-4 col-lg-2">
                 <Image
-                 src={ booking.room.images[0].url}
-                 alt={ booking.room.name} 
+                 src={ booking.notifier?.images[0]?.url}
+                 alt={ booking.notifier?.name} 
                  height={45}
                  width={65}
                  />
               </div>
 
               <div className="col-5 col-lg-5">
-                <Link href={`room/${booking.room._id}`}>{ booking.room.name}</Link>
+                <Link href="/">name</Link>
                 
               </div>
 
@@ -102,4 +104,4 @@ const BookingDetails = () => {
     )
 }
 
-export default BookingDetails
+export default AppointmentDetails

@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { Carousel } from 'react-bootstrap';
 import Image from 'next/image';
 import {useRouter} from 'next/router'
-import RoomFeatures from './NotifierDocs' 
+import NotifierDocs from './NotifierDocs' 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios';
@@ -22,15 +22,15 @@ import Link from 'next/link';
 import Loader from '../layout/Loader';
 import BasicDateTimePicker from './DatePicker';
 import { MenuItem, TextField } from '@mui/material';
-// import RoomItem from './room/RoomItem';
 
-const RoomDetails = () => {
+
+const NotifierDetails = () => {
     const [checkInDate,setCheckInDate] = useState();
     const [checkOutDate,setCheckOutDate] = useState();
     const [daysOfStay,setDaysOfStay] = useState();
     const [phoneNumber,setPhoneNumber] = useState();
     
-    const {room,error} = useSelector(state=>state.roomDetails)
+    const {notifier,error} = useSelector(state=>state.notifierDetails)
     const {user} = useSelector(state=>state.login)
     const {available,loading:bookingLoader} = useSelector(state=>state.checkBooking)
  const [email,setEmail] = useState('');
@@ -176,33 +176,33 @@ const [document, setDocument] = useState('landServices 2000');
        return (
         <>
         <Head>
-            <title>{ room && room.name} - Notary</title>
+            <title>{ notifier && notifier.name} - Notary</title>
         </Head>
         {
-            room && <div className="container container-fluid">
-            <h2 className='mt-5'>{room.name}</h2>
-            <p>{room.address?.city}</p>
+            notifier && <div className="container container-fluid">
+            <h2 className='mt-5'>{notifier.name}</h2>
+            <p>{notifier.address?.city}</p>
     
             <div className="ratings mt-auto mb-3">
                 <div className="rating-outer">
                   <div className="rating-inner"
-                   style={{width:`${room.ratings / 5 * 100}%`}}
+                   style={{width:`${notifier.ratings / 5 * 100}%`}}
                   ></div>
                 </div>
-                <span id="no_of_reviews">({room.numOfReviews} Reviews)</span>
+                <span id="no_of_reviews">({notifier.numOfReviews} Reviews)</span>
               </div> 
     
               {/* <img src="https://a0.muscache.com/im/pictures/a8f6a489-d236-4d2d-a57b-a95d928970af.jpg?im_w=960" className="d-block w-100 property-details-image m-auto" alt="Hotel" /> */}
     
                <Carousel hover="pause">
                          {
-                             room.images && room.images.map(img=>(
+                             notifier.images && notifier.images.map(img=>(
                                  <Carousel.Item key={img.public_id}>
                                      <div className="w-full" style={{height:'440px'}}>
                                         <Image 
                                          className="d-block m-auto"
                                          src={img.url}
-                                         alt={room.name}
+                                         alt={notifier.name}
                                          layout="fill"
                                         />
                                      </div>
@@ -213,7 +213,7 @@ const [document, setDocument] = useState('landServices 2000');
               <div className="row my-5">
                   <div className="col-12 col-md-6 col-lg-8">
                       <h3>Description</h3>
-                      <p>{room.description}</p>
+                      <p>{notifier.description}</p>
     
     
                   </div>
@@ -264,7 +264,7 @@ const [document, setDocument] = useState('landServices 2000');
                             </div>
                             
                             }
-                            {available && !user && <div className="alert alert-danger font-weight-bold  my-3">First login to book the room</div>}
+                            {available && !user && <div className="alert alert-danger font-weight-bold  my-3">First login to book the notifier</div>}
                             {!available && user &&  
                             <>
                             
@@ -285,15 +285,15 @@ const [document, setDocument] = useState('landServices 2000');
           });
         }}
       >
-        Use MTN - {daysOfStay*room.pricePerDocument*1000} Rwf
+        Use MTN - {daysOfStay*notifier.pricePerDocument*1000} Rwf
       </button> */}
                             {/* <div class="d-flex align-items-center my-5">
                                 <input name="number" required placeholder="Mtn Phone Number" value={phoneNumber} className="py-3 mx-2 flex-1 form-control" onChange={e=>setPhoneNumber(e.target.value)} />
                                 <button 
-                            onClick={()=>bookMtn(room._id,room.pricePerDocument)} 
+                            onClick={()=>bookMtn(notifier._id,notifier.pricePerDocument)} 
                             disabled={paymentLoading || bookingLoader ? true : false}
                             className="btn btn-block btn-sm py-2 w-25  bg-warning border-0 text-white">
-                                ${daysOfStay*room.pricePerDocument}
+                                ${daysOfStay*notifier.pricePerDocument}
                             </button>
                             </div>
                              */}
@@ -305,12 +305,12 @@ const [document, setDocument] = useState('landServices 2000');
                       </div>
                   </div>
               </div>
-           <RoomFeatures room={room} />
+           <NotifierDocs notifier={notifier} />
     
 
            <NewReview />
     
-            {room.reviews && room.reviews.length > 0 ? <ListReview reviews = {room.reviews} /> : 
+            {notifier.reviews && notifier.reviews.length > 0 ? <ListReview reviews = {notifier.reviews} /> : 
              <div>No Reviews available for this notifier</div>
             } 
         </div>
@@ -324,4 +324,4 @@ const [document, setDocument] = useState('landServices 2000');
     )
 }
 
-export default RoomDetails
+export default NotifierDetails
