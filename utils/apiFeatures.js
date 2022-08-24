@@ -12,6 +12,8 @@ class  APIFeatures{
                 $options: 'i'
             }
         } : {}
+
+        
         
         
         this.query = this.query.find({...location});

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import ErrorHandler from "../utils/errorHandler";
 
 export default (err,req,res,next) => {

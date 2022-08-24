@@ -8,7 +8,9 @@ const getStripe = () =>{
         stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY)
     }
 
-return stripePromise;
+return stripePromise;  
+
+
 }
 
 

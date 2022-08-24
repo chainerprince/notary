@@ -11,7 +11,8 @@ const fileFilter = (req, file, cb) => {
 const storage = multer.diskStorage({
     destination: function(req,file,cb){
         cb(null,"public");
-    },
+    }, 
+    
     filename: (req,file,cb) => cb(null, new Date().toISOString().replace(/:/g,"_") + file.originalname)
 })
 const upload = multer({storage:storage,fileFilter:fileFilter})

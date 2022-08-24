@@ -1,8 +1,8 @@
-const Room = require("../models/rooms");
-const rooms = require('../data/rooms');
+const Notifier = require("../models/notifiers");
+const Notifiers = require('../data/notifiers');
 
 
-console.log(rooms)
+console.log(Notifiers)
 
 const  mongoose  = require("mongoose");
 
@@ -15,12 +15,12 @@ mongoose.connect("mongodb+srv://admin:bookit@bookit.v9kl4.mongodb.net/bookit?ret
 }).then(con=>console.log('Connected to db Successfully')).catch(err=>console.log(err))
 
 
-const seedRooms = async(req,res)=>{
+const seedNotifiers = async(req,res)=>{
     try {
-        await Room.deleteMany();
-        console.log("Rooms deleted")
-        await Room.insertMany(rooms);
-        console.log("Rooms added to The system");
+        await Notifier.deleteMany();
+        console.log("Notifiers deleted")
+        await Notifier.insertMany(Notifiers);
+        console.log("Notifiers added to The system");
         process.exit()
     } catch (error) {
         console.log(error.message)
@@ -28,4 +28,4 @@ const seedRooms = async(req,res)=>{
     }
 }
 
-seedRooms();
+seedNotifiers();
