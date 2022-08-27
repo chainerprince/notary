@@ -21,8 +21,9 @@ module.exports = {
     NEXTAUTH_URL:"https://bookhotel.vercel.app"
 
   },
+ 
   images:{
-    domains:['res.cloudinary.com'],
+    domains:['res.cloudinary.com','images.unsplash.com'],
   }
   
 }

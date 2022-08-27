@@ -4,14 +4,9 @@ import React,{useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux';
 import { userLogin } from '../../state/actions/userActions';
 import {signOut} from 'next-auth/client'
-import Image from 'next/image';
-
-
 function Header() {
   const dispatch = useDispatch();
   const {user,loading} = useSelector(state=>state.login);
-  
-
   const logoutHandler = () =>{
     signOut(); 
   }
@@ -60,9 +55,6 @@ function Header() {
                     <Link href="/admin/notifiers">
                       <a  className="dropdown-item">Notifiers</a>            
                   </Link>
-
-                 
-
                     <Link href="/admin/appointments">
                       <a  className="dropdown-item">Appointments</a>            
                   </Link>
@@ -78,11 +70,25 @@ function Header() {
 
                   <hr/>
                     </>
+                  )}
+                  {
+                  user.role == 'notifier' && (
+                    <>                                 
+                    <Link href="/admin/appointments">
+                      <a  className="dropdown-item">Appointments</a>            
+                  </Link>                   
+                    <Link href="/admin/reviews">
+                      <a  className="dropdown-item">Reviews</a>            
+                  </Link>
+
+                  <hr/>
+                    </>
                   )
                 }
-                  <Link href="/appointments/me">
+                 {(user.role !== 'admin') && (user.role !== 'notifier') ? ( <Link href="/appointments/me">
                       <a  className="dropdown-item">My Appointments</a>
-                  </Link>
+                  </Link>) : null
+                  }
                   <Link href="/me/update">
                       <a  className="dropdown-item">My Profile</a>
                   </Link>

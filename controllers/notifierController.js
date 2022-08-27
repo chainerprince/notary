@@ -246,6 +246,7 @@ export const allAdminNotifiers = AsyncErrors(async(req,res,next)=>{
 
 const saveNotifier = AsyncErrors(async (req,res)=>{
   const images = req.body.images;
+  const profileImage = req.body.profileImage;
 
   let imageLinks = [];
   
@@ -263,8 +264,17 @@ const saveNotifier = AsyncErrors(async (req,res)=>{
 }) 
 
   }
-
+    const profileResult = await cloudinary.v2.uploader.upload(profileImage,{
+      folder:"bookit/avatars",
+      width:'150',
+      crop:'scale'
+  })
+  profileImageLink = {
+    public_id : profileResult.public_id,
+    url:profileResult.secure_url
+  }
   req.body.images = imageLinks;
+  req.body.profileImage = profileImageLink;
   req.body.user = req.user._id;
   
   const notifier = await Notifier.create(req.body);  

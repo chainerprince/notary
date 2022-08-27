@@ -71,6 +71,11 @@ const notifierSchema = new Schema({
          type:Boolean,
          default:false
      },
+      education:{
+                 type:String,  
+                 default:'bachelors',             
+                 required:true
+             },
      ratings:{
          type:Number,
          default:0
@@ -79,9 +84,29 @@ const notifierSchema = new Schema({
          type:Number,
          default:0
      },
-    
-     
-    
+          images:[
+         {
+            public_id:{
+                  type:String,
+                   required:true
+         },
+            url:{
+                  type:String,
+                   required:true
+         }
+         }
+     ]
+     ,
+     profileImage: {
+            public_id:{
+                  type:String,
+                   required:true
+         },
+            url:{
+                  type:String,
+                   required:true
+         }
+         },         
      reviews:[
          {
              user:{
@@ -92,12 +117,7 @@ const notifierSchema = new Schema({
              name:{
                  type:String,                
                  required:true
-             },
-             education:{
-                 type:String,  
-                 default:'bachelors',             
-                 required:true
-             },
+             },            
              rating:{
                 type:Number,                
                 required:true

@@ -11,20 +11,20 @@ const moment = extendMoment(Moment);
 
 
 
-export const checkRoomAvailability = AsyncErrors(async(req,res,next)=>{
-    let  {roomId,checkInDate,checkOutDate} = req.query;
-    checkInDate = new Date(checkInDate);
-    checkOutDate = new Date(checkOutDate);
+export const checkNotifierAvailability = AsyncErrors(async(req,res,next)=>{
+    let  {notifierId,date,time} = req.query;
+    date = new Date(date);
+    time = new Date(time);
     const bookings = await Booking.find({
-        room:roomId,
+        notifier:notifierId,
         $and:[
             {
-             checkInDate : {
-                    $lte:checkOutDate
+             date : {
+                    $lte:time
                 }
            },{
-               checkOutDate:{
-                   $gte:checkInDate
+               time:{
+                   $gte:date
                }
            }
         ]

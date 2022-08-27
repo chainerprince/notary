@@ -56,6 +56,7 @@ const NotifierDetails = () => {
 
      console.log(user);
     const [paymentLoading, setPaymentLoading] = useState(false)
+    console.log(notifier,'the notifiyer')
     const documents = [
   {
     value: 'landServices 2000',
@@ -70,8 +71,12 @@ const NotifierDetails = () => {
     label: 'School Reports',
   },
   {
-    value: 'others 1500',
-    label: 'Others',
+    value: 'birthCertificates 1500',
+    label: 'Birth Certificates',
+  },
+  {
+    value: 'marriage 1500',
+    label: 'Marriage',
   },
 ];
 const [document, setDocument] = useState('landServices 2000');
@@ -215,7 +220,7 @@ const [document, setDocument] = useState('landServices 2000');
           onChange={handleChange}
         //   helperText="Please select your document"
         >
-          {documents.map((option) => (
+          {documents.filter(doc=>notifier[doc.value?.split(' ')[0]]).map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>

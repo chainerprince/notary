@@ -18,6 +18,7 @@
     "axios": "^0.21.4",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.25.1",
+    "cors": "^2.8.5",
     "easyinvoice": "^2.3.3",
     "flutterwave-node-v3": "^1.0.9",
     "flutterwave-react-v3": "^1.1.0",

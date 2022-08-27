@@ -24,7 +24,9 @@ const Application = () => {
     const [reports ,setReports] = useState(false);
     const [birth ,setBirth] = useState(false);
     const [images,setImages] = useState([]);
+    const [profileImage,setProfileImage] = useState([]);
     const [imagesPreview,setImagesPreview] = useState([])
+    const [profilePreview,setProfilePreview] = useState()
 
     const dispatch = useDispatch();
     const router = useRouter();
@@ -47,7 +49,7 @@ const Application = () => {
 
 
     const imageHandler = e => {
-
+              
         const files = Array.from(e.target.files);
         
 
@@ -70,6 +72,21 @@ const Application = () => {
         
             
         
+    }
+
+      const profileHandler = e => {      
+         console.log(e.target.files,'the target')
+
+           setProfileImage('')
+           setProfilePreview('')
+            const reader = new FileReader();
+            reader.onload = ()=>{
+                if(reader.readyState === 2){
+                    setProfileImage(reader.result);
+                    setProfilePreview(reader.result);
+                }
+            }
+            reader.readAsDataURL(e.target.files[0])                                  
     }
     
 
@@ -265,7 +282,7 @@ const Application = () => {
                         imagesPreview.map(img=>
                             <Image
                             key={img}
-                            src={img}
+                            src={img ?? ''}
                             alt={img}
                             className="mt-3 mr-2"
                             width={55}
@@ -274,6 +291,32 @@ const Application = () => {
                         )
                     }
                  </div>
+                 <label>Profile Image</label>
+                    <div className="custom-file">
+                       <input
+                          type="file"
+                          name="notifier_images"
+                          className="custom-file-input"
+                          id="customFile"
+                          onChange={profileHandler}                          
+                          />
+                       <label className="custom-file-label" htmlFor="customFile">
+                       Choose Images
+                       </label>
+                    </div>
+                      {
+                        
+                            <Image
+                            key={profilePreview}
+                            src={profilePreview ?? ''}
+                            alt={profilePreview}
+                            className="mt-3 mr-2"
+                            width={55}
+                            height={52}
+                            />
+                        
+                    }
+
                  <div className="form-group">
                     <label htmlFor="description_field">Enter more about your notary office</label>
                     <textarea
