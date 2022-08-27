@@ -151,8 +151,10 @@ export const newNotifier = (notifierData) => async(dispatch) => {
             'Content-Type':"Application/json"
         }
     }
+    console.log(notifierData,'the data from notifier')
       
       const {data} = await axios.post(`/api/notifier/`,notifierData,config)
+      console.log(data,'the data we have')
       
       
       dispatch({
@@ -160,7 +162,7 @@ export const newNotifier = (notifierData) => async(dispatch) => {
           payload: data
       })
   } catch (error) {
-      console.log(error)
+      console.log(error,'the new notifier error')
       dispatch({
           type:NEW_NOTIFIER_FAIL,
           payload:error.response.data.message

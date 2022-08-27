@@ -60,7 +60,7 @@ const Application = () => {
         files.forEach(file=>{
             const reader = new FileReader();
             reader.onload = ()=>{
-                if(reader.readyState === 2){
+                if(reader.readyState === 2){                  
                     setImages(prev=>[...prev,reader.result]);
                     setImagesPreview(prev=>[...prev,reader.result]);
                 }
@@ -81,7 +81,8 @@ const Application = () => {
            setProfilePreview('')
             const reader = new FileReader();
             reader.onload = ()=>{
-                if(reader.readyState === 2){
+                if(reader.readyState === 2){   
+                  console.log(reader.result,'the reader result')               
                     setProfileImage(reader.result);
                     setProfilePreview(reader.result);
                 }
@@ -104,6 +105,7 @@ const Application = () => {
             marriage,
             migrationSersvices: migration,
             schoolReports:reports,
+            profileImage,
             images
         }
         
@@ -305,15 +307,15 @@ const Application = () => {
                        </label>
                     </div>
                       {
-                        
-                            <Image
+                        profilePreview && ( <Image
                             key={profilePreview}
                             src={profilePreview ?? ''}
                             alt={profilePreview}
                             className="mt-3 mr-2"
                             width={55}
                             height={52}
-                            />
+                            />)
+                           
                         
                     }
 
