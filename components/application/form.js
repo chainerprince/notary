@@ -103,7 +103,7 @@ const Application = () => {
             name,
             pricePerDocument:`${price} RWF`,
             description,
-            address: {sector,district},
+            address: {city,sector,district,cell,village},
             category,
             education,            
             landServices: land,

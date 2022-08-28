@@ -34,6 +34,14 @@ const notifierSchema = new Schema({
          type:String,
          required:[false]
      },
+           cell:{
+         type:String,
+         required:[false]
+     },
+           village:{
+         type:String,
+         required:[false]
+     },
       
 
            district:{
