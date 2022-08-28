@@ -12,53 +12,30 @@ const moment = extendMoment(Moment);
 
 
 export const checkNotifierAvailability = AsyncErrors(async(req,res,next)=>{
-    let  {notifierId,date,time} = req.query;
-    date = new Date(date);
-    time = new Date(time);
-    const bookings = await Booking.find({
-        notifier:notifierId,
-        $and:[
-            {
-             date : {
-                    $lte:time
-                }
-           },{
-               time:{
-                   $gte:date
-               }
-           }
-        ]
-    })
+    let  {notifierId,currentDate} = req.query;   
 
+
+    const appointments = await Booking.find({
+        notifier:notifierId,        
+    })
+    
+    const bookedDates = Array.from(appointments).
+    filter(booked=>moment(currentDate).
+    isBetween(moment(booked.date), moment(booked.date).add(30,'minutes'))) 
 
     let isAvailable;
 
-    if(bookings && bookings.length === 0){
+    if(bookedDates && bookedDates.length === 0){
         isAvailable = true;
     }else{
         isAvailable = false;
-    }
-    
-   
-    
-
-
-
-
-  
-   
-   
+    } 
     res.status(201).json({
         success:true,
         isAvailable
     })
     
  })
-
-
-
-
-
 
  export const bookingDetails = AsyncErrors(async(req,res,next)=>{
     const booking = await Booking.findById(req.query.id)

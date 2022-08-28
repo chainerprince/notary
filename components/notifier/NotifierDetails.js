@@ -22,17 +22,15 @@ import Link from 'next/link';
 import Loader from '../layout/Loader';
 import BasicDateTimePicker from './DatePicker';
 import { MenuItem, TextField } from '@mui/material';
+import moment from 'moment';
 
 
-const NotifierDetails = () => {
-    const [checkInDate,setCheckInDate] = useState();
-    const [checkOutDate,setCheckOutDate] = useState();
-    const [daysOfStay,setDaysOfStay] = useState();
-    const [phoneNumber,setPhoneNumber] = useState();
+const NotifierDetails = () => {   
     
     const {notifier,error} = useSelector(state=>state.notifierDetails)
     const {user} = useSelector(state=>state.login)
     const {available,loading:bookingLoader} = useSelector(state=>state.checkBooking)
+    console.log(available,'the available date')
  const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [loading,setloading] = useState(false);
@@ -55,8 +53,7 @@ const NotifierDetails = () => {
     
 
      console.log(user);
-    const [paymentLoading, setPaymentLoading] = useState(false)
-    console.log(notifier,'the notifiyer')
+    const [paymentLoading, setPaymentLoading] = useState(false)    
     const documents = [
   {
     value: 'landServices 2000',
@@ -124,11 +121,10 @@ const [document, setDocument] = useState('landServices 2000');
           const newBookingHandler = async()=>{                        
            const booking = {
                notifier: router.query.id,
-               date: dateValue.toDateString(), 
-               time:dateValue.toTimeString(),
+               date: moment(dateValue).format("YYYY-MM-DD HH:mm:ss"),            
                price,  
                document: document.split(' ')[0],                                         
-           }                    
+           }             
            try {
                const config = {
                     headers:{
@@ -206,7 +202,7 @@ const [document, setDocument] = useState('landServices 2000');
                                     
            
             <div className="form-group">              
-              <BasicDateTimePicker value={dateValue} setValue={setDateValue}/>
+              <BasicDateTimePicker value={dateValue} setValue={setDateValue} id={id} />
             </div>
   
             <div className="form-group">
@@ -229,7 +225,7 @@ const [document, setDocument] = useState('landServices 2000');
             </div>                               
           </form>
     
-                           {!available ?
+                           {available ?
                            <div className="alert alert-success font-weight-bold  my-3">
                                Notifier is available. Book Appointment
                             </div>
@@ -240,7 +236,7 @@ const [document, setDocument] = useState('landServices 2000');
                             
                             }
                             {available && !user && <div className="alert alert-danger font-weight-bold  my-3">First login to book the notifier</div>}
-                            {!available && user &&  
+                            {available && user &&  
                             <>
                             
                             <button 

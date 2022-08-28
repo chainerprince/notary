@@ -1,5 +1,5 @@
 import nc from 'next-connect'
-import { checkRoomAvailability, newBooking } from '../../../controllers/appointmentController'
+import { checkNotifierAvailability, newBooking } from '../../../controllers/appointmentController'
 import dbConnect from '../../../config/dbConnect';
 import onError from "../../../middlewares/error"
 import isAuthenticated from '../../../middlewares/auth'
@@ -9,7 +9,7 @@ dbConnect();
 
 
 
-handler.get(checkRoomAvailability);
+handler.get(checkNotifierAvailability);
 
 
 export default handler;

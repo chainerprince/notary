@@ -161,7 +161,7 @@ export const bookedDates = (roomId) => async(dispatch) => {
 
 
 
-export const checkBooking = (roomId,checkInDate,checkOutDate) => async(dispatch) => {
+export const checkBooking = (notifierId,currentDate) => async(dispatch) => {
     try {
        dispatch({
            type:CHECK_BOOKING_REQUEST
@@ -169,7 +169,7 @@ export const checkBooking = (roomId,checkInDate,checkOutDate) => async(dispatch)
 
      
 
-       let link = `/api/appointments/check?roomId=${roomId}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+       let link = `/api/appointments/check?notifierId=${notifierId}&currentDate=${currentDate}`
 
        const {data} = await axios.get(link);
        

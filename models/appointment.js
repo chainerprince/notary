@@ -15,10 +15,10 @@ const bookingSchema = new Schema({
       },
       date:{
           required:true,
-          type:Date
+          type:String
       },
       time:{
-          required:true,
+          required:false,
           type:String
       },
       price:{
