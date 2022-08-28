@@ -7,11 +7,13 @@ class  APIFeatures{
     }
     search(){
         const location = this.queryStr.location ? {
-            address:{
+            'address.city':{
                 $regex: this.queryStr.location,
                 $options: 'i'
             }
         } : {}
+
+        console.log(this.queryStr,'the location of me')
 
         
         

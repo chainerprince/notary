@@ -8,12 +8,9 @@ import cloudinary from 'cloudinary'
 
 const allNotifiers = AsyncErrors(async(req,res)=>{
      const resPerPage = 4;
-     const notifiersCount = await Notifier.countDocuments();
-     
+     const notifiersCount = await Notifier.countDocuments();     
      const apiFeatures = new APIFeatures(Notifier.find(),req.query).
-     search().
-     filter()
-     
+     search()                
      let notifiers = await apiFeatures.query;
      let filteredNotifiersCount = notifiers.length;
      apiFeatures.pagination(resPerPage);
@@ -179,8 +176,7 @@ export const createNotifierReview = AsyncErrors(async(req,res,next)=>{
     rating:Number(rating),
     comment
   }
-    const notifier = await Notifier.findById(notifierId);
-    console.log(notifier,notifierId,'the notifier')
+    const notifier = await Notifier.findById(notifierId);    
 
     const isReviewed = notifier.reviews.find(r=>r.user.toString() === req.user._id.toString());
     

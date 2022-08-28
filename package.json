@@ -46,6 +46,7 @@
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
+    "rwanda": "^2.1.5",
     "stripe": "^8.138.0",
     "validator": "^13.6.0"
   },
