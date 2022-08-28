@@ -7,11 +7,17 @@ import { newNotifier } from '../../state/actions/notifierAction';
 import Loading from '../layout/Loading';
 import { NEW_NOTIFIER_RESET } from '../../state/constants/notifierConstants';
 import Image from 'next/image';
+import {Provinces,Districts,Sectors,Cells,Villages} from 'rwanda'
 
 const Application = () => {
+   console.log(Provinces(),'the provinces')
 
     const [name ,setName] = useState('');
-    const [district ,setDistrict] = useState('kicukiro');
+
+    const [city ,setCity] = useState('');
+    const [district ,setDistrict] = useState('');
+    const [cell ,setCell] = useState('');
+    const [village ,setVillage] = useState('');
     const [description ,setDescription] = useState('');
     const [sector ,setSector] = useState('');
     const [category ,setCategory] = useState('private');
@@ -146,10 +152,89 @@ const Application = () => {
               </select>                   
                  </div>
                              
-                 <div className="form-group">
-                    <label htmlFor="category_field">District</label>
+      <div className=" row">
+         <div className='col form-group'>
+            <label htmlFor="category_field">Province</label>
+            <select className="form-control" id="guest_field" 
+              value={city}
+              onChange = {e=>setCity(e.target.value)}
+              >
+                {
+                   Provinces().map(num=>(
+                    <option value={num} key={num}>{num}</option>
+                   ))
+                }
+              </select>
+         </div>
 
-                    <select className="form-control" id="guest_field" 
+         <div className='col form-group'>
+                     <label htmlFor="category_field">District</label>
+
+                     <select className="form-control" id="guest_field" 
+                     value={district}
+                     onChange = {e=>setDistrict(e.target.value)}
+                     >
+                        {
+                           Districts(city).map(num=>(
+                           <option value={num} key={num}>{num}</option>
+                           ))
+                        }
+                     </select>
+         </div>                                            
+      </div>
+
+      <div className=" row">
+         <div className='col form-group'>
+                     <label htmlFor="category_field">Sector</label>
+
+                     <select className="form-control" id="guest_field" 
+                     value={sector}
+                     onChange = {e=>setSector(e.target.value)}
+                     >
+                        {
+                           Sectors(city,district)?.map(num=>(
+                           <option value={num} key={num}>{num}</option>
+                           ))
+                        }
+                     </select>
+         </div>   
+
+         <div className='col form-group'>
+                     <label htmlFor="category_field">Cell</label>
+
+                     <select className="form-control" id="guest_field" 
+                     value={cell}
+                     onChange = {e=>setCell(e.target.value)}
+                     >
+                        {
+                           Cells(city,district,sector)?.map(num=>(
+                           <option value={num} key={num}>{num}</option>
+                           ))
+                        }
+                     </select>
+         </div> 
+          <div className='col form-group'>
+                     <label htmlFor="category_field">Village</label>
+
+                     <select className="form-control" id="guest_field" 
+                     value={village}
+                     onChange = {e=>setVillage(e.target.value)}
+                     >
+                        {
+                           Villages(city,district,sector,cell)?.map(num=>(
+                           <option value={num} key={num}>{num}</option>
+                           ))
+                        }
+                     </select>
+         </div>                                                                                       
+      </div>
+
+
+
+      <div className="form-group">
+            <label htmlFor="category_field">District</label>
+
+            <select className="form-control" id="guest_field" 
               value={district}
               onChange = {e=>setDistrict(e.target.value)}
               >
@@ -163,18 +248,7 @@ const Application = () => {
                        <option value="">1</option>
                        <option value="">2</option>
                     </select> */}
-                 </div>
-                 <div className="form-group">
-                    <label htmlFor="sector_field">Sector</label>
-                    <input
-                       type="text"
-                       id="sector_field"
-                       className="form-control"
-                       value={sector}
-                       onChange = {e=>setSector(e.target.value)}
-                       required
-                       />
-                 </div>
+      </div>                 
                  <label className="mb-3">Documents Available</label>
                  <div className="form-check">
                     <input
