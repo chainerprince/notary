@@ -7,22 +7,44 @@ import { newNotifier } from '../../state/actions/notifierAction';
 import Loading from '../layout/Loading';
 import { NEW_NOTIFIER_RESET } from '../../state/constants/notifierConstants';
 import Image from 'next/image';
-import {Provinces,Districts,Sectors,Cells,Villages} from 'rwanda'
+import {data} from './data';
 
 const Application = () => {
-   console.log(Provinces(),'the provinces')
-
+   
+    const provinces = Object.keys(data)
     const [name ,setName] = useState('');
 
-    const [city ,setCity] = useState('');
-    const [district ,setDistrict] = useState('');
-    const [cell ,setCell] = useState('');
+    const [city ,setCity] = useState('Kigali');
+    const [district ,setDistrict] = useState('Kicukiro');
+    const [cell ,setCell] = useState('Kagunga');
     const [village ,setVillage] = useState('');
     const [description ,setDescription] = useState('');
-    const [sector ,setSector] = useState('');
+    const [sector ,setSector] = useState('Gikondo');
     const [category ,setCategory] = useState('private');
-    const [education,setEducation] = useState('');
+    const [education,setEducation] = useState('Bachelors');
     const [price,setPrice] = useState('1000');
+
+    const [districts,setDistricts] = useState([]);
+    const [sectors,setSectors] = useState([]);
+    const [cells,setCells] = useState([]);
+    const [villages,setVillages] = useState([]);
+
+    useEffect(()=>{
+      if(Object.keys(data[city])){
+         setDistricts(Object.keys(data[city]))
+      }
+      if(data[city][district]){
+         setSectors(Object.keys(data[city][district]))
+      }
+      if(data[city][district] && data[city][district][sector]){
+         
+         setCells(Object.keys(data[city][district][sector]))
+      }
+      if(data[city][district] && data[city][district][sector] && data[city][district][sector][cell] ){
+         setVillages(Object.values(data[city][district][sector][cell]))
+      }
+
+    },[cell, city, district, sector])                
     
     const [land ,setLand] = useState(false);
     const [marriage ,setMarriage] = useState(false);
@@ -33,6 +55,7 @@ const Application = () => {
     const [profileImage,setProfileImage] = useState([]);
     const [imagesPreview,setImagesPreview] = useState([])
     const [profilePreview,setProfilePreview] = useState()
+   
 
     const dispatch = useDispatch();
     const router = useRouter();
@@ -47,7 +70,8 @@ const Application = () => {
             dispatch(clearErrors())
         }
         if(success){
-            router.push('/admin/notifiers');
+            toast.success('New notifier created succesfully. Relogin to see the changes')
+            router.push('/logout');
             dispatch({type:NEW_NOTIFIER_RESET});
         }
 
@@ -56,13 +80,9 @@ const Application = () => {
 
     const imageHandler = e => {
               
-        const files = Array.from(e.target.files);
-        
-
+        const files = Array.from(e.target.files);        
         setImages([]);
-        setImagesPreview([]);
-        
-
+        setImagesPreview([]);        
         files.forEach(file=>{
             const reader = new FileReader();
             reader.onload = ()=>{
@@ -74,21 +94,16 @@ const Application = () => {
             reader.readAsDataURL(file)
         })
 
-
         
             
         
     }
-
-      const profileHandler = e => {      
-         console.log(e.target.files,'the target')
-
+      const profileHandler = e => {               
            setProfileImage('')
            setProfilePreview('')
             const reader = new FileReader();
             reader.onload = ()=>{
-                if(reader.readyState === 2){   
-                  console.log(reader.result,'the reader result')               
+                if(reader.readyState === 2){                                 
                     setProfileImage(reader.result);
                     setProfilePreview(reader.result);
                 }
@@ -117,6 +132,7 @@ const Application = () => {
         
         dispatch(newNotifier(notifierData))
     }
+    
 
 
     
@@ -160,7 +176,7 @@ const Application = () => {
               onChange = {e=>setCity(e.target.value)}
               >
                 {
-                   Provinces().map(num=>(
+                   provinces.map(num=>(
                     <option value={num} key={num}>{num}</option>
                    ))
                 }
@@ -175,7 +191,7 @@ const Application = () => {
                      onChange = {e=>setDistrict(e.target.value)}
                      >
                         {
-                           Districts(city).map(num=>(
+                           districts.map(num=>(
                            <option value={num} key={num}>{num}</option>
                            ))
                         }
@@ -192,7 +208,7 @@ const Application = () => {
                      onChange = {e=>setSector(e.target.value)}
                      >
                         {
-                           Sectors(city,district)?.map(num=>(
+                           sectors?.map(num=>(
                            <option value={num} key={num}>{num}</option>
                            ))
                         }
@@ -207,7 +223,7 @@ const Application = () => {
                      onChange = {e=>setCell(e.target.value)}
                      >
                         {
-                           Cells(city,district,sector)?.map(num=>(
+                           cells?.map(num=>(
                            <option value={num} key={num}>{num}</option>
                            ))
                         }
@@ -221,34 +237,13 @@ const Application = () => {
                      onChange = {e=>setVillage(e.target.value)}
                      >
                         {
-                           Villages(city,district,sector,cell)?.map(num=>(
+                           villages?.map(num=>(
                            <option value={num} key={num}>{num}</option>
                            ))
                         }
                      </select>
          </div>                                                                                       
-      </div>
-
-
-
-      <div className="form-group">
-            <label htmlFor="category_field">District</label>
-
-            <select className="form-control" id="guest_field" 
-              value={district}
-              onChange = {e=>setDistrict(e.target.value)}
-              >
-                {
-                   [ 'Gasabo', 'Kicukiro', 'Nyarugenge' ].map(num=>(
-                    <option value={num} key={num}>{num}</option>
-                   ))
-                }
-              </select>
-                    {/* <select className="form-control" id="numOfBeds_field" value="">
-                       <option value="">1</option>
-                       <option value="">2</option>
-                    </select> */}
-      </div>                 
+      </div>                    
                  <label className="mb-3">Documents Available</label>
                  <div className="form-check">
                     <input

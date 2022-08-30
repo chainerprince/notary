@@ -3,7 +3,7 @@ import Booking from '../models/appointment'
 import ErrorHandler from "../utils/errorHandler";
 import AsyncErrors from "../middlewares/asyncErrors";
 import APIFeatures from "../utils/apiFeatures";
-
+import User from "../models/user";
 import cloudinary from 'cloudinary'
 
 const allNotifiers = AsyncErrors(async(req,res)=>{
@@ -272,6 +272,9 @@ const saveNotifier = AsyncErrors(async (req,res)=>{
   req.body.images = imageLinks;
   req.body.profileImage = profileImageLink;
   req.body.user = req.user._id;
+
+  const updateduser = await User.findByIdAndUpdate(req.user._id,{role: 'notifier'})
+  console.log(updateduser)
   
   const notifier = await Notifier.create(req.body);  
   res.status(201).json(

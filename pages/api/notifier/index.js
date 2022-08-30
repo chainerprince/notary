@@ -4,6 +4,7 @@ import dbConnect from '../../../config/dbConnect';
 import onError from "../../../middlewares/error"
 import cors from 'cors'
 const handler = nc({onError});
+import isAuthenticated from '../../../middlewares/auth'
 dbConnect();
 var corsOptions = {
   origin: function (origin, callback) {
@@ -16,7 +17,7 @@ var corsOptions = {
 
 handler.use(cors(corsOptions)).get(allNotifiers);
 
-handler.post(saveNotifier)
+handler.use(isAuthenticated).post(saveNotifier)
 
 
 export default handler;

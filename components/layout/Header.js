@@ -1,20 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import {useDispatch,useSelector} from 'react-redux';
 import { userLogin } from '../../state/actions/userActions';
 import {signOut} from 'next-auth/client'
+
+
 function Header() {
   const dispatch = useDispatch();
   const {user,loading} = useSelector(state=>state.login);
+  const [canAppy,setCanAppy] = useState(false);
   const logoutHandler = () =>{
     signOut(); 
   }
   
   useEffect(() => {
     dispatch(userLogin())
-    
+     
   }, [dispatch])
+ 
   
     return (
         <nav className="navbar row justify-content-center   sticky-top">
@@ -29,9 +33,9 @@ function Header() {
         </div>
       </div>
 
-      <div className="col-3 mt-3 mt-md-0 text-center">
+      <div className="col-4 mt-3 mt-md-0 text-center">
         {user ? (
-          <div className="ml-4 dropdown show d-inline">
+          <div className="ml-4 dropdown show d-flex justify-content-center align-items-center">
               <a 
               className="btn dropdown-toggle mr-4" 
               id="dropdownMenuButton"
@@ -96,16 +100,18 @@ function Header() {
                       <a onClick={logoutHandler}  className="dropdown-item text-danger">Logout</a>
                   </Link>
               </div>
+               {
+         <Link href="/application">
+         <a className="btn bg-choco px-2 text-white  mx-2 float-right">Apply as notifier</a>
+        </Link>
+       }
           </div>
         ):
       !loading &&  (
         <>
         <Link href="/login">
          <a className="btn bg-choco px-4 text-white login-header-btn float-right">Login</a>
-        </Link>
-        <Link href="/application">
-         <a className="btn bg-choco px-4 text-white login-header-btn mx-2 float-right">Apply as notifier</a>
-        </Link>
+        </Link>      
         </>
         
         )
