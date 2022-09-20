@@ -17,6 +17,7 @@ const Reviews = () => {
     
     const {isDeleted,error:deleteError}  = useSelector(state=>state.deleteReview)
     const {user} = useSelector(state=>state.login)
+    console.log(user,'the loggend in user')
     
 
     useEffect(() => {
@@ -26,7 +27,7 @@ const Reviews = () => {
             dispatch(clearErrors())
         }
         
-            dispatch(getReviews(user._id))
+            dispatch(getReviews(user?._id))
         
         if(deleteError){
             toast.error(deleteError)
@@ -38,7 +39,7 @@ const Reviews = () => {
             dispatch({type:DELETE_REVIEW_RESET})
         }
 
-    }, [dispatch,deleteError,isDeleted,user,error])
+    }, [dispatch,deleteError,isDeleted,user])
 
     
 
