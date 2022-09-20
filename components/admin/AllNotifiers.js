@@ -15,8 +15,7 @@ const AllNotifiers = () => {
     const router = useRouter();
     const {notifiers,loading,error} = useSelector(state=>state.allNotifiers)
     const {isDeleted,error:deleteError}  = useSelector(state=>state.deleteNotifier)
-    
-
+       
     useEffect(() => {
         dispatch(getAdminNotifiers())
         if(error){

@@ -17,7 +17,10 @@ import {
    ADMIN_BOOKING_REQUEST,
    DELETE_BOOKING_REQUEST,
    DELETE_BOOKING_SUCCESS,
-   DELETE_BOOKING_FAIL
+   DELETE_BOOKING_FAIL,
+   NOTIFIER_BOOKING_REQUEST,
+   NOTIFIER_BOOKING_SUCCESS,
+   NOTIFIER_BOOKING_FAIL
 
     
    
@@ -127,6 +130,26 @@ export const adminBookings = () => async (dispatch) => {
 
         dispatch({
             type:ADMIN_BOOKING_FAIL,
+            payload: error.response.data.message
+        })
+    }
+
+}
+export const notifierBookings = () => async (dispatch) => {
+    try {
+        dispatch({type:NOTIFIER_BOOKING_REQUEST})
+
+        const { data } = await axios.get(`/api/notifier/appointments/`)
+
+        dispatch({
+            type:NOTIFIER_BOOKING_SUCCESS,
+            payload: data.bookings
+        })
+
+    } catch (error) {
+
+        dispatch({
+            type:NOTIFIER_BOOKING_FAIL,
             payload: error.response.data.message
         })
     }

@@ -4,6 +4,7 @@ import React,{useEffect, useState} from 'react'
 import {useDispatch,useSelector} from 'react-redux';
 import { userLogin } from '../../state/actions/userActions';
 import {signOut} from 'next-auth/client'
+import { useRouter } from 'next/router';
 
 
 function Header() {
@@ -13,12 +14,15 @@ function Header() {
   const logoutHandler = () =>{
     signOut(); 
   }
-  
+  const router = useRouter();
   useEffect(() => {
     dispatch(userLogin())
      
   }, [dispatch])
- 
+  const redirectHome = () => {
+    router.push('/')
+    typeof window !== 'undefined' && window.location.reload();
+  }
   
     return (
         <nav className="navbar row justify-content-center   sticky-top">
@@ -26,9 +30,8 @@ function Header() {
       <div className="col-3 p-0">
         <div className="navbar-brand">
             {/* <img src="./images/bookit_logo.png" alt="BookIT" /> */}
-            <Link href="/" passHref>
-            <h2 style={{cursor:'pointer'}}>Notary</h2>
-            </Link>
+            
+            <h2 onClick={()=>redirectHome()} style={{cursor:'pointer'}}>Notary</h2>            
            
         </div>
       </div>
@@ -78,10 +81,10 @@ function Header() {
                   {
                   user.role == 'notifier' && (
                     <>                                 
-                    <Link href="/admin/appointments">
+                    <Link href="/notifier/appointments">
                       <a  className="dropdown-item">Appointments</a>            
                   </Link>                   
-                    <Link href="/admin/reviews">
+                    <Link href="/notifier/reviews">
                       <a  className="dropdown-item">Reviews</a>            
                   </Link>
 
@@ -101,9 +104,12 @@ function Header() {
                   </Link>
               </div>
                {
-         <Link href="/application">
+                user.role == 'user' && (
+<Link href="/application">
          <a className="btn bg-choco px-2 text-white  mx-2 float-right">Apply as notifier</a>
         </Link>
+                )
+         
        }
           </div>
         ):

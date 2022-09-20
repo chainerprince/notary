@@ -11,12 +11,12 @@ import { getReviews,clearErrors, deleteReview } from '../../state/actions/notifi
 import { DELETE_REVIEW_RESET } from '../../state/constants/notifierConstants';
 
 const Reviews = () => {
-    const dispatch = useDispatch();
-    const [notifierId,setnotifierId] = useState('')
+    const dispatch = useDispatch();    
     const router = useRouter();
     const {reviews,loading,error} = useSelector(state=>state.reviews)
     
     const {isDeleted,error:deleteError}  = useSelector(state=>state.deleteReview)
+    const {user} = useSelector(state=>state.login)
     
 
     useEffect(() => {
@@ -25,9 +25,9 @@ const Reviews = () => {
             toast.error(error)
             dispatch(clearErrors())
         }
-        if(notifierId !== ''){
-            dispatch(getReviews(notifierId))
-        }
+        
+            dispatch(getReviews(user._id))
+        
         if(deleteError){
             toast.error(deleteError)
             dispatch(clearErrors())
@@ -38,7 +38,7 @@ const Reviews = () => {
             dispatch({type:DELETE_REVIEW_RESET})
         }
 
-    }, [dispatch,notifierId,deleteError,isDeleted])
+    }, [dispatch,deleteError,isDeleted,user,error])
 
     
 
@@ -103,24 +103,7 @@ const Reviews = () => {
 }
 
     return (
-        <div className="container container-fluid">
-                       <div className="row justify-content-center mt-5">
-                <div className="col-5">
-                    <form>
-                        <div className="form-group">
-                            <label htmlFor="notifierId_field">Enter Notifier ID</label>
-                            <input
-                                type="email"
-                                id="notifierId_field"
-                                className="form-control"
-                                value={notifierId}
-                                onChange={(e) => setnotifierId(e.target.value)}
-                            />
-                        </div>
-                    </form>
-                </div>
-            </div>
-
+        <div className="container container-fluid">                       
             {
                 reviews && reviews.length > 0 ?
                 <MDBDataTable

@@ -16,7 +16,6 @@ var corsOptions = {
 }
 
 handler.use(cors(corsOptions)).get(allNotifiers);
-
 handler.use(isAuthenticated).post(saveNotifier)
 
 

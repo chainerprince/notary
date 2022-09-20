@@ -8,6 +8,7 @@ import Loading from '../layout/Loading';
 import { NEW_NOTIFIER_RESET } from '../../state/constants/notifierConstants';
 import Image from 'next/image';
 import {data} from './data';
+import {signOut} from 'next-auth/client'
 
 const Application = () => {
    
@@ -71,7 +72,9 @@ const Application = () => {
         }
         if(success){
             toast.success('New notifier created succesfully. Relogin to see the changes')
-            router.push('/logout');
+            router.push('/login')
+            signOut();
+            
             dispatch({type:NEW_NOTIFIER_RESET});
         }
 
@@ -131,11 +134,9 @@ const Application = () => {
         }
         
         dispatch(newNotifier(notifierData))
+
     }
-    
-
-
-    
+        
 
     return (
         <div className="container container-fluid">

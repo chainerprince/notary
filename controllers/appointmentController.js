@@ -159,10 +159,6 @@ export const checkBookedDates = AsyncErrors(async(req,res,next)=>{
 
     })
     
-
-
-    
-
     res.status(201).json({
         success:true,
         bookedDates
@@ -218,4 +214,22 @@ export const newBooking = AsyncErrors(async(req,res,next)=>{
         console.log(error,'the error')
     }
   
+ })
+
+ export const notifierBookings = AsyncErrors(async(req,res,next)=>{
+    const bookings = await Booking.find({notifier:req.query.id})
+    .populate({
+        path:'notifier',
+        select:'name pricePerDocument  images'
+    })
+    .populate({
+        path:'user',
+        select:'name email'
+    })
+    console.log(bookings,'the bookings')
+
+    res.status(201).json({
+        success:true,
+        bookings
+    })    
  })

@@ -38,6 +38,7 @@ const NotifierItem = ({notifier}) => {
 
             <div className="ratings mt-auto mb-3">
               <p className="card-text"><b>{notifier.pricePerDocument}</b> RWF / documents</p>
+              <p className="card-text"><b>{notifier.address.city ?? '' + " " +notifier.address.district + " " + notifier.address.sector}</b> </p>
 
               <div className="rating-outer">
                   <div className="rating-inner" 

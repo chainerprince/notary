@@ -8,7 +8,7 @@ import {
     BOOKING_DETAILS_SUCCESS,
     BOOKING_DETAILS_FAIL,
  
-    BOOKED_DATES_FAIL, BOOKED_DATES_SUCCESS, CHECK_BOOKING_RESET, MY_BOOKINGS_SUCCESS, MY_BOOKINGS_FAIL, ADMIN_BOOKING_SUCCESS, ADMIN_BOOKING_FAIL , ADMIN_BOOKING_REQUEST, DELETE_BOOKING_REQUEST, DELETE_BOOKING_SUCCESS, DELETE_BOOKING_FAIL, DELETE_BOOKING_RESET
+    BOOKED_DATES_FAIL, BOOKED_DATES_SUCCESS, CHECK_BOOKING_RESET, MY_BOOKINGS_SUCCESS, MY_BOOKINGS_FAIL, ADMIN_BOOKING_SUCCESS, ADMIN_BOOKING_FAIL , ADMIN_BOOKING_REQUEST, DELETE_BOOKING_REQUEST, DELETE_BOOKING_SUCCESS, DELETE_BOOKING_FAIL, DELETE_BOOKING_RESET, NOTIFIER_BOOKING_REQUEST, NOTIFIER_BOOKING_SUCCESS, NOTIFIER_BOOKING_FAIL
  }
  from '../constants/appointmentConstants'
 
@@ -17,6 +17,8 @@ import {
 export const myAppointmentReducer = (state={bookings:[],error:null},action)=>{
     switch(action.type){
         case ADMIN_BOOKING_REQUEST:
+        case NOTIFIER_BOOKING_REQUEST:
+            
             return {
                 loading:true   ,
                 bookings: [],
@@ -25,6 +27,7 @@ export const myAppointmentReducer = (state={bookings:[],error:null},action)=>{
         
         case MY_BOOKINGS_SUCCESS:
             case ADMIN_BOOKING_SUCCESS:
+            case NOTIFIER_BOOKING_SUCCESS:
             return {
                 loading:false,
                 bookings:action.payload,
@@ -34,6 +37,7 @@ export const myAppointmentReducer = (state={bookings:[],error:null},action)=>{
 
         case MY_BOOKINGS_FAIL:
             case ADMIN_BOOKING_FAIL:
+            case NOTIFIER_BOOKING_FAIL:
             return {
                  error:action.payload
             }

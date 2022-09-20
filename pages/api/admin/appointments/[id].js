@@ -6,7 +6,7 @@ import isAuthenticated, { authorize } from '../../../../middlewares/auth'
 const handler = nc({onError});
 dbConnect();
 
-handler.use(isAuthenticated,authorize('admin')).delete(deleteBooking);
+
 
 
 

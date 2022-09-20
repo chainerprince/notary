@@ -288,10 +288,6 @@ const saveNotifier = AsyncErrors(async (req,res)=>{
 })
 
 
-
-
-
-
 export {
     allNotifiers,saveNotifier,singleNotifier,updateNotifier,deleteNotifer
 }

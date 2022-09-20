@@ -133,10 +133,7 @@ const AllBookings = () => {
                           <i className="fa fa-eye"></i>
                           
                       </a>
-                   </Link> 
-                   <button className="btn-success btn mx-2" onClick={()=>downloadInvoice(booking)}>
-                       <i className="fa fa-download"></i>
-                   </button>
+                   </Link>                 
                    <button 
                    className="btn-danger btn mx-2"
                    onClick={_=>deleteHandler(booking._id)}
@@ -152,48 +149,7 @@ const AllBookings = () => {
     }
 
 
-    const downloadInvoice = async (booking) => {
-
-        const data = {
-            "documentTitle": "Booking INVOICE", //Defaults to INVOICE
-            "currency": "RWF",
-            "taxNotation": "vat", //or gst
-            "marginTop": 25,
-            "marginRight": 25,
-            "marginLeft": 25,
-            "marginBottom": 25,
-            "logo": "https://res.cloudinary.com/bookit/image/upload/v1617904918/bookit/bookit_logo_cbgjzv.png",
-            "sender": {
-                "company": "Notary",
-                "address": "13th Street. Rebero",
-                "zip": "10001",
-                "city": "Kigali",
-                "country": "Rwanda"
-            },
-            "client": {
-                "company": `${booking.user.name}`,
-                "address": `${booking.user.email}`,
-                "zip": "",
-                "city": "kigali",
-                "district": "Kicukiro"
-            },
-            "invoiceNumber": `${booking._id}`,
-            "invoiceDate": `${new Date(Date.now()).toLocaleString('en-US')}`,
-            "products": [
-                {
-                    "document": `${booking.document}`,
-                    "description": `${booking.notifier?.name}`,
-                    "tax": 0,
-                    "price": booking.notifier.pricePerDocument
-                }
-            ],
-            "bottomNotice": "This is auto generated Invoice of your booking on Notary."
-        };
-
-        const result = await easyinvoice.createInvoice(data);
-        easyinvoice.download(`invoice_${booking._id}.pdf`, result.pdf)
-
-    }
+   
 
 
     return (
