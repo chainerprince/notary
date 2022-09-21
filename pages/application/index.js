@@ -26,6 +26,6 @@ export const getServerSideProps = wrapper.getServerSideProps(async ({ req, store
         }
     }
 
-    await store.dispatch(bookingDetails(req.headers.cookie, req,params.id))
+    
 
 })

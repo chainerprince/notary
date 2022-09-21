@@ -46,7 +46,7 @@ const Home = () => {
     </Link>
     <div className="row"> 
        {notifiers && notifiers.length===0 ? 
-        <div className="alert alert-danger"><b>No Appointments</b></div>
+        <div className="alert alert-danger"><b>No Notifiers</b></div>
         :
      notifiers &&   notifiers.filter(notifier=>notifier.status=='true').map(notifier=> <NotifierItem key={notifier._id} notifier={notifier} />)
       }
