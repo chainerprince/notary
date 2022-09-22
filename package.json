@@ -17,7 +17,7 @@
     "@stripe/stripe-js": "^1.14.0",
     "axios": "^0.21.4",
     "bcryptjs": "^2.4.3",
-    "cloudinary": "^1.25.1",
+    "cloudinary": "^1.32.0",
     "cors": "^2.8.5",
     "easyinvoice": "^2.3.3",
     "flutterwave-node-v3": "^1.0.9",
@@ -47,6 +47,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "stripe": "^8.138.0",
+    "unsplash": "^4.2.0",
     "validator": "^13.6.0"
   },
   "devDependencies": {

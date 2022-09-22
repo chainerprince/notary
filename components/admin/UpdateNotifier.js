@@ -36,25 +36,28 @@ const UpdateNotifier = () => {
     const {notifier,loading:detailsLoading,error:detailsError} = useSelector(state=>state.notifierDetails)
     
    const {id,approve} = router.query
-   
+   console.log(notifier)
     useEffect(() => {
         
-        if(notifier && notifier._id !== id){
+        if(!notifier && notifier?._id !== id){
             dispatch(getNotifierDetails('',id))
         }else{
-            setName(notifier.name)
-            setDescription(notifier.description)
-            setPrice(notifier.pricePerDocument)
+         if(notifier){
+            setName(notifier?.name)
+            setDescription(notifier?.description)
+            setPrice(notifier?.pricePerDocument)
             setAddress({sector,district})
             setSector(notifier?.address?.sector)
             setDistrict(notifier?.address?.district)
-            setCategory(notifier.category)
-            setEducation(notifier.education)
+            setCategory(notifier?.category)
+            setEducation(notifier?.education)
             setBirth(notifier.birthCertificates)
             setMarriage(notifier.marriage)
             setMigration(notifier.migrationServices)
             setReports(notifier.schoolReports)                        
             setOldImages(notifier.images)
+         }
+            
         }
 
         

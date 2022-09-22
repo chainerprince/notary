@@ -216,7 +216,7 @@ const { name, email, password } = req.body;
 
 const user = await User.create({
     name,
-    email,
+    email:email.toLowerCase(),
     password,
     avatar: {
         public_id: result.public_id,
