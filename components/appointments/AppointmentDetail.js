@@ -37,7 +37,6 @@ const AppointmentDetails = () => {
       <div className="row d-flex justify-content-between">
         <div className="col-12 col-lg-8 mt-5 booking-details">
           <h2 className="my-5">Booking # {booking._id}</h2>
-
           <h4 className="mb-4">User Info</h4>
           <p><b>Name:</b> {booking.user && booking.user.name}</p>
           <p><b>Email:</b> {booking.user && booking.user.email}</p>

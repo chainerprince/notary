@@ -73,8 +73,9 @@ const UpdateNotifier = () => {
 
 
         if(isUpdated){
+         dispatch({type:NEW_NOTIFIER_RESET});
             router.push('/admin/notifiers');
-            dispatch({type:NEW_NOTIFIER_RESET});
+            
         }
 
     }, [dispatch,error,isUpdated,notifier,detailsError,id,router])
@@ -208,6 +209,7 @@ const UpdateNotifier = () => {
                        type="checkbox"
                        id="land_checkbox"
                        value={land}
+                       checked={land}
                        onChange={e=>setLand(e.target.checked)}
                        />
                     <label className="form-check-label" htmlFor="internet_checkbox">
@@ -220,6 +222,7 @@ const UpdateNotifier = () => {
                        type="checkbox"
                        id="marriage_checkbox"
                        value={marriage}
+                       checked={marriage}
                        onChange={e=>setMarriage(e.target.checked)}
                        />
                     <label className="form-check-label" htmlFor="marriage_checkbox">
@@ -232,6 +235,7 @@ const UpdateNotifier = () => {
                        type="checkbox"
                        id="birth_checkbox"
                        value={birth}
+                       checked={birth}
                        onChange={e=>setBirth(e.target.checked)}
                        />
                     <label className="form-check-label" htmlFor="birth_checkbox">
@@ -256,6 +260,7 @@ const UpdateNotifier = () => {
                        type="checkbox"
                        id="reports_checkbox"
                        value={reports}
+                       checked={reports}
                        onChange={e=>setReports(e.target.checked)}
                        />
                     <label className="form-check-label" htmlFor="reports_checkbox">
@@ -292,22 +297,10 @@ const UpdateNotifier = () => {
                     </select> */}
                  </div>
                     <label>Images of education certificates</label>
-                    <div className="custom-file">
-                       <input
-                          type="file"
-                          name="notifier_images"
-                          className="custom-file-input"
-                          id="customFile"
-                          onChange={imageHandler}
-                          multiple
-                          />
-                       <label className="custom-file-label" htmlFor="customFile">
-                       Choose Images
-                       </label>
-                    </div>
-
+                    
+                   {console.log(notifier)}
                     {
-                        imagesPreview.map(img=>
+                     (oldImages.length > 0) ?   oldImages.map(img=>
                             <Image
                             key={img}
                             src={img}
@@ -316,7 +309,7 @@ const UpdateNotifier = () => {
                             width={55}
                             height={52}
                             />
-                        )
+                        ) : <div>No Images Available</div>
                     }
                  </div>
                  <div className="form-group">
@@ -335,7 +328,7 @@ const UpdateNotifier = () => {
                  className="btn btn-block new-notifier-btn py-3"
                  disabled = {loading?true:false}
                  >
-                     {loading ? <Loading /> : "UPDATE"}
+                     {loading ? <Loader /> :  (approve ? 'Approve' : 'Update')}
                  
                  </button>
               </form>

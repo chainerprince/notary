@@ -23,7 +23,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async ({ req, store
 
     if (!session || session.user.role !== 'notifier') {
         return {
-            redirect: {
+            redirect: { 
                 destination: '/login',
                 permanent: false 
             }

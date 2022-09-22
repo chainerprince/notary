@@ -10,6 +10,6 @@ dbConnect();
 handler.get(singleNotifier);
 
 handler.use(isAuthenticated,authorize('admin','notifier')).put(updateNotifier);
-handler.use(isAuthenticated,authorize('admin','notifier')).delete(deleteBooking);
+handler.use(isAuthenticated,authorize('admin','notifier')).delete(deleteNotifier);
 
 export default handler;
