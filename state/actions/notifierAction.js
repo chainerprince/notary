@@ -78,7 +78,9 @@ export const getNotifierDetails = (req,id) => async(dispatch) => {
     
       const {origin} = absoluteUrl(req)
       
-      const {data} = await axios.get(`${origin}/api/notifier/${id}`)           
+      const {data} = await axios.get(`${origin}/api/notifier/${id}`)
+      console.log(data,'the notifier data')
+      console.log(id)   
       dispatch({
           type: NOTIFIER_DETAILS_SUCCESS,
           payload: data

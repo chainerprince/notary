@@ -48,6 +48,10 @@ const Register = () => {
      const userData = {
          name,email,password,avatar
      }
+     if(avatar?.length  < 1){
+        toast.error('The avatar is required')
+        return;
+     }
      dispatch(userRegister(userData));
     
  }

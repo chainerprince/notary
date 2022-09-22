@@ -1,11 +1,15 @@
 module.exports = [
     {
       "name": "George Notary service",
+      "profileImage":{
+        url: "https://res.cloudinary.com/blocker/image/upload/v1627335416/bookit/rooms/yk8pppqrk1oemrnud2jx.jpg",
+        public_id: "yk8pppqrk1oemrnud2jx"
+      },
 
       "pricePerDocument": 2000,
       "description": "The best notary service you will ever find in Rwanda with license to approve most of the documents for the user and doing great stuffs together with our clients to make the future look good .",
 
-      
+  
 
       "totalDocuments": 10,      
       "landServices": true,
@@ -27,6 +31,10 @@ module.exports = [
     "birthCertificates":true,
     "schoolReports":false,
     "migrationServices":false,
+    "profileImage":{
+      url: "https://res.cloudinary.com/blocker/image/upload/v1627335416/bookit/rooms/yk8pppqrk1oemrnud2jx.jpg",
+      public_id: "yk8pppqrk1oemrnud2jx"
+    },
     "address": {lat: 0.2,long: 0.3,city:'Kigali',district: 'Kicukiro',sector:'Kicukiro'},
   
   },
@@ -42,6 +50,10 @@ module.exports = [
     "birthCertificates":true,
     "schoolReports":true,
     "migrationServices":false,
+    "profileImage":{
+      url: "https://res.cloudinary.com/blocker/image/upload/v1627335416/bookit/rooms/yk8pppqrk1oemrnud2jx.jpg",
+      public_id: "yk8pppqrk1oemrnud2jx"
+    },
     "address": {lat: 0.2,long: 0.3,city:'Kigali',district: 'Kicukiro',sector:'Kicukiro'},
   
   },
@@ -57,6 +69,10 @@ module.exports = [
     "birthCertificates":false,
     "schoolReports":true,
     "migrationServices":false,
+    "profileImage":{
+      url: "https://res.cloudinary.com/blocker/image/upload/v1627335416/bookit/rooms/yk8pppqrk1oemrnud2jx.jpg",
+      public_id: "yk8pppqrk1oemrnud2jx"
+    },
     "address": {lat: 0.2,long: 0.3,city:'Kigali',district: 'Kicukiro',sector:'Kicukiro'},
   
   },
@@ -72,6 +88,10 @@ module.exports = [
     "birthCertificates":true,
     "schoolReports":false,
     "migrationServices":true,
+    "profileImage":{
+      url: "https://res.cloudinary.com/blocker/image/upload/v1627335416/bookit/rooms/yk8pppqrk1oemrnud2jx.jpg",
+      public_id: "yk8pppqrk1oemrnud2jx"
+    },
     "address": {lat: 0.2,long: 0.3,city:'Kigali',district: 'Kicukiro',sector:'Kicukiro'},
   
   },
@@ -87,8 +107,11 @@ module.exports = [
     "birthCertificates":false,
     "schoolReports":false,
     "migrationServices":true,
+    "profileImage":{
+      url: "https://res.cloudinary.com/blocker/image/upload/v1627335416/bookit/rooms/yk8pppqrk1oemrnud2jx.jpg",
+      public_id: "yk8pppqrk1oemrnud2jx"
+    },
     "address": {lat: 0.2,long: 0.3,city:'Kigali',district: 'Kicukiro',sector:'Kicukiro'},
   }
-
  
   ]

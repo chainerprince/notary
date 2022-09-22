@@ -19,6 +19,9 @@ export default NextAuth({
                     }
 
                     const user = await  User.findOne({email}).select("+password");
+                    if(!user){
+                        throw new Error('Invalid Email or Password');
+                    }
                     const truePassword = await user.comparePassword(password);
                     if(!truePassword){
                         throw new Error("Invalid Email or Password")
