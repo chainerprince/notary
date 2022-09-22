@@ -303,7 +303,7 @@ const UpdateNotifier = () => {
                     
                    {console.log(notifier)}
                     {
-                     (oldImages.length > 0) ?   oldImages.map(img=>
+                     (oldImages?.length > 0) ?   oldImages?.map(img=>
                             <Image
                             key={img}
                             src={img}
