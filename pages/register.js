@@ -2,8 +2,6 @@ import { getSession } from 'next-auth/client'
 import Register from '../components/Auth/Register'
 import Layout from '../components/layout/Layout'
 
-
-
 export default function search() {
   return (
     <Layout>
@@ -17,7 +15,7 @@ export async function getServerSideProps(context){
   if(session){
       return {
           redirect:{
-              destination:"/login",
+              destination:"/",
               permanent:false
           }
       }

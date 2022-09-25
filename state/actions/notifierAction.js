@@ -72,13 +72,11 @@ export const getNotifiers = (req,currentPage=1,location='',document) => async(di
 
 
 
-export const getNotifierDetails = (req,id) => async(dispatch) => {
-    
-  try {
-    
+export const getNotifierDetails = (req,id) => async(dispatch) => {    
+  try {    
       const {origin} = absoluteUrl(req)
       
-      const {data} = await axios.get(`${origin}/api/notifier/${id}`)
+      const {data} = await axios.get(`${origin}/api/notifier/${id}`)      
       console.log(data,'the notifier data')
       console.log(id)   
       dispatch({

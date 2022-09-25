@@ -16,12 +16,8 @@ const Reviews = () => {
     const {reviews,loading,error} = useSelector(state=>state.reviews)
     
     const {isDeleted,error:deleteError}  = useSelector(state=>state.deleteReview)
-    const {user} = useSelector(state=>state.login)
-    console.log(user,'the loggend in user')
-    
-
-    useEffect(() => {
-        
+    const {user} = useSelector(state=>state.login)        
+    useEffect(() => {        
         if(error){
             toast.error(error)
             dispatch(clearErrors())

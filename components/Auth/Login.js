@@ -21,7 +21,7 @@ const Login = () => {
         setloading(false);
         if(result.error){
             toast.error(result.error)
-        }else{
+        }else{           
             window.location.href = '/'
         }
     }

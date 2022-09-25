@@ -53,7 +53,7 @@ export const bookingDetails = (authCookie, req, id) => async (dispatch) => {
 
         dispatch({
             type: BOOKING_DETAILS_FAIL,
-            payload: error.response.data.message
+            payload: error?.response?.data?.message
         })
     }
 
@@ -138,9 +138,8 @@ export const adminBookings = () => async (dispatch) => {
 export const notifierBookings = () => async (dispatch) => {
     try {
         dispatch({type:NOTIFIER_BOOKING_REQUEST})
-
         const { data } = await axios.get(`/api/notifier/appointments/`)
-
+        
         dispatch({
             type:NOTIFIER_BOOKING_SUCCESS,
             payload: data.bookings
@@ -150,7 +149,7 @@ export const notifierBookings = () => async (dispatch) => {
 
         dispatch({
             type:NOTIFIER_BOOKING_FAIL,
-            payload: error.response.data.message
+            payload: error?.response?.data?.message
         })
     }
 

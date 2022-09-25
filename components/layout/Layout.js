@@ -19,7 +19,7 @@ const Layout = ({children}) => {
        <Header />
        <ToastContainer />
        {children}
-       <Footer />
+       {/* <Footer /> */}
 
         </div>
     )

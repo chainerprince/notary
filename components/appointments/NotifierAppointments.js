@@ -7,11 +7,7 @@ import { notifierBookings, clearErrors, deleteBooking } from '../../state/action
 import Loader from '../layout/Loader';
 import { useRouter } from 'next/router';
 import { DELETE_BOOKING_RESET } from '../../state/constants/appointmentConstants';
-import axios from 'axios';
-
-
-
- 
+import axios from 'axios'; 
 const AllBookings = () => {
     const router = useRouter();
     const dispatch = useDispatch();

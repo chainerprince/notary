@@ -30,7 +30,7 @@ const NotifierDetails = () => {
     const {notifier,error} = useSelector(state=>state.notifierDetails)
     const {user} = useSelector(state=>state.login)
     const {available,loading:bookingLoader} = useSelector(state=>state.checkBooking)
-    console.log(available,'the available date')
+    
  const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [loading,setloading] = useState(false);
@@ -51,8 +51,7 @@ const NotifierDetails = () => {
         }
     }
     
-
-     console.log(user);
+     
     const [paymentLoading, setPaymentLoading] = useState(false)    
     const documents = [
   {
@@ -134,6 +133,7 @@ const [document, setDocument] = useState('landServices 2000');
                const { data } = await axios.post('/api/appointments/new',booking,config)               
                if(data.success) {
                    toast.success("The appointment created succesfully");
+                    router.push('/appointments/me')
                }                                             
            } catch (error) {
                console.log(error)

@@ -9,6 +9,7 @@ import { NEW_NOTIFIER_RESET } from '../../state/constants/notifierConstants';
 import Image from 'next/image';
 import {data} from './data';
 import {signOut} from 'next-auth/client'
+import Loader from '../layout/Loading';
 
 const Application = () => {
    
@@ -405,7 +406,7 @@ const Application = () => {
                  className="btn btn-block bg-choco text-white new-notifier-btn py-3"
                  disabled = {loading?true:false}
                  >
-                     {loading ? <Loading /> : "Appy"}
+                     {loading ? <Loader /> : "Appy"}
                  
                  </button>
               </form>

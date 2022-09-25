@@ -10,14 +10,22 @@ const Home = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const {notifiers,resPerPage,filteredNotifiersCount,notifiersCount,error} = useSelector(state=>state.allNotifiers);
-  console.log(notifiers,'the notification gratis completion')
+  const {user} = useSelector(state=>state.login)
+  console.log(user,'the user')
   useEffect(() => {
    if(error){
       toast.error(error)
       dispatch(clearErrors)
    }
    
-  },[])
+  },[error,dispatch])
+   useEffect(() => {
+   if(user?.role == 'notifier'){
+      
+      router.push('/notifier/appointments')
+   }
+   
+  },[user,router])
   let {page = 1,location} = router.query;
   page = Number(page);
 
@@ -35,18 +43,21 @@ const Home = () => {
 
     <section id="notifiers" className="container-fluid mt-5">
 
-    <h2 className='mb-3 ml-2 stays-heading'>{location ? `Notifiers in ${location}` : "All Notifiers" }</h2>
+  { notifiers && notifiers.length !== 0 &&  <h2 className='mb-3 ml-2 stays-heading'>{location ? `Notifiers in ${location}` : "All Notifiers" }</h2>}
 
-    <Link href='/search'> 
+{
+  notifiers && notifiers.length !== 0 && ( <Link href='/search'> 
     <a  className='ml-2 back-to-search'>
 
-    <i className='fa fa-arrow-left'></i> Search
-    
+    <i className='fa fa-arrow-left'></i> Search    
     </a> 
-    </Link>
-    <div className="row"> 
+    </Link>)
+}
+   
+
+    <div className="row justify-content-center align-items-center my-auto h-100"> 
        {notifiers && notifiers.length===0 ? 
-        <div className="alert alert-danger"><b>No Notifiers</b></div>
+        <div className="alert alert-danger"><b>No Notifiers Available</b></div>
         :
      notifiers &&   notifiers.filter(notifier=>notifier.status=='true').map(notifier=> <NotifierItem key={notifier._id} notifier={notifier} />)
       }

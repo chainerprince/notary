@@ -13,7 +13,7 @@ function Header() {
   const [canAppy,setCanAppy] = useState(false);
   const logoutHandler = () =>{
     signOut(); 
-  }
+  }  
   const router = useRouter();
   useEffect(() => {
     dispatch(userLogin())
@@ -70,10 +70,9 @@ function Header() {
                     <Link href="/admin/users">
                       <a  className="dropdown-item">Users</a>            
                   </Link>
-
-                    <Link href="/admin/reviews">
+                    {/* <Link href="/admin/reviews">
                       <a  className="dropdown-item">Reviews</a>            
-                  </Link>
+                  </Link> */}
 
                   <hr/>
                     </>

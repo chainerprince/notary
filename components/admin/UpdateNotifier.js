@@ -28,19 +28,19 @@ const UpdateNotifier = () => {
     const [birth ,setBirth] = useState(false);
     const [images,setImages] = useState([]);
     const [oldImages,setOldImages] = useState([]);
-    const [imagesPreview,setImagesPreview] = useState([])
-
+    const [imagesPreview,setImagesPreview] = useState([]);
     const dispatch = useDispatch();
     const router = useRouter();
     const {isUpdated,loading,error} = useSelector(state=>state.updateNotifier)
     const {notifier,loading:detailsLoading,error:detailsError} = useSelector(state=>state.notifierDetails)
     
    const {id,approve} = router.query
-   console.log(notifier)
-    useEffect(() => {
-        
-        if(!notifier && notifier?._id !== id){
+   
+    useEffect(() => {        
+        if((Object.keys(notifier).length < 1) && notifier?._id !== id){
+         console.log('reached here')
             dispatch(getNotifierDetails('',id))
+            
         }else{
          if(notifier){
             setName(notifier?.name)
@@ -82,7 +82,10 @@ const UpdateNotifier = () => {
         }
 
     }, [dispatch,error,isUpdated,notifier,detailsError,id,router])
-
+    
+    const redirectToImage = (image) => {
+         router.push(image)
+    }
 
     const imageHandler = e => {
 
@@ -300,20 +303,24 @@ const UpdateNotifier = () => {
                     </select> */}
                  </div>
                     <label>Images of education certificates</label>
-                    
-                   {console.log(notifier)}
+                    <div>                   
                     {
                      (oldImages?.length > 0) ?   oldImages?.map(img=>
-                            <Image
-                            key={img}
-                            src={img}
-                            alt={img}
-                            className="mt-3 mr-2"
-                            width={55}
-                            height={52}
+                        <a target="_blank" href={img?.url} key={img?._id} rel="noopener noreferrer">
+      <Image                            
+                            src={img?.url}
+                            alt={"User Images"}
+                            className="mt-3 mr-2 cursor-pointer"
+                            width={150}
+                            height={150}
+                            onClick={() => redirectToImage(img?.url)}
                             />
+ </a>
+                          
                         ) : <div>No Images Available</div>
                     }
+                    </div>
+                   
                  </div>
                  <div className="form-group">
                     <label htmlFor="description_field">Enter more about your notary office</label>

@@ -1,5 +1,5 @@
 import Booking from "../models/appointment";
-
+import Notifier from "../models/notifiers";
 import AsyncErrors from "../middlewares/asyncErrors";
 
 import Moment from 'moment'
@@ -191,7 +191,7 @@ export const newBooking = AsyncErrors(async(req,res,next)=>{
         status,    
         
    })
-   
+    console.log(booking,'the booking we want')
     res.status(201).json({
         success:true,
         booking
@@ -216,8 +216,10 @@ export const newBooking = AsyncErrors(async(req,res,next)=>{
   
  })
 
- export const notifierBookings = AsyncErrors(async(req,res,next)=>{
-    const bookings = await Booking.find({notifier:req.query.id})
+ export const notifierBookings = AsyncErrors(async(req,res,next)=>{    
+    const notifier = await Notifier.findOne({user: req.user?._id})
+    
+    const bookings = await Booking.find({notifier:notifier?._id})    
     .populate({
         path:'notifier',
         select:'name pricePerDocument  images'
@@ -225,8 +227,7 @@ export const newBooking = AsyncErrors(async(req,res,next)=>{
     .populate({
         path:'user',
         select:'name email'
-    })
-    console.log(bookings,'the bookings')
+    })    
 
     res.status(201).json({
         success:true,

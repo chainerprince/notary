@@ -47,20 +47,15 @@ const singleNotifier = AsyncErrors(async(req,res,next)=>{
 })
 
 
-export const notifierReviews = AsyncErrors(async(req,res,next)=>{
-   
-      const notifier = await Notifier.findById(req.query.id);
-     
+export const notifierReviews = AsyncErrors(async(req,res,next)=>{      
+      const notifier = await Notifier.findOne({user:req.query.id});          
       if(!notifier){
         return next(new ErrorHandler("That Notifier is not saved",404));
-      }
-
+      }           
       res.status(200).json({
         success:true,
          reviews: notifier.reviews
-      })
-
-    
+      })    
 })
 
 
@@ -214,11 +209,12 @@ export const canReview = AsyncErrors(async(req,res,next)=>{
   const {notifier} = req.query;  
 
   
-    const bookings = await Booking.find({user:req.user._id,notifier})    
-
+    const bookings = await Booking.find({user:req.user._id,notifier}) 
+    console.log(bookings,'the bookings')   
+    const approved = bookings?.filter(booking=>booking.status == 'true')
+    // console.log(approved,'the approved')
       let booked = false;
-    bookings.length > 0 ? booked = true : null;
-    
+    ( (bookings.length  > 0) && (approved.length > 0))  ? booked = true : null;    
     res.status(200).json({
       success:true,
       booked
@@ -231,6 +227,7 @@ export const canReview = AsyncErrors(async(req,res,next)=>{
 export const allAdminNotifiers = AsyncErrors(async(req,res,next)=>{
 
      const notifiers = await Notifier.find();
+     console.log(notifiers,'the notifiers in controller')
     
     res.status(200).json({
       success:true,

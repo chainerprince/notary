@@ -15,8 +15,7 @@ export default function search() {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(async ({ req, store,params }) => {
-    const session = await getSession({ req })
-
+    const session = await getSession({ req })    
     if (!session) {
         return {
             redirect: {
@@ -26,6 +25,6 @@ export const getServerSideProps = wrapper.getServerSideProps(async ({ req, store
         }
     }
 
-    await store.dispatch(bookingDetails(req.headers.cookie, req,params.id))
+  req.params?.id &&  await store.dispatch(bookingDetails(req.headers.cookie, req.params.id))
 
 })
