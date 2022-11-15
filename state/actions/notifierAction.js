@@ -51,13 +51,11 @@ from '../constants/notifierConstants'
 
 export const getNotifiers = (req,currentPage=1,location='',document) => async(dispatch) => {
   try {
-      const {origin} = absoluteUrl(req)
-      console.log(origin,'the original page')
+      const {origin} = absoluteUrl(req)      
       let link = `${origin}/api/notifier?page=${currentPage}&location=${location}`
       if(document) link = link.concat(`&document=${document}`)
       
-      const {data} = await axios.get(link);
-      console.log(data,'the data we fetched')
+      const {data} = await axios.get(link);      
       dispatch({
           type: NOTIFIER_SUCCESS,
           payload: data
@@ -77,15 +75,12 @@ export const getNotifierDetails = (req,id) => async(dispatch) => {
       const {origin} = absoluteUrl(req)
       
       const {data} = await axios.get(`${origin}/api/notifier/${id}`)      
-      console.log(data,'the notifier data')
-      console.log(id)   
+   
       dispatch({
           type: NOTIFIER_DETAILS_SUCCESS,
           payload: data
       })
-  } catch (error) {
-      
-      console.log(error,'the error we have')
+  } catch (error) {            
       dispatch({
           type:NOTIFIER_DETAILS_FAIL,
           payload:error.response.data.message
@@ -101,8 +96,7 @@ export const getAdminNotifiers = (req,id) => async(dispatch) => {
       })
       const {origin} = absoluteUrl(req)
       const {data} = await axios.get(`${origin}/api/admin/notifiers`)
-
-      console.log(data,'the admin notifier')
+      
       
       dispatch({
           type: ADMIN_NOTIFIERS_SUCCESS,
@@ -127,8 +121,7 @@ export const newNotifierReviews = (reviewData) => async(dispatch) => {
         }
     }
       
-      const {data} = await axios.put(`/api/reviews/`,reviewData,config)
-      console.log(data,'the data for reviewing the new reviews')
+      const {data} = await axios.put(`/api/reviews/`,reviewData,config)      
       dispatch({
           type: NEW_REVIEW_SUCCESS,
           payload: data.success
@@ -151,18 +144,14 @@ export const newNotifier = (notifierData) => async(dispatch) => {
             'Content-Type':"Application/json"
         }
     }
-    console.log(notifierData,'the data from notifier')
+    
       
-      const {data} = await axios.post(`/api/notifier/`,notifierData,config)
-      console.log(data,'the data we have')
-      
-      
+      const {data} = await axios.post(`/api/notifier/`,notifierData,config)                  
       dispatch({
           type: NEW_NOTIFIER_SUCCESS,
           payload: data
       })
-  } catch (error) {
-      console.log(error,'the new notifier error')
+  } catch (error) {      
       dispatch({
           type:NEW_NOTIFIER_FAIL,
           payload:error.response.data.message
@@ -180,14 +169,12 @@ export const updateNotifier = (id,notifierData) => async(dispatch) => {
         }
     }
       
-      const {data} = await axios.put(`/api/notifier/${id}`,notifierData,config)
-      console.log(data)
+      const {data} = await axios.put(`/api/notifier/${id}`,notifierData,config)      
       dispatch({
           type: UPDATE_NOTIFIER_SUCCESS,
           payload: data.success
       })
-  } catch (error) {
-      console.log(error)
+  } catch (error) {      
       dispatch({
           type:UPDATE_NOTIFIER_FAIL,
           payload:error.response.data.message
@@ -205,8 +192,7 @@ export const deleteNotifier = (id) => async(dispatch) => {
     //     }
     // }
       
-      const {data} = await axios.delete(`/api/notifier/${id}`)
-      console.log(data);
+      const {data} = await axios.delete(`/api/notifier/${id}`)      
       
       dispatch({
           type: DELETE_NOTIFIER_SUCCESS,
@@ -231,15 +217,13 @@ export const deleteReview = (id,notifierId) => async(dispatch) => {
     //     }
     // }
       
-      const {data} = await axios.delete(`/api/reviews/?id=${id}&notifierid=${notifierId}`)
-      console.log(data);
+      const {data} = await axios.delete(`/api/reviews/?id=${id}&notifierid=${notifierId}`)      
       
       dispatch({
           type: DELETE_REVIEW_SUCCESS,
           payload: data.success
       })
-  } catch (error) {
-      console.log(error);
+  } catch (error) {      
       dispatch({
           type:DELETE_REVIEW_FAIL,
           payload:error.response.data.message

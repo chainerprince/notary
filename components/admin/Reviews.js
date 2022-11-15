@@ -70,12 +70,7 @@ const Reviews = () => {
                 label: 'User',
                 field: 'user',
                 sort: 'asc'
-            },
-            {
-                label: 'Actions',
-                field: 'actions',
-                sort: 'asc'
-            }
+            },           
 
         ],
         rows: []
@@ -86,15 +81,7 @@ const Reviews = () => {
             id: review._id,
             rating: review.rating,
             comment: review.comment,
-            user: review.name,
-            actions:
-            // 
-                <button 
-                className="btn btn-danger mx-2"
-                onClick={() => deleteHandler(review._id)}
-                >
-                    <i className="fa fa-trash"></i>
-                </button>
+            user: review.name            
         })
     })
 

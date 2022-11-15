@@ -9,12 +9,13 @@ import { toast } from 'react-toastify';
 import { clearErrors } from '../../state/actions/appointmentAction';
 import { getAdminNotifiers, deleteNotifier } from '../../state/actions/notifierAction';
 import Loader from '../layout/Loader';
+import { DELETE_NOTIFIER_RESET } from '../../state/constants/notifierConstants';
 
 const AllNotifiers = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     const {notifiers,loading,error} = useSelector(state=>state.allNotifiers)
-    const {isDeleted,error:deleteError}  = useSelector(state=>state.deleteNotifier)
+    const {isDeleted,error:deleteError,success}  = useSelector(state=>state.deleteNotifier)
        
     useEffect(() => {
         dispatch(getAdminNotifiers())
@@ -26,18 +27,22 @@ const AllNotifiers = () => {
             toast.error(deleteError)
             dispatch(clearErrors())
         }
+       
+        
 
         if(isDeleted){
+            toast.success('Notifier deleted successfully')
             router.push('/admin/notifiers');
             dispatch({type:DELETE_NOTIFIER_RESET})
         }
 
-    }, [dispatch,isDeleted,deleteError])
+    }, [dispatch,isDeleted,deleteError,error,router])
 
     
   const deleteHandler = (id) =>{
       console.log(id)
       dispatch(deleteNotifier(id));
+      
   }
     const setNotifiers = () => {
         const data = {
@@ -101,13 +106,7 @@ const AllNotifiers = () => {
                    
                   </div>,
                   action:
-                  <div className="d-flex">
-                   <Link href={`/admin/notifiers/${notifier._id}`}>
-                      <a  className="btn btn-primary">
-                          <i className="fa fa-pencil"></i>
-                          
-                      </a>
-                   </Link>
+                  <div className="d-flex">                   
                    <button 
                    
                    className="btn-danger btn mx-2"

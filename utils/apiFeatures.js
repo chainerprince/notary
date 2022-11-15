@@ -3,40 +3,36 @@ import { remove } from "../models/notifiers";
 class  APIFeatures{
     constructor(query,queryStr){
         this.query = query;
-        this.queryStr = queryStr;
+        this.queryStr = queryStr;        
     }
-    search(){
+   async search(){
         const location = this.queryStr.location ? {
-            'address.city':{
+            'address.district':{
                 $regex: this.queryStr.location,
                 $options: 'i'
             }
         } : {}
-
-        console.log(this.queryStr,'the location of me')
-
         
-        
-        
-        this.query = this.query.find({...location});
+                              
+        this.query = await this.query.find({...location});        
         return this;
     }
-   filter(){
+  async filter(){
        const queryCopy = {...this.queryStr}
        const removeFields = ['location','page']
        
        removeFields.forEach(field=> delete queryCopy[field]);
        
-       this.query = this.query.find(queryCopy);
+       this.query = await this.query.find(queryCopy);
        return this;
    }
 
 
-   pagination(pageNumber){
+  async pagination(pageNumber){
      const currentPage =  Number(this.queryStr.page) || 1;
      
      const skip = pageNumber * (currentPage - 1);
-     this.query = this.query.limit(pageNumber).skip(skip);
+     this.query = await this.query?.find()?.limit(pageNumber)?.skip(skip);
 
      return this;
    }

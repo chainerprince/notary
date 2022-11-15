@@ -10,8 +10,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const {notifiers,resPerPage,filteredNotifiersCount,notifiersCount,error} = useSelector(state=>state.allNotifiers);
-  const {user} = useSelector(state=>state.login)
-  console.log(user,'the user')
+  const {user} = useSelector(state=>state.login)  
   useEffect(() => {
    if(error){
       toast.error(error)

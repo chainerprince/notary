@@ -75,7 +75,7 @@ const NotifierDetails = () => {
     label: 'Marriage',
   },
 ];
-const [document, setDocument] = useState('landServices 2000');
+const [document, setDocument] = useState('');
 
   const handleChange = (event) => {
     

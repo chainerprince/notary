@@ -34,7 +34,7 @@ const AllBookings = () => {
             dispatch({type:DELETE_BOOKING_RESET})
         }
 
-    }, [dispatch,isDeleted,deleteError])
+    }, [dispatch,isDeleted,deleteError,router,error])
          const approveHandler = async(id)=>{                                                       
            try {
                const config = {
@@ -43,7 +43,7 @@ const AllBookings = () => {
                     }
                }               
                const { data } = await axios.put('/api/appointments/approve',{id},config) 
-               console.log(data)              
+                            
                if(data.success) {
                    toast.success("The appointment approved succesfully");
                }                                             

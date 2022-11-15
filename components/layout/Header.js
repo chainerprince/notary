@@ -21,7 +21,7 @@ function Header() {
   }, [dispatch])
   const redirectHome = () => {
     router.push('/')
-    typeof window !== 'undefined' && window.location.reload();
+    // typeof window !== 'undefined' && window.location.reload();
   }
   
     return (
@@ -62,9 +62,9 @@ function Header() {
                     <Link href="/admin/notifiers">
                       <a  className="dropdown-item">Notifiers</a>            
                   </Link>
-                    <Link href="/admin/appointments">
+                    {/* <Link href="/admin/appointments">
                       <a  className="dropdown-item">Appointments</a>            
-                  </Link>
+                  </Link> */}
 
 
                     <Link href="/admin/users">

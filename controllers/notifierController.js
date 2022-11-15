@@ -9,9 +9,9 @@ import cloudinary from 'cloudinary'
 const allNotifiers = AsyncErrors(async(req,res)=>{
      const resPerPage = 4;
      const notifiersCount = await Notifier.countDocuments();     
-     const apiFeatures = new APIFeatures(Notifier.find(),req.query).
-     search()                
-     let notifiers = await apiFeatures.query;
+     const apiFeatures = await new APIFeatures(Notifier,req.query).
+     search()                    
+     let notifiers =  apiFeatures.query;         
      let filteredNotifiersCount = notifiers.length;
      apiFeatures.pagination(resPerPage);
      notifiers = await apiFeatures.query;
@@ -143,15 +143,18 @@ const updateNotifier = AsyncErrors(async(req,res,next)=>{
 })
 
 
-const deleteNotifer = AsyncErrors(async(req,res,next)=>{
+const deleteNotifier = AsyncErrors(async(req,res,next)=>{
   
-    const notifier = await Notifier.findById(req.query.id);
+    const notifier = await Notifier.findById(req.query.id);    
     if(!notifier){
       return next(new ErrorHandler("That notifier doesn't Exist",404));
     }
-    for(let i=0;i<notifier.images.length;i++){
+    if(notifier.images){
+for(let i=0;i<notifier.images.length;i++){
       await cloudinary.v2.uploader.destroy(notifier.images[i].public_id)
     }
+    }
+    
     await notifier.remove();
     res.status(200).json({
       success:true,
@@ -226,9 +229,7 @@ export const canReview = AsyncErrors(async(req,res,next)=>{
 
 export const allAdminNotifiers = AsyncErrors(async(req,res,next)=>{
 
-     const notifiers = await Notifier.find();
-     console.log(notifiers,'the notifiers in controller')
-    
+     const notifiers = await Notifier.find();         
     res.status(200).json({
       success:true,
       notifiers
@@ -286,5 +287,5 @@ const saveNotifier = AsyncErrors(async (req,res)=>{
 
 
 export {
-    allNotifiers,saveNotifier,singleNotifier,updateNotifier,deleteNotifer
+    allNotifiers,saveNotifier,singleNotifier,updateNotifier,deleteNotifier
 }

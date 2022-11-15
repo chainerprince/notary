@@ -22,8 +22,8 @@ const Reviews = () => {
             toast.error(error)
             dispatch(clearErrors())
         }
-        
-            dispatch(getReviews(user?._id))
+            
+          user._id && dispatch(getReviews(user?._id))
         
         if(deleteError){
             toast.error(deleteError)

@@ -7,8 +7,4 @@ const handler = nc({onError});
 dbConnect();
 
 
-
-
-
-
 export default handler;

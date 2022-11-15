@@ -94,8 +94,7 @@ const UpdateNotifier = () => {
 
         setImages([]);
         setOldImages([]);
-        setImagesPreview([]);
-        console.log(files)
+        setImagesPreview([]);        
 
         files.forEach(file=>{
             const reader = new FileReader();
@@ -157,7 +156,9 @@ const UpdateNotifier = () => {
                      <div className="form-group">
                     <label htmlFor="name_field">Name</label>
                     <input
+                       
                        type="text"
+                       disabled={approve ? true : false}
                        id="name_field"
                        className="form-control"
                        value={name}
@@ -170,6 +171,7 @@ const UpdateNotifier = () => {
                     <select className="form-control" id="rom_type_field" 
               value={category}
               onChange = {e=>setCategory(e.target.value)}
+              disabled={approve ? true : false}
               >
                 {
                    ["public","private"].map(num=>(
@@ -185,6 +187,7 @@ const UpdateNotifier = () => {
                     <select className="form-control" id="guest_field" 
               value={district}
               onChange = {e=>setDistrict(e.target.value)}
+              disabled={approve ? true : false}
               >
                 {
                    [ 'Gasabo', 'Kicukiro', 'Nyarugenge' ].map(num=>(
@@ -200,7 +203,9 @@ const UpdateNotifier = () => {
                  <div className="form-group">
                     <label htmlFor="sector_field">Sector</label>
                     <input
+                       
                        type="text"
+                       disabled
                        id="sector_field"
                        className="form-control"
                        value={sector}
@@ -211,7 +216,10 @@ const UpdateNotifier = () => {
                  <label className="mb-3">Documents Available</label>
                  <div className="form-check">
                     <input
+                       
                        className="form-check-input"
+                       disabled={approve ? true : false}
+                       
                        type="checkbox"
                        id="land_checkbox"
                        value={land}
@@ -224,7 +232,10 @@ const UpdateNotifier = () => {
                  </div>
                  <div className="form-check">
                     <input
+                       
                        className="form-check-input"
+                       disabled
+                          
                        type="checkbox"
                        id="marriage_checkbox"
                        value={marriage}
@@ -237,7 +248,10 @@ const UpdateNotifier = () => {
                  </div>
                  <div className="form-check">
                     <input
+                       
                        className="form-check-input"
+                       disabled
+                          
                        type="checkbox"
                        id="birth_checkbox"
                        value={birth}
@@ -250,7 +264,10 @@ const UpdateNotifier = () => {
                  </div>
                  <div className="form-check">
                     <input
+                       
                        className="form-check-input"
+                       disabled
+                          
                        type="checkbox"
                        id="migration_checkbox"
                        value={migration}
@@ -262,7 +279,10 @@ const UpdateNotifier = () => {
                  </div>
                  <div className="form-check">
                     <input
+                       
                        className="form-check-input"
+                       disabled
+                          
                        type="checkbox"
                        id="reports_checkbox"
                        value={reports}
@@ -276,7 +296,9 @@ const UpdateNotifier = () => {
                   <div className="form-group">
                     <label htmlFor="price_field">Average price per document (RWF)</label>
                     <input
+                       
                        type="text"
+                       disabled
                        id="price_field"
                        className="form-control"
                        value={price}
@@ -290,6 +312,7 @@ const UpdateNotifier = () => {
                     <select className="form-control" id="education_field" 
               value={education}
               onChange = {e=>setEducation(e.target.value)}
+              disabled={approve ? true : false}
               >
                 {
                    ['Bachelors','Masters','PHD'].map(num=>(
@@ -329,6 +352,7 @@ const UpdateNotifier = () => {
                        id="description_field"
                        rows="8"
                        value={description}
+                       disabled={approve ? true : false}
                        onChange = {e=>setDescription(e.target.value)}
                        required
                        ></textarea>

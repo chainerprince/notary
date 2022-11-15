@@ -36,18 +36,16 @@ const AppointmentDetails = () => {
            <div className="container">
       <div className="row d-flex justify-content-between">
         <div className="col-12 col-lg-8 mt-5 booking-details">
-          <h2 className="my-5">Booking # {booking._id}</h2>
+          <h2 className="my-5">Appointment # {booking._id}</h2>
           <h4 className="mb-4">User Info</h4>
           <p><b>Name:</b> {booking.user && booking.user.name}</p>
           <p><b>Email:</b> {booking.user && booking.user.email}</p>
-          <p><b>Amount:</b> {booking.amountPaid}</p>
+          <p><b>Amount:</b> {booking.price}</p>
 
           <hr />
-
-          <h4 className="mb-4">Booking Info</h4>
-          <p><b>Check In:</b> {new Date(booking.checkInDate).toLocaleString('en-UK')}</p>
-          <p><b>Check Out:</b>{new Date(booking.checkOutDate).toLocaleString('en-US')}</p>
-          <p><b>Days of Stay: {booking.daysOfStay}</b> </p>
+          {console.log(booking,'the booking')}
+          <h4 className="mb-4">Appointment Info</h4>
+          <p><b>Check In:</b> {new Date(booking.date).toLocaleString('en-UK')}</p>                 
 
           <hr />
 
@@ -76,10 +74,7 @@ const AppointmentDetails = () => {
                  />
               </div>
 
-              <div className="col-5 col-lg-5">
-                <Link href="/">name</Link>
-                
-              </div>
+              
 
               <div className="col-4 col-lg-2 mt-4 mt-lg-0">
                 <p>${ booking.price}</p>
