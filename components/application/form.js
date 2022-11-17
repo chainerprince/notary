@@ -370,6 +370,7 @@ const Application = () => {
                           type="file"
                           name="notifier_images"
                           className="custom-file-input"
+                          required
                           id="customFile"
                           onChange={profileHandler}                          
                           />
