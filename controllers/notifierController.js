@@ -33,6 +33,7 @@ const allNotifiers = AsyncErrors(async(req,res)=>{
 const singleNotifier = AsyncErrors(async(req,res,next)=>{
    
       const notifier = await Notifier.findById(req.query.id);
+      console.log(notifier,req,'reached here.')
      
       if(!notifier){
         return next(new ErrorHandler("That Notifier is not registered",404));
@@ -212,8 +213,7 @@ export const canReview = AsyncErrors(async(req,res,next)=>{
   const {notifier} = req.query;  
 
   
-    const bookings = await Booking.find({user:req.user._id,notifier}) 
-    console.log(bookings,'the bookings')   
+    const bookings = await Booking.find({user:req.user._id,notifier})      
     const approved = bookings?.filter(booking=>booking.status == 'true')
     // console.log(approved,'the approved')
       let booked = false;

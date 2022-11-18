@@ -52,46 +52,25 @@ const MyAppointments = () => {
                     sort:'asc'
                 },
                 {
-                    label: "Approve",
+                    label: "Approve Status",
                     field:'status',
                     sort:'asc'
-                },
-                {
-                    label: "Actions",
-                    field:'action',
-                    sort:'asc'
-                },
+                }                
             ],
             rows:[]
         }
-
+        
         bookings && bookings.forEach(booking => {
               data.rows.push({
                   id:booking._id,
                   date:new Date(booking.date).toLocaleString('en-UK')?.split(',')[0],
-                  time:booking.time?.split(' ')[0],
+                  time:booking.date?.split(' ')[1],
                   price:`${booking.price} RWF`,
                   user: booking?.user?.name,
                   document: booking.document,
                   status:
                 
-                    booking.status !== 'true' ?  'pending' : 'approved',                                                                                                               
-                  
-                  action:
-                  <div className='d-flex justify-content-between flex-nowrap'>
-                   <Link href={`/admin/appointments/${booking._id}`}>
-                      <a  className="btn btn-primary">
-                          <i className="fa fa-eye"></i>
-                          
-                      </a>
-                   </Link>                    
-                   <button 
-                   className="btn-danger btn mx-2"
-                   onClick={_=>deleteHandler(booking._id)}
-                   >
-                       <i className="fa fa-trash"></i>
-                   </button>
-                  </div>
+                    booking.status !== 'true' ?  'pending' : 'approved',                                                                                                                                                  
               })
         });
 

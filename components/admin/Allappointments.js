@@ -106,7 +106,7 @@ const AllBookings = () => {
               data.rows.push({
                   id:booking._id,
                   date:new Date(booking.date).toLocaleString('en-UK')?.split(',')[0],
-                  time:booking.time?.split(' ')[0],
+                  time:booking.date?.split(' ')[0],
                   price:`${booking.price} RWF`,
                   user: booking?.user?.name,
                   document: booking.document,

@@ -129,9 +129,9 @@ const AllNotifiers = () => {
 
             <h1 className="my-4">{`${notifiers && notifiers.length} Notifiers`}</h1>
 
-            <Link href="/admin/notifiers/new">
+            {/* <Link href="/application">
                 <a className="mt-0 btn text-white btn-sm float-right bg-choco mt-3">Add Notifier</a>
-            </Link>
+            </Link> */}
             </>            
             }
 

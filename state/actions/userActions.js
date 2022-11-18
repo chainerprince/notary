@@ -62,8 +62,7 @@ export const userRegister = (userData) => async(dispatch) => {
        }) 
 
 
-    } catch (error) {
-        console.log(error)
+    } catch (error) {        
         dispatch({
             type:USER_REGISTER_FAIL,
             payload:error.response.data.message

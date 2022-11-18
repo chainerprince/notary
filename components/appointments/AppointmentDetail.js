@@ -23,8 +23,7 @@ const AppointmentDetails = () => {
         }
 
     }, [dispatch])
-
-    console.log(booking,'the booking we want')
+    
     
   const isPaid = booking && booking.paymentInfo && booking.paymentInfo.status  === 'paid' ? true : false;
     return (

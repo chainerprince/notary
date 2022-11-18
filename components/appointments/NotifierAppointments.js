@@ -38,9 +38,10 @@ const AllBookings = () => {
                     }
                }               
                const { data } = await axios.put('/api/appointments/approve',{id},config) 
-               console.log(data)              
+                        
                if(data.success) {
                    toast.success("The appointment approved succesfully");
+                   dispatch(notifierBookings())
                }                                             
            } catch (error) {
                console.log(error)
@@ -101,7 +102,7 @@ const AllBookings = () => {
               data.rows.push({
                   id:booking._id,
                   date:new Date(booking.date).toLocaleString('en-UK')?.split(',')[0],
-                  time:booking.time?.split(' ')[0],
+                  time:booking.date?.split(' ')[1],
                   price:`${booking.price} RWF`,
                   user: booking?.user?.name,
                   document: booking.document,

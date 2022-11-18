@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ListReview = ({reviews}) => {
+const ListReview = ({reviews}) => {  
     return (
         <>
               <div className="reviews w-75">

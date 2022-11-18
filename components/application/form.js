@@ -9,7 +9,7 @@ import { NEW_NOTIFIER_RESET } from '../../state/constants/notifierConstants';
 import Image from 'next/image';
 import {data} from './data';
 import {signOut} from 'next-auth/client'
-import Loader from '../layout/Loading';
+import Loader from '../layout/Loader';
 
 const Application = () => {
    
@@ -85,8 +85,8 @@ const Application = () => {
     const imageHandler = e => {
               
         const files = Array.from(e.target.files);        
-        setImages([]);
-        setImagesPreview([]);        
+      //   setImages([]);
+      //   setImagesPreview([]);        
         files.forEach(file=>{
             const reader = new FileReader();
             reader.onload = ()=>{

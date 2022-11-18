@@ -17,7 +17,6 @@ const NewReview = () => {
     const {error, success } = useSelector(state=>state.newReview);
     const { canRev } = useSelector(state=>state.reviewPossible); 
     const {id} = router.query;
-
      
     useEffect(() => {                
         if(id !== undefined){

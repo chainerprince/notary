@@ -33,12 +33,14 @@ const Register = () => {
             toast.success("Registered successfully login to continue")
          },2000)
          router.push('/login');
+         dispatch(clearErrors());
      }else{
+        console.log(error,'on the homepage')
          toast.error(error);
          dispatch(clearErrors());
      }
 
- }, [dispatch,success,loading])
+ }, [dispatch,success,loading,error,router])
 
 
  const handleSubmit = e=>{

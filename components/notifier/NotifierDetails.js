@@ -34,6 +34,10 @@ const NotifierDetails = () => {
  const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [loading,setloading] = useState(false);
+    const dispatch = useDispatch();
+ const router = useRouter();
+    const {id} = router.query;
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -77,14 +81,12 @@ const NotifierDetails = () => {
 ];
 const [document, setDocument] = useState('');
 
-  const handleChange = (event) => {
-    
-    setDocument(event.target.value);
+  const handleChange = (event) => {    
+    setDocument(event.target.value);    
     setPrice(document.split(' ')[1])
   };
-    const router = useRouter();
-    const {id} = router.query;
-   const dispatch = useDispatch();
+    
+   
     useEffect(() => {
         dispatch(bookedDates(id))
         if(error){
@@ -98,7 +100,7 @@ const [document, setDocument] = useState('');
             })
         }
         
-       },[dispatch,id])
+       },[dispatch,id,error])
 
        const {dates} = useSelector(state=>state.bookedDates)
     
@@ -136,6 +138,7 @@ const [document, setDocument] = useState('');
                     router.push('/appointments/me')
                }                                             
            } catch (error) {
+               toast.error(error.response.data.message)
                console.log(error)
            }
        }

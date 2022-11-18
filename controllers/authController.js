@@ -88,8 +88,7 @@ export  const adminUpdateUser = AsyncErrors(async (req,res,next)=>{
 
 const updateUser = AsyncErrors(async (req,res,next)=>{
     const user = await User.findById(req.user._id);
-    
-    console.log("They are hitting me now and thn and am tired");
+        
     if(user){
         user.name = req.body.name;
         user.email = req.body.email
@@ -201,7 +200,7 @@ const forgotPassword = AsyncErrors(async (req,res,next)=>{
 
 
 
-const registerUser = AsyncErrors(async(req,res)=>{
+const registerUser = AsyncErrors(async(req,res,next)=>{
   
   
 // })
@@ -213,6 +212,10 @@ const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
 
 
 const { name, email, password } = req.body;
+const userExists = await User.find({email});
+if(userExists?.length > 0){
+    return next(new ErrorHandler('User with this email already exists',400));
+}
 
 const user = await User.create({
     name,

@@ -138,7 +138,8 @@ export const authReducer = (state={user:null},action)=>{
         case CLEAR_ERRORS:
                 return {
                     ...state,
-                     error:null
+                     error:null,
+                     success:false
                 }
                 
         default:

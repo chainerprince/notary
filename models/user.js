@@ -12,7 +12,7 @@ const userSchema = new Schema({
          email:{
              type:String,
              required:[true,"Please enter your email"],
-             unique:true,
+             unique:[true,'This email is already registered'],
              validate:[validator.isEmail,"Please enter a valid Email"]
 
          },

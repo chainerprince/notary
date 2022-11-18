@@ -326,7 +326,8 @@ const UpdateNotifier = () => {
                     </select> */}
                  </div>
                     <label>Images of education certificates</label>
-                    <div>                   
+                    <div>       
+                     {console.log(oldImages)            }
                     {
                      (oldImages?.length > 0) ?   oldImages?.map(img=>
                         <a target="_blank" href={img?.url} key={img?._id} rel="noopener noreferrer">

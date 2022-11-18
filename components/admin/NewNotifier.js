@@ -7,6 +7,7 @@ import { newNotifier } from '../../state/actions/notifierAction';
 import Loading from '../layout/Loading';
 import { NEW_NOTIFIER_RESET } from '../../state/constants/notifierConstants';
 import Image from 'next/image';
+import Loader from '../layout/Loader';
 
 const Application = () => {
 
@@ -51,8 +52,7 @@ const Application = () => {
         const files = Array.from(e.target.files);
         
 
-        setImages([]);
-        setImagesPreview([]);
+        
         
 
         files.forEach(file=>{
@@ -258,6 +258,7 @@ const Application = () => {
                           id="customFile"
                           onChange={imageHandler}
                           multiple
+                          disabled
                           />
                        <label className="custom-file-label" htmlFor="customFile">
                        Choose Images
@@ -293,7 +294,7 @@ const Application = () => {
                  className="btn btn-block bg-choco text-white new-notifier-btn py-3"
                  disabled = {loading?true:false}
                  >
-                     {loading ? <Loading /> : "Appy"}
+                     {loading ? <Loader /> : "Apply"}
                  
                  </button>
               </form>

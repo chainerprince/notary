@@ -13,7 +13,7 @@ const NotifierItem = ({notifier}) => {
     zoom: 11
   };
   const {user} = useSelector(state=>state.login);
-  
+  console.log(notifier,'the notifier')
   
     return (
         <div className="col-sm-12   col-md-6 col-lg-3 my-3">
@@ -21,7 +21,7 @@ const NotifierItem = ({notifier}) => {
           <div >
        <Image
             className=" mx-auto"
-            src={notifier.profileImage ?? 'https://images.unsplash.com/photo-1657879438367-f28d3855b9c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'}
+            src={notifier?.profileImage?.url ?? '/download.png'}
             height = {300}
             alt="notifier"
             width={400}
@@ -49,14 +49,14 @@ const NotifierItem = ({notifier}) => {
               <span id="no_of_reviews">({notifier.numOfReviews} Reviews)</span>
           </div>
 
-         {
-          (user?.role == 'admin') || (user?.role == 'notifier')  ? null: ( <button className="btn btn-block rounded  ">
+         
+           <button className="btn btn-block rounded  ">
               
               <Link  href={`/notifier/${notifier._id}`}>
                  <a className="text-white bg-choco p-2 ">Book Appointment</a> 
               </Link>
-          </button>)
-         }
+          </button>
+         
         </div>
         </div>
         </div>
