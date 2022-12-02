@@ -6,7 +6,7 @@ const NotifierDocs = ({notifier}) => {
         <h3 className='mb-4'>Documents Available:</h3>
                   
           <div className='notifier-doc'>
-            <i className={notifier.schoolReports ? "fa  fa-fw fa-check text-success" : "fa  fa-fw fa-times text-danger"} aria-hidden="true"></i>
+            <i className={notifier.marriage ? "fa  fa-fw fa-check text-success" : "fa  fa-fw fa-times text-danger"} aria-hidden="true"></i>
             <p>Marriage</p>
           </div>
           <div className='notifier-doc'>

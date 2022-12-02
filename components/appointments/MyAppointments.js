@@ -16,7 +16,7 @@ const MyAppointments = () => {
             dispatch(clearErrors())
         }
 
-    }, [dispatch])
+    }, [dispatch, error])
 
       const setAppointments = () => {
         const data = {
@@ -42,8 +42,8 @@ const MyAppointments = () => {
                     sort:'asc'
                 },
                 {
-                    label: "User",
-                    field:'user',
+                    label: "Notifier",
+                    field:'notary',
                     sort:'asc'
                 },
                 {
@@ -66,7 +66,7 @@ const MyAppointments = () => {
                   date:new Date(booking.date).toLocaleString('en-UK')?.split(',')[0],
                   time:booking.date?.split(' ')[1],
                   price:`${booking.price} RWF`,
-                  user: booking?.user?.name,
+                  notary: booking?.notifier?.name,
                   document: booking.document,
                   status:
                 

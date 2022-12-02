@@ -27,7 +27,7 @@ const NewPassword = () => {
 
         }
              
-    }, [dispatch,success,error])
+    }, [dispatch, success, error, router])
    
    
     const handleSubmit = e=>{

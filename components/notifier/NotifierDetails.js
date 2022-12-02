@@ -59,31 +59,41 @@ const NotifierDetails = () => {
     const [paymentLoading, setPaymentLoading] = useState(false)    
     const documents = [
   {
-    value: 'landServices 2000',
+    value: 'landServices',
     label: 'Land Services',    
   },
   {
-    value: 'migrationServices 1500',
+    value: 'migrationServices',
     label: 'Migration Services',
   },
   {
-    value: 'schoolReports 2000',
+    value: 'schoolReports',
     label: 'School Reports',
   },
   {
-    value: 'birthCertificates 1500',
+    value: 'birthCertificates',
     label: 'Birth Certificates',
   },
   {
-    value: 'marriage 1500',
+    value: 'marriage',
     label: 'Marriage',
   },
 ];
-const [document, setDocument] = useState('');
 
-  const handleChange = (event) => {    
-    setDocument(event.target.value);    
-    setPrice(document.split(' ')[1])
+const prices = {
+  landServices: 1000,
+  migrationServices: 2000,
+  schoolReports: 3000,
+  birthCertificates: 4000,
+  marriage: 5000,
+
+}
+const [document, setDocument] = useState('');
+const [price,setPrice] = useState()  
+
+  const handleChange = (event) => {      
+    setDocument(event.target.value);        
+    setPrice(prices[event.target.value])
   };
     
    
@@ -114,7 +124,7 @@ const [document, setDocument] = useState('');
        
      
      const [dateValue,setDateValue] = useState(new Date())
-     const [price,setPrice] = useState('')             
+                
 
 
 
@@ -124,7 +134,7 @@ const [document, setDocument] = useState('');
                notifier: router.query.id,
                date: moment(dateValue).format("YYYY-MM-DD HH:mm:ss"),            
                price,  
-               document: document.split(' ')[0],                                         
+               document,                                         
            }             
            try {
                const config = {
@@ -216,15 +226,18 @@ const [document, setDocument] = useState('');
           fullWidth
           label="Select your document"
           value={document}
-          onChange={handleChange}
+          onChange={handleChange}          
         //   helperText="Please select your document"
         >
-          {documents.filter(doc=>notifier[doc.value?.split(' ')[0]]).map((option) => (
+          
+          {documents.filter(doc=>notifier[doc.value]).map((option) => (
             <MenuItem key={option.value} value={option.value}>
+              
               {option.label}
             </MenuItem>
           ))}
         </TextField>
+
             </div>                               
           </form>
     

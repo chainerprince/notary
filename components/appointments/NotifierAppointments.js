@@ -47,9 +47,26 @@ const AllBookings = () => {
                console.log(error)
            }
        }
-    const deleteHandler = (id) => {
-        dispatch(deleteBooking(id));
-    }
+        const denyHandler = async(id)=>{                                                       
+           try {
+               const config = {
+                    headers:{
+                        'content-Type':'application/json'
+                    }
+               }               
+               const { data } = await axios.put('/api/appointments/deny',{id},config) 
+                        
+               if(data.success) {
+                   toast.success("The appointment denied succesfully");
+                   dispatch(notifierBookings())
+               }                                             
+           } catch (error) {
+               console.log(error)
+           }
+       }
+    // const deleteHandler = (id) => {
+    //     dispatch(deleteBooking(id));
+    // }
 
     const setAppointments = () => {
         const data = {
@@ -130,12 +147,20 @@ const AllBookings = () => {
                           
                       </a>
                    </Link>                 
-                   <button 
-                   className="btn-danger btn mx-2"
-                   onClick={_=>deleteHandler(booking._id)}
-                   >
-                       <i className="fa fa-trash"></i>
-                   </button>
+                   <div className="d-flex justify-content-center align-items-center ">
+                {
+                    booking.status == 'true' ? (<span onClick={()=>denyHandler(booking._id)}>
+                      <a  className="btn btn-success">
+                          <i className="fa fa-trash"></i>                          
+                      </a>
+                   </span>
+                   
+                   )
+                   : 'Denied'
+                }
+                   
+                   
+                  </div>
                   </div>
               })
         });

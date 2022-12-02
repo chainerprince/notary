@@ -201,10 +201,22 @@ export const newBooking = AsyncErrors(async(req,res,next)=>{
 
 
  export const approveAppointment = AsyncErrors(async(req,res,next)=>{
-    try{
-        console.log(req.body.id,'the request')
+    try{        
  const booking = await Booking.findByIdAndUpdate(req.body.id, { $set: { status: true } });
-   console.log(booking,'the one to approve')
+   
+   
+    res.status(201).json({
+        success:true,        
+    })
+    }   
+    catch(error) {
+        console.log(error,'the error')
+    }
+  
+ })
+ export const denyAppointment = AsyncErrors(async(req,res,next)=>{
+    try{        
+ const booking = await Booking.findByIdAndUpdate(req.body.id, { $set: { status: false } });   
    
     res.status(201).json({
         success:true,        

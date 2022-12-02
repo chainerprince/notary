@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 
 import { getReviews,clearErrors, deleteReview } from '../../state/actions/notifierAction';
-import { DELETE_REVIEW_RESET } from '../../state/constants/notifierConstants';
+// import { DELETE_REVIEW_RESET } from '../../state/constants/notifierConstants';
 
 const Reviews = () => {
     const dispatch = useDispatch();    
@@ -25,15 +25,15 @@ const Reviews = () => {
             
           user?._id && dispatch(getReviews(user?._id))
         
-        if(deleteError){
-            toast.error(deleteError)
-            dispatch(clearErrors())
-        }
+        // if(deleteError){
+        //     toast.error(deleteError)
+        //     dispatch(clearErrors())
+        // }
 
-        if(isDeleted){
-            toast.success("Review is deleted")
-            dispatch({type:DELETE_REVIEW_RESET})
-        }
+        // if(isDeleted){
+        //     toast.success("Review is deleted")
+        //     dispatch({type:DELETE_REVIEW_RESET})
+        // }
 
     }, [dispatch,deleteError,isDeleted,user])
 
@@ -67,12 +67,7 @@ const Reviews = () => {
                 label: 'User',
                 field: 'user',
                 sort: 'asc'
-            },
-            {
-                label: 'Actions',
-                field: 'actions',
-                sort: 'asc'
-            }
+            }        
 
         ],
         rows: []
@@ -83,15 +78,7 @@ const Reviews = () => {
             id: review._id,
             rating: review.rating,
             comment: review.comment,
-            user: review.name,
-            actions:
-            // 
-                <button 
-                className="btn btn-danger mx-2"
-                onClick={() => deleteHandler(review._id)}
-                >
-                    <i className="fa fa-trash"></i>
-                </button>
+            user: review.name,           
         })
     })
 
