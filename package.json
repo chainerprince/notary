@@ -19,6 +19,7 @@
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.33.0",
     "cors": "^2.8.5",
+    "dayjs": "^1.11.7",
     "easyinvoice": "^2.3.3",
     "flutterwave-node-v3": "^1.0.9",
     "flutterwave-react-v3": "^1.1.0",

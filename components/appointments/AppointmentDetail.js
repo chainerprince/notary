@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useSelector,useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
 import { clearErrors } from '../../state/actions/appointmentAction';
+import { useRouter } from 'next/router';
 
 const AppointmentDetails = () => {
      const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const AppointmentDetails = () => {
     
     
   const isPaid = booking && booking.paymentInfo && booking.paymentInfo.status  === 'paid' ? true : false;
+  const router = useRouter();
+  const finalSlashIndex = router.asPath.lastIndexOf('/')
+const previousPath = router.asPath.slice(0, finalSlashIndex)
     return (
         <div className="container">
         <div className="row d-flex justify-content-between">
@@ -35,29 +39,34 @@ const AppointmentDetails = () => {
            <div className="container">
       <div className="row d-flex justify-content-between">
         <div className="col-12 col-lg-8 mt-5 booking-details">
+           <Link  href={previousPath}> 
+                      <a  className='ml-2 back-to-search'>
+                      <i className='fa fa-arrow-left'></i> Back
+                      </a> 
+            </Link>
           <h2 className="my-5">Appointment # {booking._id}</h2>
           <h4 className="mb-4">User Info</h4>
           <p><b>Name:</b> {booking.user && booking.user.name}</p>
           <p><b>Email:</b> {booking.user && booking.user.email}</p>
           <p><b>Amount:</b> {booking.price}</p>
 
-          <hr />
-          {console.log(booking,'the booking')}
+          <hr />          
           <h4 className="mb-4">Appointment Info</h4>
-          <p><b>Check In:</b> {new Date(booking.date).toLocaleString('en-UK')}</p>                 
+         
+          {/* <p><b>Check In:</b> {new Date(booking.date).toLocaleString('en-UK')}</p>                  */}
 
           <hr />
 
           <h4 className="my-4">Payment Status</h4>
           <p className={isPaid ? "text-success" : 'text-danger'}><b>{isPaid? "Paid": "Not Paid"}</b></p>
 
-          {
+          {/* {
             user && user.role === 'admin' && 
             <>
               <h4 className= "my-4">Stripe Payment Id</h4>
               <p className="text-danger">{booking.paymentInfo.id}</p>
             </>
-          }
+          } */}
 
           <h4 className="mt-5 mb-4">Booked Appointment:</h4>
 

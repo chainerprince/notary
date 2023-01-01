@@ -32,17 +32,23 @@ const allNotifiers = AsyncErrors(async(req,res)=>{
 
 const singleNotifier = AsyncErrors(async(req,res,next)=>{
    
-      const notifier = await Notifier.findById(req.query.id);
-      console.log(notifier,req,'reached here.')
+        const notifier = await Notifier.findById(req.query.id);
+      
      
-      if(!notifier){
+      if(!notifier ){
+        const notifierFromUser = await Notifier.findOne({user:req.query.id});
+         if(notifierFromUser){
+        res.status(200).json({
+          success:true,
+          notifier:notifierFromUser
+        })}
         return next(new ErrorHandler("That Notifier is not registered",404));
       }
-
+   
       res.status(200).json({
         success:true,
         notifier
-      })
+      })   
 
     
 })
@@ -150,16 +156,16 @@ const deleteNotifier = AsyncErrors(async(req,res,next)=>{
     if(!notifier){
       return next(new ErrorHandler("That notifier doesn't Exist",404));
     }
-    if(notifier.images){
-for(let i=0;i<notifier.images.length;i++){
-      await cloudinary.v2.uploader.destroy(notifier.images[i].public_id)
-    }
-    }
-    
-    await notifier.remove();
+//     if(notifier.images){
+// for(let i=0;i<notifier.images.length;i++){
+//       await cloudinary.v2.uploader.destroy(notifier.images[i].public_id)
+//     }
+//     }    
+     notifier.status='canceled';
+     await notifier.save();
     res.status(200).json({
       success:true,
-      message:"The notifier has been deleted succesfully"
+      message:"The notifier has been canceled succesfully"
     })
 
  
