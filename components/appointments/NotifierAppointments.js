@@ -189,7 +189,6 @@ const AllBookings = () => {
                 </>
             }
 
-
         </div>
     )
 }

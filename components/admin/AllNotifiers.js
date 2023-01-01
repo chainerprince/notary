@@ -33,7 +33,7 @@ const AllNotifiers = () => {
 		}
 
 		if (isDeleted) {
-			toast.success("Notifier deleted successfully");
+			toast.success("Notifier canceled successfully");
 			router.push("/admin/notifiers");
 			dispatch({ type: DELETE_NOTIFIER_RESET });
 		}

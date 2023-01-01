@@ -1,11 +1,13 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useDispatch } from 'react-redux';
 import { checkBooking } from '../../state/actions/appointmentAction';
 import moment from 'moment';
+import dayjs from 'dayjs';
 
 export default function BasicDateTimePicker({value,setValue,id}) {
     const today = new Date();
@@ -18,12 +20,14 @@ export default function BasicDateTimePicker({value,setValue,id}) {
            }
        }
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DateTimePicker
         renderInput={(props) => <TextField {...props} fullWidth />}
         label="Choose time and date"        
         value={value}
         minDate={today}
+        minTime={dayjs('2022-02-14T08:00')}
+        maxTime={dayjs('2022-02-14T19:00')}
         onChange={onchange}
         
       />

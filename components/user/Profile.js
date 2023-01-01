@@ -8,11 +8,13 @@ import { useDispatch,useSelector } from 'react-redux'
 
 import { clearErrors, userUpdate } from '../../state/actions/userActions'
 import { UPDATE_PROFILE_RESET } from '../../state/constants/userConstants'
+import { getNotifierDetails } from '../../state/actions/notifierAction'
 
 
 const Profile = () => {
  const dispatch = useDispatch()
  const router = useRouter();
+ const updatePage = router.asPath.includes('update');
 
  const [userData, setuser] = useState({
      name:'',
@@ -29,7 +31,19 @@ const Profile = () => {
  const [avatarPreview, setavatarPreview] = useState('/vercel.svg')
 
  const {user,loading } = useSelector(state=>state.login);
+ const [status,setStatus] = useState('');
  const {error,isUpdated,loading:updateLoading } = useSelector(state=>state.user);
+ const { notifier, loading: detailsLoading, error: detailsError } = useSelector((state) => state.notifierDetails);
+ useEffect(() => {
+    if(user && user?.role == 'notifier'){
+        dispatch(getNotifierDetails("", user?._id));
+    }
+ }, [dispatch,user])
+  useEffect(() => {
+        if(notifier){
+            setStatus(notifier.status)
+        }
+  },[notifier])
  
  useEffect(() => {
      if(user){
@@ -84,8 +98,13 @@ const Profile = () => {
         <div className="row wrapper"> 
 		<div className="col-10 col-lg-5">
         <form className="shadow-lg" onSubmit={handleSubmit}>
-            <h1 className="mb-3">Join Us</h1>
-
+            <h1 className="mb-3">                
+                {updatePage ? 'My Profile' : 'Join Us'}
+                </h1>
+                
+                  <h3>
+                   {status && `Status: ${status}` }
+                  </h3>
             <div className="form-group">
                 <label htmlFor="name_field">Full Name</label>
                 <input
