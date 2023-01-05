@@ -118,11 +118,11 @@ const Application = () => {
 			landServices: land,
 			birthCertificates: birth,
 			marriage,
-			migrationSersvices: migration,
+			migrationServices: migration,
 			schoolReports: reports,
 			profileImage,
 			images,
-		};
+		};		
 
 		dispatch(newNotifier(notifierData));
 	};
